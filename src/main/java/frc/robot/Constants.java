@@ -16,6 +16,11 @@ import utilities.PIDConfiguration;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  //Motors and constants for our Arm
+  public static final int WRIST_MOTOR_ID = 0;
+  public static final int FOREARM_MOTOR_ID = 0;
+  public static final int SHOULDER_MOTOR_ID = 0;
+
   // Driving.
   public static final int DRIVE_CONTROLLER = 0;
   public static final double DRIVE_SPEED = 0.5;
@@ -46,7 +51,6 @@ public final class Constants {
   public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0;
   public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0;
   public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
-  // 16384 * gear_thingy * circumference. gear thingy is 0.00000826719.
 
   //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 

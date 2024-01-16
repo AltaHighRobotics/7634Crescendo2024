@@ -6,11 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import javax.swing.JToggleButton;
-
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
