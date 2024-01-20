@@ -43,7 +43,7 @@ public class DriveCommand extends Command {
 
     // Get joystick values.
     double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
-    double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICKY_Y);
+    double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
     double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
 
     // Apply dead zones to controller.

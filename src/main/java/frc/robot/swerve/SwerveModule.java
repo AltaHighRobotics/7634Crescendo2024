@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkLowLevel;
 
 import frc.robot.Constants;
 import utilities.MathTools;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class SwerveModule {
   /** Creates a new SwerveModuleSub. */
@@ -18,6 +19,8 @@ public class SwerveModule {
 
   // Wheel.
   private double wheelDirection = FORWARD;
+  private VictorSPX wheelMotor;
+
 
   // Turn.
   private ConfigurablePID turnPid;
@@ -30,8 +33,9 @@ public class SwerveModule {
 
   public SwerveModule(SwerveModuleConfig config) {
     // Wheel motor.
-
+    wheelMotor = new VictorSPX(config.wheelMotorId);
     // Config wheel motor.
+    
     resetWheelEncoder();
 
     // Turn motor.
