@@ -2,13 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.positions;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class ArmCommand extends Command {
-  /** Creates a new ArmCommand. */
-  public ArmCommand() {
+public class SpeakerPosition extends Command {
+  /** Creates a new SpeakerPosition. */
+  private ArmSubsystem m_armSubsystem;
+  public SpeakerPosition(ArmSubsystem armSubsystem) {
+    m_armSubsystem = armSubsystem;
+    addRequirements(m_armSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
