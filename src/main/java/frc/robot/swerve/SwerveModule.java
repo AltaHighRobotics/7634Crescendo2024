@@ -50,6 +50,7 @@ public class SwerveModule {
 
   // TODO: Full the wheel motor wrappers with stuff UwU
   public void setWheelMotor(double speed) {
+    
   }
 
   public void stopWheelMotor() {

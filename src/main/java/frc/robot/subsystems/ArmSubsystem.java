@@ -18,8 +18,19 @@ public class ArmSubsystem extends SubsystemBase {
   public ArmSubsystem() {
     //initilizing the motors
     wristMotor = new TalonFX(Constants.WRIST_MOTOR_ID);
+    forearmMotor = new TalonFX(Constants.FOREARM_MOTOR_ID);
+    shoulderMotor = new TalonFX(Constants.SHOULDER_MOTOR_ID);
   }
-
+  public void setShoulderMotor(double power){
+    shoulderMotor.set(power);
+  }
+  public void setForearmMotor(double power){
+    forearmMotor.set(power);
+  }
+  public void setWristMotor(double power){
+    wristMotor.set(power);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

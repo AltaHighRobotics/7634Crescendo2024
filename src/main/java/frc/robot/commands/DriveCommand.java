@@ -21,6 +21,8 @@ public class DriveCommand extends Command {
 
     addRequirements(m_driveTrainSub);
     // Use addRequirements() here to declare subsystem dependencies.
+    double xStick = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
+    double yStick = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
   }
 
   // Called when the command is initially scheduled.

@@ -35,7 +35,7 @@ public final class Constants {
   public static final int LEFT_STICK_X = 0;
 
   public static final int FLIGHT_STICK_X = 0;
-  public static final int FLIGHT_STICKY_Y = 1;
+  public static final int FLIGHT_STICK_Y = 1;
   public static final int FLIGHT_STICK_Z = 2;
   public static final int FLIGHT_STICK_SLIDER = 3;
 
