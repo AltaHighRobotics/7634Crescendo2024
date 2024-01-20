@@ -11,6 +11,8 @@ import com.revrobotics.CANSparkLowLevel;
 import frc.robot.Constants;
 import utilities.MathTools;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 
 public class SwerveModule {
   /** Creates a new SwerveModuleSub. */
@@ -20,6 +22,9 @@ public class SwerveModule {
   // Wheel.
   private double wheelDirection = FORWARD;
   private WPI_VictorSPX wheelMotor;
+  private double lastWheelDistance = 0.0;
+  private double distanceRate = 0.0;
+  private double distance = 0.0;
 
 
   // Turn.
@@ -33,10 +38,16 @@ public class SwerveModule {
 
   public SwerveModule(SwerveModuleConfig config) {
     // Wheel motor.
-    wheelMotor = new VictorSPX(config.wheelMotorId);
+    wheelMotor = new WPI_VictorSPX(config.wheelMotorId);
     // Config wheel motor.
+    wheelMotor.setNeutralMode(NeutralMode.Coast);
+
     
     resetWheelEncoder();
+
+    // Are soul is nothing magic yet its much greater then any magic.
+    // The soul is made up of electric signals and frequencies that come together to create complex thought and feelings.
+    // Its crazy to think that small things can sum up to great things without the need of magic.
 
     // Turn motor.
     turnMotor = new CANSparkMax(config.turnMotorId, CANSparkLowLevel.MotorType.kBrushless);
