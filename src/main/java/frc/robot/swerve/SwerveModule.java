@@ -40,10 +40,11 @@ public class SwerveModule {
     // Wheel motor.
     wheelMotor = new WPI_VictorSPX(config.wheelMotorId);
     // Config wheel motor.
+    wheelMotor.setInverted(config.invertWheelMotor);
     wheelMotor.setNeutralMode(NeutralMode.Coast);
 
     
-    resetWheelEncoder();
+
 
     // Are soul is nothing magic yet its much greater then any magic.
     // The soul is made up of electric signals and frequencies that come together to create complex thought and feelings.
@@ -65,10 +66,12 @@ public class SwerveModule {
 
   // TODO: Full the wheel motor wrappers with stuff UwU
   public void setWheelMotor(double speed) {
+    wheelMotor.set(speed*wheelDirection);  
     
   }
 
   public void stopWheelMotor() {
+    wheelMotor.stopMotor();
   }
 
   public void setTurnMotor(double speed) {
@@ -99,14 +102,6 @@ public class SwerveModule {
   public void setTurnEncoderPosition(double position) {
     turnEncoder.setPosition(position);
   }
-  //I Love potato
-  // tostinos tostinos hot pizza rolls
-  //tostinos tostinos everybody's talking bout tostinos tostinos hot pizza rolls
-
-  //ni how ma
-  //hoa
-  //robot worky pls
-  //rock paper sciccor shoot
 
   // TODO: Start using fancy stuff.
   public void setDesiredAngle(double desiredAngle) {
@@ -136,16 +131,6 @@ public class SwerveModule {
     return this.turnAngle;
   }
 
-  public double getWheelEncoder() {
-    return 0.0;
-  }
-
-  public void resetWheelEncoder() {
-  }
-
-  public double getSpeed() {
-    return 0.0;
-  }
 
   public double getAngleError() {
     return turnPid.getError();

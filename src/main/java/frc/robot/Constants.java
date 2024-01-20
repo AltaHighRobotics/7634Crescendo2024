@@ -63,10 +63,10 @@ public final class Constants {
   public static final int SWERVE_MODULE_COUNT = 4;
 
   public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
-    new SwerveModuleConfig(0, 0, false, false), // Front right
-    new SwerveModuleConfig(0, 0, false, false), // Front left
-    new SwerveModuleConfig(0, 0, false, false), // Back right
-    new SwerveModuleConfig(0, 0, false, false) // Back left
+    new SwerveModuleConfig(4, 0, false, false), // Front right
+    new SwerveModuleConfig(6, 0, false, false), // Front left
+    new SwerveModuleConfig(5, 0, false, false), // Back right
+    new SwerveModuleConfig(3, 0, false, false) // Back left
 };
   
   public static final double VEHICLE_WHEELBASE = 1.0;

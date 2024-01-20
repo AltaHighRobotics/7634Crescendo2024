@@ -6,10 +6,12 @@ package frc.robot;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import frc.robot.commands.*;
+import frc.robot.swerve.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -21,11 +23,14 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  //subsytems
+  private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
+  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
+  /** The container for the rot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
   }
 
   /**
