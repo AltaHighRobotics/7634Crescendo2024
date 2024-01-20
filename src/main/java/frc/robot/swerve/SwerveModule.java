@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkLowLevel;
 
 import frc.robot.Constants;
 import utilities.MathTools;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class SwerveModule {
   /** Creates a new SwerveModuleSub. */
@@ -19,7 +19,7 @@ public class SwerveModule {
 
   // Wheel.
   private double wheelDirection = FORWARD;
-  private VictorSPX wheelMotor;
+  private WPI_VictorSPX wheelMotor;
 
 
   // Turn.
