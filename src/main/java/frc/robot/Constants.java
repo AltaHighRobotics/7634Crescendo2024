@@ -17,7 +17,7 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //Motors and constants for our Arm
-  public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+  public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
   public static final int WRIST_MOTOR_ID = 0;
   public static final int FOREARM_MOTOR_ID = 0;
   public static final int SHOULDER_MOTOR_ID = 0;
@@ -55,7 +55,7 @@ public final class Constants {
 
   //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 
-  public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
+  public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
 
   public static final int FRONT_RIGHT_MODULE = 0;
   public static final int FRONT_LEFT_MODULE = 1;
