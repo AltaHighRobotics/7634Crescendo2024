@@ -28,13 +28,28 @@ public class ManualPositionCreator extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //grab stick inputs, apply a deadzone, and use values to increment setPoint; <- that was an accident im getting more used to java
     double xStick = m_testController.getRawAxis(Constants.FLIGHT_STICK_X);
     double yStick = m_testController.getRawAxis(Constants.FLIGHT_STICK_Y);
     double zStick = m_testController.getRawAxis(Constants.FLIGHT_STICK_Z);
-
-    SmartDashboard.putNumber("Shoulder Setpoint", xStick);
-    SmartDashboard.putNumber("Forearm Setpoint", yStick);
-    SmartDashboard.putNumber("Wrist Setpoint", zStick);
+    
+    // Apply dead zones to controller.
+    if (Math.abs(xStick) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+      xStick = 0.0;
+    } 
+    if (Math.abs(yStick) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+      yStick = 0.0;
+    } 
+    if (Math.abs(zStick) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+      zStick = 0.0;
+    }
+    //get setpoints for each motor, increment by axis input, apply to PID controller
+    double[] positionArray = m_armSubsystem.getCurrentPositions();
+    positionArray[0] += xStick;
+    positionArray[1] += yStick;
+    positionArray[2] += zStick;
+    m_armSubsystem.goToSetPoints(positionArray);
+    
   }
 
   // Called once the command ends or is interrupted.

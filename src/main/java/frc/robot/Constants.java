@@ -16,11 +16,16 @@ import utilities.PIDConfiguration;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  //Motors and constants for our Arm
+  //Motors and PID constants for our Arm
   public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
   public static final int WRIST_MOTOR_ID = 0;
   public static final int FOREARM_MOTOR_ID = 0;
   public static final int SHOULDER_MOTOR_ID = 0;
+  //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
+  public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
+  public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
+  public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
+  public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
 
   // Driving.
   public static final int DRIVE_CONTROLLER = 0;

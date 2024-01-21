@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.Constants;
@@ -35,26 +36,47 @@ public class ArmSubsystem extends SubsystemBase {
   // }
   // public void setWristMotor(double power){
   //   wristMotor.set(power);
+  
   public void resetEncoderValues(){ // This function is to reset the encoders; **ONLY USE WHEN ROBOT IS AT STARTING POSITION**
     wristMotor.setPosition(0);
     shoulderMotor.setPosition(0);
     forearmMotor.setPosition(0);
   }
-  public void goToSetPoints(double shoulderSetPoint, double forearmSetPoint, double wristSetPoint){
-    //get current encoder values for all joints
+
+
+
+  //I can feel the boiler plate already, but fuck it I need something to work off of, even if its ass
+  //this function returns the current postions of all encoders in a list. its orderd shoulderMotor, forearmMotor, wristMotor
+  public double[] getCurrentPositions(){
     double shoulderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
     double forearmCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
     double wristCurrentPosition = wristMotor.getPosition().refresh().getValueAsDouble();
+    double[] positionArray = {shoulderCurrentPosition, forearmCurrentPosition, wristCurrentPosition};
+    return positionArray;
+  }
+
+
+
+
+  public void goToSetPoints(double[] setPoints){
+    //get current encoder values for all joints
+    double shoulderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
+    double forearmCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
+    double wristCurrentPosition = wristMotor.getPosition().refresh().getValueAsDouble(    );
     //run a PID loop to calculate power to put each joint to its SetPoint
-    double shoulderOutput = armJointPID.runPID(shoulderSetPoint, shoulderCurrentPosition);
-    double forearmOutput = armJointPID.runPID(forearmSetPoint, forearmCurrentPosition);
-    double wristOutput = armJointPID.runPID(wristSetPoint, wristCurrentPosition);
-    //Apply output of PID loops to motors, moving them to setpoint
+    double shoulderOutput = armJointPID.runPID(setPoints[0], shoulderCurrentPosition);
+    double forearmOutput = armJointPID.runPID(setPoints[1], forearmCurrentPosition);
+    double wristOutput = armJointPID.runPID(setPoints[2], wristCurrentPosition);
+    //Apply output of PID loops to motors, moving them to setpoint as well as push values
+    SmartDashboard.putNumberArray("Joint SetPoints: ", setPoints);
+    SmartDashboard.putNumberArray("Joint Current Positions: ", double[] currentPositions = {shoulderCurrentPosition, forearmCurrentPosition, wristCurrentPosition});
     shoulderMotor.set(shoulderOutput);
     forearmMotor.set(forearmOutput);
     wristMotor.set(wristOutput);
-
   }
+
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
