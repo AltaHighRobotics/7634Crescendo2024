@@ -1,7 +1,6 @@
 package frc.robot.swerve;
 
 import utilities.ConfigurablePID;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -18,13 +17,10 @@ public class SwerveModule {
   /** Creates a new SwerveModuleSub. */
   private static final double FORWARD = 1.0;
   private static final double BACKWARD = -1.0;
-
+  
   // Wheel.
   private double wheelDirection = FORWARD;
   private WPI_VictorSPX wheelMotor;
-  private double lastWheelDistance = 0.0;
-  private double distanceRate = 0.0;
-  private double distance = 0.0;
 
 
   // Turn.

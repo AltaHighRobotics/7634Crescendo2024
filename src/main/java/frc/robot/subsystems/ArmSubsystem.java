@@ -35,33 +35,25 @@ public class ArmSubsystem extends SubsystemBase {
   // }
   // public void setWristMotor(double power){
   //   wristMotor.set(power);
-  public void resetEncoderValues(){ // This function should only apply to StartingPosition.java. Its to make sure the encoders are 0'd on startup
+  public void resetEncoderValues(){ // This function is to reset the encoders; **ONLY USE WHEN ROBOT IS AT STARTING POSITION**
     wristMotor.setPosition(0);
     shoulderMotor.setPosition(0);
     forearmMotor.setPosition(0);
   }
-  
-  public void shoulderPID(double encoderSetPoint){ // The Docs for Refresh/getPosition/getValueAsDouble: https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/StatusSignal.html#refresh()
-    //encoderCurrentPosition = TalonFX.getPosition(). This is meant to get the encoders current position
-    //these functions are PID controllers that take {whereEncoderShouldbe} versus {whereEncoderIs} and tries to fix it :)
-    double encoderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
-    double shoulderOutput = armJointPID.runPID(encoderSetPoint,encoderCurrentPosition);
+  public void goToSetPoints(double shoulderSetPoint, double forearmSetPoint, double wristSetPoint){
+    //get current encoder values for all joints
+    double shoulderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
+    double forearmCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
+    double wristCurrentPosition = wristMotor.getPosition().refresh().getValueAsDouble();
+    //run a PID loop to calculate power to put each joint to its SetPoint
+    double shoulderOutput = armJointPID.runPID(shoulderSetPoint, shoulderCurrentPosition);
+    double forearmOutput = armJointPID.runPID(forearmSetPoint, forearmCurrentPosition);
+    double wristOutput = armJointPID.runPID(wristSetPoint, wristCurrentPosition);
+    //Apply output of PID loops to motors, moving them to setpoint
     shoulderMotor.set(shoulderOutput);
-
-  }
-  public void forearmPID(double encoderSetPoint){ // The Docs for Refresh/getPosition/getValueAsDouble: https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/StatusSignal.html#refresh()
-    //encoderCurrentPosition = TalonFX.getPosition(). This is meant to get the encoders current position
-    //these functions are PID controllers that take {whereEncoderShouldbe} versus {whereEncoderIs} and tries to fix it :)
-    double encoderCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
-    double forearmOutput = armJointPID.runPID(encoderSetPoint, encoderCurrentPosition);
     forearmMotor.set(forearmOutput);
-  }
-  public void wristPID(double encoderSetPoint){ // The Docs for Refresh/getPosition/getValueAsDouble: https://api.ctr-electronics.com/phoenix6/release/java/com/ctre/phoenix6/StatusSignal.html#refresh()
-    //encoderCurrentPosition = TalonFX.getPosition(). This is meant to get the encoders current position
-    //these functions are PID controllers that take {whereEncoderShouldbe} versus {whereEncoderIs} and tries to fix it :)
-    double encoderCurrentPosition = wristMotor.getPosition().refresh().getValueAsDouble();
-    double wristOutput = armJointPID.runPID(encoderSetPoint, encoderCurrentPosition);
     wristMotor.set(wristOutput);
+
   }
   @Override
   public void periodic() {
