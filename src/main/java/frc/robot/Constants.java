@@ -17,6 +17,7 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //Motors and constants for our Arm
+  public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
   public static final int WRIST_MOTOR_ID = 0;
   public static final int FOREARM_MOTOR_ID = 0;
   public static final int SHOULDER_MOTOR_ID = 0;
