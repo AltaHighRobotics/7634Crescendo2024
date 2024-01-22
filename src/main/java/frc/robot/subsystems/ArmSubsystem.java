@@ -60,16 +60,14 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void goToSetPoints(double[] setPoints){
     //get current encoder values for all joints
-    double shoulderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
-    double forearmCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
-    double wristCurrentPosition = wristMotor.getPosition().refresh().getValueAsDouble(    );
+    double[] positionArray = getCurrentPositions();
     //run a PID loop to calculate power to put each joint to its SetPoint
-    double shoulderOutput = armJointPID.runPID(setPoints[0], shoulderCurrentPosition);
-    double forearmOutput = armJointPID.runPID(setPoints[1], forearmCurrentPosition);
-    double wristOutput = armJointPID.runPID(setPoints[2], wristCurrentPosition);
+    double shoulderOutput = armJointPID.runPID(setPoints[0], positionArray[0]);
+    double forearmOutput = armJointPID.runPID(setPoints[1], positionArray[1]);
+    double wristOutput = armJointPID.runPID(setPoints[2], positionArray[2]);
     //Apply output of PID loops to motors, moving them to setpoint as well as push values
     SmartDashboard.putNumberArray("Joint SetPoints: ", setPoints);
-    SmartDashboard.putNumberArray("Joint Current Positions: ", double[] currentPositions = {shoulderCurrentPosition, forearmCurrentPosition, wristCurrentPosition});
+    SmartDashboard.putNumberArray("Joint Current Positions: ", positionArray);
     shoulderMotor.set(shoulderOutput);
     forearmMotor.set(forearmOutput);
     wristMotor.set(wristOutput);
