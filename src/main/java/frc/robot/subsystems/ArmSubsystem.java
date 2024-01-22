@@ -65,7 +65,7 @@ public class ArmSubsystem extends SubsystemBase {
     double shoulderOutput = armJointPID.runPID(setPoints[0], positionArray[0]);
     double forearmOutput = armJointPID.runPID(setPoints[1], positionArray[1]);
     double wristOutput = armJointPID.runPID(setPoints[2], positionArray[2]);
-    //Apply output of PID loops to motors, moving them to setpoint as well as push values
+    //Apply output of PID loops to motors, moving them to setpoint as well as push values to smartDashboard
     SmartDashboard.putNumberArray("Joint SetPoints: ", setPoints);
     SmartDashboard.putNumberArray("Joint Current Positions: ", positionArray);
     shoulderMotor.set(shoulderOutput);
