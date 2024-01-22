@@ -43,7 +43,7 @@ public class ManualPositionCreator extends Command {
     if (Math.abs(zStick) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
       zStick = 0.0;
     }
-    //get setpoints for each motor, increment by axis input, apply to PID controller
+    //get currentPosition for each motor, increment setPoint by axis input, apply to PID controller
     double[] positionArray = m_armSubsystem.getCurrentPositions();
     positionArray[0] += xStick;
     positionArray[1] += yStick;
