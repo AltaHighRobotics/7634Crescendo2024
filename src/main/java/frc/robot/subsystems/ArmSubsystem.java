@@ -6,9 +6,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.Constants;
 import utilities.ConfigurablePID;
+import java.lang.Math;
 
 
 public class ArmSubsystem extends SubsystemBase {
@@ -27,6 +31,10 @@ public class ArmSubsystem extends SubsystemBase {
     wristMotor = new TalonFX(Constants.WRIST_MOTOR_ID);
     forearmMotor = new TalonFX(Constants.FOREARM_MOTOR_ID);
     shoulderMotor = new TalonFX(Constants.SHOULDER_MOTOR_ID);
+
+    shoulderMotor.setNeutralMode(NeutralModeValue.Brake);
+    forearmMotor.setNeutralMode(NeutralModeValue.Brake);
+    wristMotor.setNeutralMode(NeutralModeValue.Brake);
   }
   // public void setShoulderMotor(double power){
   //   shoulderMotor.set(power);
@@ -36,6 +44,10 @@ public class ArmSubsystem extends SubsystemBase {
   // }
   // public void setWristMotor(double power){
   //   wristMotor.set(power);
+
+  // I smell of old weed stored in wet socks
+
+  // useful video that helped us a lot program this robot: https://youtu.be/hvL1339luv0fgvbnm,./
   
   public void resetEncoderValues(){ // This function is to reset the encoders; **ONLY USE WHEN ROBOT IS AT STARTING POSITION**
     wristMotor.setPosition(0);
@@ -57,8 +69,9 @@ public class ArmSubsystem extends SubsystemBase {
 
 
 
-
-  public void goToSetPoints(double[] setPoints){
+// shadyn suggested that when a joint is within a certain tolerance, we lock the joint to prevent it from swaying.
+//The function below is purely PID controllers, no breaking.
+ /*  public void goToSetPoints(double[] setPoints){
     //get current encoder values for all joints
     double[] positionArray = getCurrentPositions();
     //run a PID loop to calculate power to put each joint to its SetPoint
@@ -68,10 +81,36 @@ public class ArmSubsystem extends SubsystemBase {
     //Apply output of PID loops to motors, moving them to setpoint as well as push values to smartDashboard
     SmartDashboard.putNumberArray("Joint SetPoints: ", setPoints);
     SmartDashboard.putNumberArray("Joint Current Positions: ", positionArray);
-    shoulderMotor.set(shoulderOutput);
-    forearmMotor.set(forearmOutput);
-    wristMotor.set(wristOutput);
+    shoulderMotor.set(VictorSPXControlMode.PercentOutput, shoulderOutput);
+    forearmMotor.set(VictorSPXControlMode.PercentOutput, forearmOutput);
+    wristMotor.set(VictorSPXControlMode.PercentOutput, wristOutput);
   }
+*/
+// This function implements shaydns suggestion as described in the function above.
+//its also a villion times better
+
+public void goToSetPoints(double[] setPoints){
+  TalonFX[] jointMotors = {shoulderMotor, forearmMotor, wristMotor};
+  // this loops over each motor, moves it to position, and checks if its within tolerance, and stops the motors
+  //the thinking is that instead of using a pid controller to keep it steady, we stop the motors from moving at all
+  for (int i = 0; i < jointMotors.length; ++i) {
+    double currentPosition = jointMotors[i].getPosition().refresh().getValueAsDouble();
+
+    if (Math.abs(currentPosition) < Constants.JOINT_TOLERANCE) {
+      jointMotors[i].set(0.0);
+    }
+    else {
+      jointMotors[i].set(armJointPID.runPID(setPoints[i], currentPosition));
+    }
+
+    SmartDashboard.putNumber("Join motor: " + i, currentPosition);
+  }
+
+  }
+
+
+  
+
 
 
 

@@ -17,65 +17,67 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //Motors and PID constants for our Arm
-  public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
-  public static final int WRIST_MOTOR_ID = 0;
-  public static final int FOREARM_MOTOR_ID = 0;
-  public static final int SHOULDER_MOTOR_ID = 0;
-  //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
-  public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
-  public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
-  public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
-  public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+    public static final int WRIST_MOTOR_ID = 0;
+    public static final int FOREARM_MOTOR_ID = 0;
+    public static final int SHOULDER_MOTOR_ID = 0;
+    //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
+    public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
+    //tolerance for the .brake Method on shaydns suggested changes in armSubsystem
+    public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 
   // Driving.
-  public static final int DRIVE_CONTROLLER = 0;
-  public static final double DRIVE_SPEED = 0.5;
-  public static final double DRIVE_TURN_SPEED = 0.5;
+    public static final int DRIVE_CONTROLLER = 0;
+    public static final double DRIVE_SPEED = 0.5;
+    public static final double DRIVE_TURN_SPEED = 0.5;
 
   // Controller.
-  public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.15;
+    public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.15;
 
-  public static final int RIGHT_STICK_Y = 3;
-  public static final int RIGHT_STICK_X = 4;
-  public static final int LEFT_STICK_Y = 1;
-  public static final int LEFT_STICK_X = 0;
+    public static final int RIGHT_STICK_Y = 3;
+    public static final int RIGHT_STICK_X = 4;
+    public static final int LEFT_STICK_Y = 1;
+    public static final int LEFT_STICK_X = 0;
 
-  public static final int FLIGHT_STICK_X = 0;
-  public static final int FLIGHT_STICK_Y = 1;
-  public static final int FLIGHT_STICK_Z = 2;
-  public static final int FLIGHT_STICK_SLIDER = 3;
+    public static final int FLIGHT_STICK_X = 0;
+    public static final int FLIGHT_STICK_Y = 1;
+    public static final int FLIGHT_STICK_Z = 2;
+    public static final int FLIGHT_STICK_SLIDER = 3;
 
-  public static final int XBOX_A_BUTTON = 1; 
-  public static final int XBOX_B_BUTTON = 2;
-  public static final int XBOX_X_BUTTON = 3;
-  public static final int XBOX_Y_BUTTON = 4;
+    public static final int XBOX_A_BUTTON = 1; 
+    public static final int XBOX_B_BUTTON = 2;
+    public static final int XBOX_X_BUTTON = 3;
+    public static final int XBOX_Y_BUTTON = 4;
 
-  public static final int XBOX_LEFT_BUMPER = 5;
-  public static final int XBOX_RIGHT_BUMPER = 6;
+    public static final int XBOX_LEFT_BUMPER = 5;
+    public static final int XBOX_RIGHT_BUMPER = 6;
 
   // Swerve module.
-  public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0;
-  public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0;
-  public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
+    public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0;
+    public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0;
+    public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
 
-  //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
+    //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 
-  public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
+    public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
 
-  public static final int FRONT_RIGHT_MODULE = 0;
-  public static final int FRONT_LEFT_MODULE = 1;
-  public static final int BACK_RIGHT_MODULE = 2;
-  public static final int BACK_LEFT_MODULE = 3;
-  public static final int SWERVE_MODULE_COUNT = 4;
+    public static final int FRONT_RIGHT_MODULE = 0;
+    public static final int FRONT_LEFT_MODULE = 1;
+    public static final int BACK_RIGHT_MODULE = 2;
+    public static final int BACK_LEFT_MODULE = 3;
+    public static final int SWERVE_MODULE_COUNT = 4;
 
-  public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
-    new SwerveModuleConfig(4, 0, false, false), // Front right
-    new SwerveModuleConfig(6, 0, false, false), // Front left
-    new SwerveModuleConfig(5, 0, false, false), // Back right
-    new SwerveModuleConfig(3, 0, false, false) // Back left
-};
-  
-  public static final double VEHICLE_WHEELBASE = 1.0;
-  public static final double VEHICLE_TRACKWIDTH = 1.0;
-  public static final double VEHICLE_RADIUS = Math.hypot(VEHICLE_WHEELBASE, VEHICLE_TRACKWIDTH);
-}
+    public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
+      new SwerveModuleConfig(4, 0, false, false), // Front right
+      new SwerveModuleConfig(6, 0, false, false), // Front left
+      new SwerveModuleConfig(5, 0, false, false), // Back right
+      new SwerveModuleConfig(3, 0, false, false) // Back left
+  };
+    
+    public static final double VEHICLE_WHEELBASE = 1.0;
+    public static final double VEHICLE_TRACKWIDTH = 1.0;
+    public static final double VEHICLE_RADIUS = Math.hypot(VEHICLE_WHEELBASE, VEHICLE_TRACKWIDTH);
+  }
