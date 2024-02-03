@@ -75,9 +75,11 @@ public final class Constants {
       new SwerveModuleConfig(6, 0, false, false), // Front left
       new SwerveModuleConfig(5, 0, false, false), // Back right
       new SwerveModuleConfig(3, 0, false, false) // Back left
-  };
+    };
     
     public static final double VEHICLE_WHEELBASE = 1.0;
     public static final double VEHICLE_TRACKWIDTH = 1.0;
     public static final double VEHICLE_RADIUS = Math.hypot(VEHICLE_WHEELBASE, VEHICLE_TRACKWIDTH);
+
+    public static final double DRIVE_GEAR_RATIO = 6.54;
   }
