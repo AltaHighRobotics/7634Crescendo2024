@@ -82,4 +82,5 @@ public final class Constants {
     public static final double VEHICLE_RADIUS = Math.hypot(VEHICLE_WHEELBASE, VEHICLE_TRACKWIDTH);
 
     public static final double DRIVE_GEAR_RATIO = 6.54;
+    public static final double TURN_GEAR_RATIO = 33.94;
   }
