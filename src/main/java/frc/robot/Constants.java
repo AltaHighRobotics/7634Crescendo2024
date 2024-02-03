@@ -30,7 +30,7 @@ public final class Constants {
     public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 
   // Driving.
-    public static final int DRIVE_CONTROLLER = 0;
+    public static final int DRIVE_CONTROLLER = 2;
     public static final double DRIVE_SPEED = 0.5;
     public static final double DRIVE_TURN_SPEED = 0.5;
 
@@ -56,13 +56,13 @@ public final class Constants {
     public static final int XBOX_RIGHT_BUMPER = 6;
 
   // Swerve module.
-    public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0;
-    public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0;
-    public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
+    public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 2;
+    public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0.3092112569295754;
+    //public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
 
     //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 
-    public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
+    public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000000000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
 
     public static final int FRONT_RIGHT_MODULE = 0;
     public static final int FRONT_LEFT_MODULE = 1;
@@ -71,10 +71,10 @@ public final class Constants {
     public static final int SWERVE_MODULE_COUNT = 4;
 
     public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
-      new SwerveModuleConfig(4, 0, false, false), // Front right
-      new SwerveModuleConfig(6, 0, false, false), // Front left
-      new SwerveModuleConfig(5, 0, false, false), // Back right
-      new SwerveModuleConfig(3, 0, false, false) // Back left
+      new SwerveModuleConfig(4, 40, false, false), // Front right
+      new SwerveModuleConfig(6, 60, false, false), // Front left
+      new SwerveModuleConfig(5, 50, false, false), // Back right
+      new SwerveModuleConfig(3, 30, false, false) // Back left
     };
     
     public static final double VEHICLE_WHEELBASE = 1.0;

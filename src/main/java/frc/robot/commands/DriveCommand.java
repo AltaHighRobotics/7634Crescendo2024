@@ -5,8 +5,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.swerve.DriveTrainSub;
+import frc.robot.swerve.SwerveModule;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class DriveCommand extends Command {
@@ -25,49 +27,74 @@ public class DriveCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    //TODO: delete after pid tuning
+    // Reset this module for testing. Delete this when you no longer need it.
+    m_driveTrainSub.getSwerveModuleFromId(Constants.FRONT_RIGHT_MODULE).resetTurnEncoder();
+    SmartDashboard.putData("A single turn pid", m_driveTrainSub.getSwerveModuleFromId(Constants.FRONT_RIGHT_MODULE).getTurnPID());
   }
 
+  private void test(){
+    SmartDashboard.putNumber("Encoder change #1 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(0).getTurnEncoderPosition());
+    SmartDashboard.putNumber("Encoder change #2 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(1).getTurnEncoderPosition());
+    SmartDashboard.putNumber("Encoder change #3 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(2).getTurnEncoderPosition());
+    SmartDashboard.putNumber("Encoder change #4 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(3).getTurnEncoderPosition());
+
+    double setpoint = m_driveController.getRawAxis(Constants.FLIGHT_STICK_SLIDER) * 180;
+
+    SmartDashboard.putNumber("Slider value: ", setpoint);
+
+    SwerveModule module = m_driveTrainSub.getSwerveModuleFromId(Constants.FRONT_RIGHT_MODULE);
+    module.setDesiredAngle(setpoint);
+    module.run();
+    //module.setTurnMotor(.08);
+
+  }
+  /* */
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    test();
+    
     // The gyro wants to be reset during runtime but I only want to do it once.
-    if (doInitGyro) {
-      doInitGyro = false;
-      m_driveTrainSub.resetGyro();
-      m_driveTrainSub.zeroFieldCentric();
-    }
+    // if (doInitGyro) {
+    //   doInitGyro = false;
+    //   m_driveTrainSub.resetGyro();
+    //   m_driveTrainSub.zeroFieldCentric();
+    // }
 
-    // Get joystick values.
-    double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
-    double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
-    double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
-    //System.out.println(flightStickX);
-    //System.out.println(flightStickY);
-    //System.out.println(flightStickZ);
+    // // Get joystick values.
+    // double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
+    // double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
+    // double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
 
-    // Apply dead zones to controller.
-    if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
-      flightStickX = 0.0;
-    } if (Math.abs(flightStickY) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
-      flightStickY = 0.0;
-    } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
-      flightStickZ = 0.0;
-    }
 
-    double strafe = flightStickX;
-    double speed = flightStickY;
-    double rotation = flightStickZ;
+    // // Apply dead zones to controller.
+    // if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    //   flightStickX = 0.0;
+    // } if (Math.abs(flightStickY) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    //   flightStickY = 0.0;
+    // } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    //   flightStickZ = 0.0;
+    // }
 
-    m_driveTrainSub.drive(
-      Math.pow(strafe, 2.0) * Math.signum(strafe), 
-      -Math.pow(speed, 2.0) * Math.signum(speed), 
-      Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
-      true,
-      Constants.DRIVE_SPEED
-    );
+    // System.out.println(flightStickX);
+    // System.out.println(flightStickY);
+    // System.out.println(flightStickZ);
 
-    m_driveTrainSub.run();
+    // double strafe = flightStickX;
+    // double speed = flightStickY;
+    // double rotation = flightStickZ;
+
+    // m_driveTrainSub.drive(
+    //   Math.pow(strafe, 2.0) * Math.signum(strafe), 
+    //   -Math.pow(speed, 2.0) * Math.signum(speed), 
+    //   Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
+    //   true,
+    //   Constants.DRIVE_SPEED
+    // );
+    
+    // m_driveTrainSub.run();
+    
   }
 
   // Called once the command ends or is interrupted.

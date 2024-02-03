@@ -1,12 +1,16 @@
 package utilities;
 
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
+import java.util.ArrayList;
+
 /**
  * A PID controller with settings for ranges on all values, and a velocity based
  * control mode.
  * 
  * @author Icarus Innovated
  */
-public class ConfigurablePID
+public class ConfigurablePID implements Sendable
 {
 	/**
 	 * The proportional component of the output. Equal to error * gain.
@@ -151,6 +155,12 @@ public class ConfigurablePID
 	private boolean velocityMode;
 
 	/**
+	 * PIDS that are linked for the senadle and other things.
+	 * Changing settings in SmartDashboard for this will apply to all linked PIDS.
+	 */
+	private ArrayList<ConfigurablePID> linkedPIDS = new ArrayList<ConfigurablePID>();
+
+	/**
 	 * Creates a new Configurable PID with default parameters
 	 */
 	public ConfigurablePID()
@@ -196,6 +206,31 @@ public class ConfigurablePID
 		this.clampProportional = this.minProportional != 0 || this.maxProportional != 0;
 		this.clampIntegral = this.minIntegral != 0 || this.maxIntegral != 0;
 		this.clampDerivative = this.minDerivative != 0 || this.maxDerivative != 0;
+	}
+
+	/**
+	 * Initializes this Sendable object.
+	 * 
+	 * @param builder		A sendable builder for playing with the values in SmartDashboard
+	 */
+	@Override
+	public void initSendable(SendableBuilder builder)
+	{
+		builder.setSmartDashboardType("ConfigurablePID");
+		builder.addDoubleProperty("Proportional gain", this::getProportionalGain, this::setProportionalGain);
+		builder.addDoubleProperty("Integral gain", this::getIntegralGain, this::setIntegralGain);
+		builder.addDoubleProperty("Derivative gain", this::getDerivativeGain, this::setDerivativeGain);
+	}
+
+	/**
+	 * Adds a PID to link.
+	 * They will be linked recursively so be careful not to create a loop.
+	 * 
+	 * @param linkedPID 	The PID that will be linked.
+	 */
+	public void addLinkedPID(ConfigurablePID linkedPID)
+	{
+		this.linkedPIDS.add(linkedPID);
 	}
 
 	/**
@@ -416,6 +451,20 @@ public class ConfigurablePID
 	public void setProportionalGain(double newProportionalGain)
 	{
 		proportionalGain = newProportionalGain;
+
+		for (ConfigurablePID linkedPID : linkedPIDS) {
+			linkedPID.setProportionalGain(newProportionalGain);
+		}
+	}
+
+	/**
+	 * Gets the proportional gain
+	 * 
+	 * @return the proportional gain
+	 */
+	public double getProportionalGain()
+	{
+		return this.proportionalGain;
 	}
 
 	/**
@@ -436,6 +485,21 @@ public class ConfigurablePID
 	public void setIntegralGain(double newIntegralGain)
 	{
 		integralGain = newIntegralGain;
+
+		for (ConfigurablePID linkedPID : linkedPIDS)
+		{
+			linkedPID.setIntegralGain(newIntegralGain);
+		}
+	}
+
+	/**
+	 * Get the integral gain
+	 * 
+	 * @return the integral gain
+	 */
+	public double getIntegralGain()
+	{
+		return this.integralGain;
 	}
 
 	/**
@@ -443,9 +507,24 @@ public class ConfigurablePID
 	 *
 	 * @param newDerivativeGain the derivative gain
 	 */
-	public void setderivativeGain(double newDerivativeGain)
+	public void setDerivativeGain(double newDerivativeGain)
 	{
 		derivativeGain = newDerivativeGain;
+
+		for (ConfigurablePID linkedPID : linkedPIDS)
+		{
+			linkedPID.setDerivativeGain(newDerivativeGain);
+		}
+	}
+
+	/**
+	 * Get the derivative gain
+	 * 
+	 * @return the derivative gain
+	 */
+	public double getDerivativeGain()
+	{
+		return this.derivativeGain;
 	}
 
 	/**

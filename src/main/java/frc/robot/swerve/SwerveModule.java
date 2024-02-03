@@ -99,6 +99,10 @@ public class SwerveModule {
     turnEncoder.setPosition(position);
   }
 
+  public ConfigurablePID getTurnPID() {
+    return turnPid;
+  }
+
   // TODO: Start using fancy stuff.
   public void setDesiredAngle(double desiredAngle) {
     this.desiredAngle = desiredAngle;
@@ -133,6 +137,7 @@ public class SwerveModule {
   }
   
   public void run() {
-    setTurnMotor(turnPid.runPID(desiredAngle, getTurnEncoderPosition()));
+    setTurnMotor(turnPid.runPID(desiredAngle, getAngle()));
   }
+
 }
