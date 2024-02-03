@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.Constants;
@@ -98,6 +96,7 @@ public void goToSetPoints(double[] setPoints){
 
     if (Math.abs(currentPosition) < Constants.JOINT_TOLERANCE) {
       jointMotors[i].set(0.0);
+      //motors are config'd to stay in the same spot when given no output
     }
     else {
       jointMotors[i].set(armJointPID.runPID(setPoints[i], currentPosition));
