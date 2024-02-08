@@ -76,7 +76,7 @@ public final class Constants {
       new SwerveModuleConfig(4, 40, false, false), // Front right
       new SwerveModuleConfig(6, 60, false, false), // Front left
       new SwerveModuleConfig(5, 50, false, false), // Back right
-      new SwerveModuleConfig(3, 30, true, false) // Back left
+      new SwerveModuleConfig(3, 30, false, false) // Back left
     };
     
     public static final double VEHICLE_WHEELBASE = 1.0;
