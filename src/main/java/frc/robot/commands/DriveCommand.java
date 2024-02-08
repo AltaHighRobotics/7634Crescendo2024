@@ -52,7 +52,7 @@ public class DriveCommand extends Command {
     
    // The gyro wants to be reset during runtime but I only want to do it once.
     if (doInitGyro) {
-      doInitGyro = false;//taco quesadilla fish & chips
+      doInitGyro = false;
       m_driveTrainSub.resetGyro();
       m_driveTrainSub.zeroFieldCentric();
     }

@@ -56,13 +56,14 @@ public final class Constants {
   public static final int XBOX_RIGHT_BUMPER = 6;
 
   // Swerve module.
-  public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0;
-  public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0;
-  public static final double SWERVE_MODULE_WHEEL_ENCODER_DISTANCE_PER_PULSE = 0;
+  public static final double SWERVE_MODULE_TURN_ENCODER_DISTANCE_PER_PULSE = 0.267745716 * 36.0;
+  // 1.0/gear_thingy * 360.0
+  public static final double SWERVE_MODULE_WHEEL_CIRCUMFERENCE = 0.3092112569295754;
 
   //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 
-  public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.0, 0.0);
+  public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.012, 0.0, 0.000099
+  , 0.0, 0, 0, 0, 0, 0, 0, 0, -0.8, 0.8);
 
   public static final int FRONT_RIGHT_MODULE = 0;
   public static final int FRONT_LEFT_MODULE = 1;
