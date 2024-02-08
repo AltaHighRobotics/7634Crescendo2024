@@ -137,7 +137,8 @@ public class SwerveModule {
   }
   
   public void run() {
-    setTurnMotor(turnPid.runPID(desiredAngle, getAngle()));
+    setTurnMotor(turnPid.runPID(desiredAngle, getTurnEncoderPosition()));
+    
   }
 
 }
