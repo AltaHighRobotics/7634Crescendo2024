@@ -103,7 +103,7 @@ public class SwerveModule {
     return turnPid;
   }
 
-  // TODO: Start using fancy stuff.
+
   public void setDesiredAngle(double desiredAngle) {
     this.desiredAngle = desiredAngle;
 
