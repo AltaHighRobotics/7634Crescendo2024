@@ -30,7 +30,7 @@ public final class Constants {
     public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 
   // Driving.
-    public static final int DRIVE_CONTROLLER = 2;
+    public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.5;
     public static final double DRIVE_TURN_SPEED = 0.5;
 
@@ -74,9 +74,9 @@ public final class Constants {
 
     public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
       new SwerveModuleConfig(4, 40, false, false), // Front right
-      new SwerveModuleConfig(6, 60, false, false), // Front left
+      new SwerveModuleConfig(6, 60, true, false), // Front left
       new SwerveModuleConfig(5, 50, false, false), // Back right
-      new SwerveModuleConfig(3, 30, false, false) // Back left
+      new SwerveModuleConfig(3, 30, true, false) // Back left
     };
     
     public static final double VEHICLE_WHEELBASE = 1.0;
