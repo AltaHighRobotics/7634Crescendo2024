@@ -105,9 +105,10 @@ public class SwerveModule {
 
 
   public void setDesiredAngle(double desiredAngle) {
-    this.desiredAngle = desiredAngle;
+    //this.desiredAngle = desiredAngle;
+    
+    this.desiredAngle = MathTools.getAngleSetPoint(desiredAngle, getTurnEncoderPosition());
 
-    // this.turnAngle = desiredAngle;
     // double turnDis = MathTools.angleDis(MathTools.wrapAngle(desiredAngle), getAngle());
 
     // if (Math.abs(turnDis) > 90.0) {

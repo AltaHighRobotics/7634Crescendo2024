@@ -58,13 +58,12 @@ public class DriveCommand extends Command {
     }
 
     // Get joystick values.
+    // double flightStickX = m_driveController.getRawAxis(Constants.LEFT_STICK_X);
+    // double flightStickY = m_driveController.getRawAxis(Constants.LEFT_STICK_Y);
+    // double flightStickZ = m_driveController.getRawAxis(Constants.RIGHT_STICK_X);
     double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
     double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
     double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
-    System.out.println(flightStickX);
-    System.out.println(flightStickY);
-    System.out.println(flightStickZ);
-    System.out.println("Testing Balls");
 
     // Apply dead zones to controller.
     if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
@@ -75,9 +74,9 @@ public class DriveCommand extends Command {
       flightStickZ = 0.0;
     }
 
-    System.out.println(flightStickX);
-    System.out.println(flightStickY);
-    System.out.println(flightStickZ);
+    // System.out.println(flightStickX);
+    // System.out.println(flightStickY);
+    // System.out.println(flightStickZ);
 
     double strafe = flightStickX;
     double speed = flightStickY;
