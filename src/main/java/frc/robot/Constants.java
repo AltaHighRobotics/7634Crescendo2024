@@ -32,7 +32,7 @@ public final class Constants {
   // Driving.
     public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.5;
-    public static final double DRIVE_TURN_SPEED = 0.5;
+    public static final double DRIVE_TURN_SPEED = 0.7; // increased to 0.7; use 0.5 if issues arise.
 
   // Controller.
     public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.3;
