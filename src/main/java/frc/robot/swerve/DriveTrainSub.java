@@ -38,7 +38,7 @@ public class DriveTrainSub extends SubsystemBase {
   }
 
   public void zeroFieldCentric() {
-    fieldCentricOffset = navx.getYaw();
+    fieldCentricOffset = getYaw();
   }
 
   public double getYaw() {

@@ -60,7 +60,6 @@ public class SwerveModule {
     turnPid = new ConfigurablePID(Constants.SWERVE_MODULE_TURN_PID);
   }
 
-  // TODO: Full the wheel motor wrappers with stuff UwU
   public void setWheelMotor(double speed) {
     wheelMotor.set(speed*wheelDirection);  
     

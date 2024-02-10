@@ -61,9 +61,9 @@ public class DriveCommand extends Command {
     // double flightStickX = m_driveController.getRawAxis(Constants.LEFT_STICK_X);
     // double flightStickY = m_driveController.getRawAxis(Constants.LEFT_STICK_Y);
     // double flightStickZ = m_driveController.getRawAxis(Constants.RIGHT_STICK_X);
-    double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
+    double flightStickX = 0;//m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
     double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
-    double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
+    double flightStickZ = 0;//m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
 
     // Apply dead zones to controller.
     if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
