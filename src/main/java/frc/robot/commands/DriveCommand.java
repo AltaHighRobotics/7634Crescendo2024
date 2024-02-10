@@ -83,8 +83,8 @@ public class DriveCommand extends Command {
     double rotation = flightStickZ;
 
     m_driveTrainSub.drive(
-      Math.pow(strafe, 2.0) * Math.signum(strafe), 
-      -Math.pow(speed, 2.0) * Math.signum(speed), 
+      Math.pow(strafe, 2.0) * Math.signum(strafe), //signum returns -1 if neg, 0 if 0, 1 if pos.
+      -Math.pow(speed, 2.0) * Math.signum(speed), // basically, he smooths out speed, gtes the direction (signum)
       Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
       false,
       Constants.DRIVE_SPEED
