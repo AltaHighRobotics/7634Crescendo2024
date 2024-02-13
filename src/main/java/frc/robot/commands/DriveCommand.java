@@ -5,10 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.swerve.DriveTrainSub;
-import frc.robot.swerve.SwerveModule;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class DriveCommand extends Command {
@@ -28,7 +26,7 @@ public class DriveCommand extends Command {
   @Override
   public void initialize() {
   }
-
+/* 
   private void test(){
     SmartDashboard.putNumber("Encoder change #1 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(0).getTurnEncoderPosition());
     SmartDashboard.putNumber("Encoder change #2 in degrees: ", m_driveTrainSub.getSwerveModuleFromId(1).getTurnEncoderPosition());
@@ -44,6 +42,7 @@ public class DriveCommand extends Command {
     module.run();
 
   }
+ */
   /* */
   // Called every time the scheduler runs while the command is scheduled.
   @Override

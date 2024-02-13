@@ -7,8 +7,6 @@ package frc.robot.commands.positions;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.Constants;
-import frc.robot.commands.shootCommand;
-
 public class SpeakerPosition extends Command {
   /** Creates a new SpeakerPosition. */
   private ArmSubsystem m_armSubsystem;
