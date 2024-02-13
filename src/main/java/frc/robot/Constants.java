@@ -23,7 +23,8 @@ public final class Constants {
   public static final int FLOOR_RETRIEVAL_BUTTON = 2;
   public static final int AMP_POSITION_BUTTON = 12;
   public static final int SPEAKER_POSITION_BUTTON = 11;
-  public static final int TRAP_POSITION_BUTTON = 4;
+  public static final int TRAP_POSITION_BUTTON = 10;
+  public static final int DEFAULT_POSITION_BUTTON = 4;
 
   //Motors and PID constants for our Arm
     public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000000, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
@@ -37,6 +38,7 @@ public final class Constants {
     public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
     public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] DEFAULT_POSTION = {0.0, 0.0, 0.0};
     //tolerance for the .brake Method on shaydns suggested changes in armSubsystem
     public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 

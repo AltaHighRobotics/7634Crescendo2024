@@ -14,9 +14,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.positions.AmpPosition;
+import frc.robot.commands.positions.RetrievalPosition;
+import frc.robot.commands.positions.SourcePosition;
 import frc.robot.commands.positions.SpeakerPosition;
 import frc.robot.commands.positions.StartingPosition;
 import frc.robot.commands.positions.TrapPosition;
+import frc.robot.commands.positions.defaultPosition;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.swerve.*;
 /**
@@ -30,9 +33,12 @@ public class RobotContainer {
   private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
   private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
   private final shootCommand m_shootCommand = new shootCommand(m_armSubsystem);
-  private final SpeakerPosition m_SpeakerPosition = new SpeakerPosition(m_armSubsystem);
+  private final SpeakerPosition m_speakerPosition = new SpeakerPosition(m_armSubsystem);
   private final StartingPosition m_startingPosition = new StartingPosition(m_armSubsystem);
   private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
+  private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
+  private final RetrievalPosition m_retrievalPosition = new RetrievalPosition(m_armSubsystem);
+  private final defaultPosition m_defaultPosition = new defaultPosition(m_armSubsystem);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   //subsytems
@@ -61,9 +67,16 @@ public class RobotContainer {
     final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
     final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
-    //final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
+    final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
 
     shootButton.onTrue(m_shootCommand);
+    ampButton.onTrue(m_ampPosition);
+    speakerButton.onTrue(m_speakerPosition);
+    sourceButton.onTrue(m_sourcePosition);
+    floorButton.whileTrue(m_retrievalPosition);
+    floorButton.onFalse(m_defaultPosition);
+    trapButton.onTrue(m_trapPosition);
+    defaultButton.onTrue(m_defaultPosition);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
