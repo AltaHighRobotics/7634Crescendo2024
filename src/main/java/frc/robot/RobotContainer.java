@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.commands.positions.AmpPosition;
+import frc.robot.commands.positions.SpeakerPosition;
+import frc.robot.commands.positions.StartingPosition;
+import frc.robot.commands.positions.TrapPosition;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.swerve.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,7 +27,12 @@ import frc.robot.swerve.*;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
+  private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
+  private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
+  private final shootCommand m_shootCommand = new shootCommand(m_armSubsystem);
+  private final SpeakerPosition m_SpeakerPosition = new SpeakerPosition(m_armSubsystem);
+  private final StartingPosition m_startingPosition = new StartingPosition(m_armSubsystem);
+  private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   //subsytems
@@ -53,7 +63,8 @@ public class RobotContainer {
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
     //final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
 
-
+    shootButton.onTrue(m_shootCommand);
+    
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
