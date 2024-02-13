@@ -16,6 +16,15 @@ import utilities.PIDConfiguration;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  //Constants for button id's
+  // all of these should corrospond with number buttons on the controller
+  public static final int TRIGGER_BUTTON = 1;
+  public static final int SOURCE_POSITION_BUTTON = 3;
+  public static final int FLOOR_RETRIEVAL_BUTTON = 2;
+  public static final int AMP_POSITION_BUTTON = 12;
+  public static final int SPEAKER_POSITION_BUTTON = 11;
+  public static final int TRAP_POSITION_BUTTON = 4;
+
   //Motors and PID constants for our Arm
     public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000000, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
     public static final int WRIST_MOTOR_ID = 0;

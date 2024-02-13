@@ -2,18 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.positions;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.commands.shootCommand;
 
-public class SpeakerPosition extends Command {
-  /** Creates a new SpeakerPosition. */
-  private ArmSubsystem m_armSubsystem;
-  public SpeakerPosition(ArmSubsystem armSubsystem) {
-    m_armSubsystem = armSubsystem;
-    addRequirements(m_armSubsystem);
+public class shootCommand extends Command {
+  public static int test = 0;
+  /** Creates a new shootCommand. */
+  public shootCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -24,7 +20,9 @@ public class SpeakerPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootCommand.test = 0;
+    switch(test){
+      case 1:
+    }
   }
 
   // Called once the command ends or is interrupted.
