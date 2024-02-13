@@ -38,7 +38,9 @@ public final class Constants {
     public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
     public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
-    public static final double[] DEFAULT_POSTION = {0.0, 0.0, 0.0};
+    public static final double[] DEFAULT_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] RETRIEVAL_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] TRAP_POSITION = {0.0, 0.0 ,0.0};
     //tolerance for the .brake Method on shaydns suggested changes in armSubsystem
     public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 

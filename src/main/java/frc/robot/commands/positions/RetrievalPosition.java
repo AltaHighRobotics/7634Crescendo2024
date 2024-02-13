@@ -5,10 +5,14 @@
 package frc.robot.commands.positions;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.Constants;
+import frc.robot.subsystems.ArmSubsystem;
 public class RetrievalPosition extends Command {
   /** Creates a new RetrievalPosition. */
-  public RetrievalPosition() {
+  ArmSubsystem m_armSubsystem;
+  public RetrievalPosition(ArmSubsystem armSubsystem) {
+    m_armSubsystem = armSubsystem;
+    addRequirements(m_armSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -18,7 +22,10 @@ public class RetrievalPosition extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_armSubsystem.goToSetPoints(Constants.RETRIEVAL_POSITION);
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -13,7 +13,7 @@ public class shootCommand extends Command {
   private ArmSubsystem m_armSubsystem;
   public shootCommand(ArmSubsystem armSubsystem) {
     m_armSubsystem = armSubsystem;
-    addRequirements(armSubsystem);
+    addRequirements(m_armSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

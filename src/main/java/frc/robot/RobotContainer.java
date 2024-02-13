@@ -19,7 +19,6 @@ import frc.robot.commands.positions.SourcePosition;
 import frc.robot.commands.positions.SpeakerPosition;
 import frc.robot.commands.positions.StartingPosition;
 import frc.robot.commands.positions.TrapPosition;
-import frc.robot.commands.positions.defaultPosition;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.swerve.*;
 /**
@@ -38,7 +37,6 @@ public class RobotContainer {
   private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
   private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
   private final RetrievalPosition m_retrievalPosition = new RetrievalPosition(m_armSubsystem);
-  private final defaultPosition m_defaultPosition = new defaultPosition(m_armSubsystem);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   //subsytems
@@ -74,9 +72,9 @@ public class RobotContainer {
     speakerButton.onTrue(m_speakerPosition);
     sourceButton.onTrue(m_sourcePosition);
     floorButton.whileTrue(m_retrievalPosition);
-    floorButton.onFalse(m_defaultPosition);
+    floorButton.onFalse(m_startingPosition);
     trapButton.onTrue(m_trapPosition);
-    defaultButton.onTrue(m_defaultPosition);
+    defaultButton.onTrue(m_startingPosition);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
