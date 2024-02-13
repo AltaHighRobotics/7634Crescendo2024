@@ -6,7 +6,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import frc.robot.Constants;
 import utilities.ConfigurablePID;
 
@@ -18,6 +23,8 @@ public class ArmSubsystem extends SubsystemBase {
   private TalonFX shoulderMotor;
   private TalonFX forearmMotor;
   private TalonFX wristMotor;
+  private TalonFX primaryRollerMotor;
+  private TalonFX secondaryRollerMotor;
   private ConfigurablePID armJointPID;
   //not totally understanding what im supposed to do here
   //im gonna make one ConfigurablePID and use .runPID on it in 3 diff places :)
@@ -27,17 +34,27 @@ public class ArmSubsystem extends SubsystemBase {
     wristMotor = new TalonFX(Constants.WRIST_MOTOR_ID);
     forearmMotor = new TalonFX(Constants.FOREARM_MOTOR_ID);
     shoulderMotor = new TalonFX(Constants.SHOULDER_MOTOR_ID);
+    primaryRollerMotor = new TalonFX(Constants.PRIMARY_ROLLER_MOTOR_ID);
+    secondaryRollerMotor = new TalonFX(Constants.SECONDARY_ROLLER_MOTOR_ID);
+    //make the shooter motors stop moving when no input is provided
+    secondaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
+    primaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
   }
-  // public void setShoulderMotor(double power){
-  //   shoulderMotor.set(power);
-  // }
-  // public void setForearmMotor(double power){
-  //   forearmMotor.set(power);
-  // }
-  // public void setWristMotor(double power){
-  //   wristMotor.set(power);
-  
-  public void resetEncoderValues(){ // This function is to reset the encoders; **ONLY USE WHEN ROBOT IS AT STARTING POSITION**
+  public void holdPrimary(){
+    primaryRollerMotor.stopMotor();
+  }
+  public void stopSecondary() {
+    secondaryRollerMotor.stopMotor();
+  }
+  public void setPrimaryMotor(double power){
+    primaryRollerMotor.set(power);
+  }
+  public void setSecondaryMotor(double power){
+    secondaryRollerMotor.set(power);
+  }
+
+
+  public void resetArmEncoderValues(){ // This function is to reset the encoders; **ONLY USE WHEN ROBOT IS AT STARTING POSITION**
     wristMotor.setPosition(0);
     shoulderMotor.setPosition(0);
     forearmMotor.setPosition(0);

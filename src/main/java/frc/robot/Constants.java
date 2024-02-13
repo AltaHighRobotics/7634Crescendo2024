@@ -17,10 +17,12 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //Motors and PID constants for our Arm
-    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000001, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000000, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
     public static final int WRIST_MOTOR_ID = 0;
     public static final int FOREARM_MOTOR_ID = 0;
     public static final int SHOULDER_MOTOR_ID = 0;
+    public static final int PRIMARY_ROLLER_MOTOR_ID = 0;
+    public static final int SECONDARY_ROLLER_MOTOR_ID = 0;
     //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
     public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
