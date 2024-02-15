@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.positions.AmpPosition;
+import frc.robot.commands.positions.ManualPositionCreator;
 import frc.robot.commands.positions.RetrievalPosition;
 import frc.robot.commands.positions.SourcePosition;
 import frc.robot.commands.positions.SpeakerPosition;
@@ -41,11 +42,12 @@ public class RobotContainer {
   //subsytems
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
+  private final ManualPositionCreator m_manualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
+    CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_manualPositionCreator);
   }
 
   /**
@@ -58,14 +60,14 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+  
     final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
     final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
     final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
-    final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
-
+/*
     shootButton.onTrue(m_shootCommand);
     ampButton.onTrue(m_ampPosition);
     speakerButton.onTrue(m_speakerPosition);
@@ -73,6 +75,9 @@ public class RobotContainer {
     floorButton.whileTrue(m_retrievalPosition);
     floorButton.onFalse(m_startingPosition);
     trapButton.onTrue(m_trapPosition);
+    */
+    final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
+
     defaultButton.onTrue(m_startingPosition);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`

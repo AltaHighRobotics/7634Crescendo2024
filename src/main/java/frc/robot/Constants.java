@@ -27,10 +27,10 @@ public final class Constants {
   public static final int DEFAULT_POSITION_BUTTON = 4;
 
   //Motors and PID constants for our Arm
-    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.000000, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
-    public static final int WRIST_MOTOR_ID = 0;
-    public static final int FOREARM_MOTOR_ID = 0;
-    public static final int SHOULDER_MOTOR_ID = 0;
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.01, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+    public static final int WRIST_MOTOR_ID = 7;
+    public static final int FOREARM_MOTOR_ID = 8;
+    public static final int SHOULDER_MOTOR_ID = 9;
     public static final int PRIMARY_ROLLER_MOTOR_ID = 0;
     public static final int SECONDARY_ROLLER_MOTOR_ID = 0;
     //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
@@ -88,9 +88,9 @@ public final class Constants {
     public static final int SWERVE_MODULE_COUNT = 4;
 
     public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
-      new SwerveModuleConfig(4, 40, true, false), // Front right
+      new SwerveModuleConfig(4, 40, false, false), // Front right
       new SwerveModuleConfig(6, 60, false, false), // Front left
-      new SwerveModuleConfig(5, 50, true, false), // Back right
+      new SwerveModuleConfig(5, 50, false, false), // Back right
       new SwerveModuleConfig(3, 30, false, false) // Back left
     };
     
@@ -100,4 +100,5 @@ public final class Constants {
 
     public static final double DRIVE_GEAR_RATIO = 6.54;
     public static final double TURN_GEAR_RATIO = 33.94;
+    
   }

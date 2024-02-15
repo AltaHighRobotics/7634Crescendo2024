@@ -37,6 +37,9 @@ public class ArmSubsystem extends SubsystemBase {
     //make the shooter motors stop moving when no input is provided
     secondaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
     primaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
+    shoulderMotor.setNeutralMode(NeutralModeValue.Brake);
+    forearmMotor.setNeutralMode(NeutralModeValue.Brake);
+    wristMotor.setNeutralMode(NeutralModeValue.Brake);
   }
   public void holdPrimary(){
     primaryRollerMotor.stopMotor();
@@ -84,6 +87,8 @@ public class ArmSubsystem extends SubsystemBase {
     SmartDashboard.putNumberArray("Joint SetPoints: ", setPoints);
     SmartDashboard.putNumberArray("Joint Current Positions: ", positionArray);
     //set the motors to the outputs of the PID controllers
+    System.out.println(setPoints[2]);
+    System.out.println(positionArray[2]);
     shoulderMotor.set(shoulderOutput);
     forearmMotor.set(forearmOutput);
     wristMotor.set(wristOutput);
