@@ -35,12 +35,13 @@ public final class Constants {
     public static final int SECONDARY_ROLLER_MOTOR_ID = 0;
     //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
     public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
-    public static final double[] SPEAKER_POSITION = {0.0, 0.0, 0.0};
+    public static final double[] SPEAKER_POSITION = {-2.003, 1.428, -10.167};
     public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
     public static final double[] DEFAULT_POSITION = {0.0, 0.0, 0.0};
     public static final double[] RETRIEVAL_POSITION = {0.0, 0.0, 0.0};
     public static final double[] TRAP_POSITION = {0.0, 0.0 ,0.0};
+    public static final double[] TEST_POSITION  ={-9.5, -6.15, -10.167};
     //tolerance for the .brake Method on shaydns suggested changes in armSubsystem
     public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
 

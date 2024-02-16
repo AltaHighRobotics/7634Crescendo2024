@@ -7,11 +7,15 @@ package frc.robot;
 //import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.commands.positions.TestPosition;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.swerve.*;
 /**
@@ -31,6 +35,7 @@ public class RobotContainer {
   private final ManualPositionCreator m_ManualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
+  private final TestPosition m_TestPosition = new TestPosition(m_armSubsystem);
   
 
   //subsytems
@@ -69,7 +74,7 @@ public class RobotContainer {
     */
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
 
-    //defaultButton.onTrue(m_startingPosition);
+    defaultButton.onTrue(m_TestPosition);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     

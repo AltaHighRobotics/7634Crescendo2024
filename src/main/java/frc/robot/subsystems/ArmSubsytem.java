@@ -5,8 +5,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import frc.robot.Constants;
 import utilities.ConfigurablePID;
 
@@ -27,6 +30,9 @@ public class ArmSubsytem extends SubsystemBase {
     primaryRollerMotor = new TalonFX(Constants.PRIMARY_ROLLER_MOTOR_ID);
     secondaryRollerMotor = new TalonFX(Constants.SECONDARY_ROLLER_MOTOR_ID);
     armJointPID = new ConfigurablePID(Constants.ARM_JOINT_CONTROLLER);
+    shoulderMotor.setNeutralMode(NeutralModeValue.Brake);
+    forearmMotor.setNeutralMode(NeutralModeValue.Brake);
+    wristMotor.setNeutralMode(NeutralModeValue.Brake);
 
   }
 
@@ -41,9 +47,16 @@ public void gotToSetPoints(double[] setPoints) {
   double[] currentPositions = getCurrentPositions();
   double shoulderOutput = armJointPID.runPID(setPoints[0], currentPositions[0]);
   double forearmOutput = armJointPID.runPID(setPoints[1], currentPositions[1]);
+  double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
   shoulderMotor.set(shoulderOutput);
   forearmMotor.set(forearmOutput);
-  //System.out.println(shoulderOutput);
+  wristMotor.set(wristOutput);  //System.out.println(shoulderOutput);
+  System.out.print("Shoulder Pos: ");
+  System.out.println(currentPositions[0]);
+  System.out.print("Forearm Pos: ");
+  System.out.println(currentPositions[1]);
+  System.out.print("Wrist Pos: ");
+  System.out.println(currentPositions[2]);
     }
 
 

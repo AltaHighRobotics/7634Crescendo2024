@@ -22,6 +22,8 @@ public class ManualPositionCreator extends Command {
   JoystickButton shoulderButtonDecrementer;
   JoystickButton forearmButtonDecrementer;
   JoystickButton forearmButtonIncrementer;
+  JoystickButton wristBUttonIncrementer;
+  JoystickButton wristButtonDecrementer;
   ArmSubsytem m_armSubsystem;
   public ManualPositionCreator(ArmSubsytem armSubsytem, XboxController driveController) {
     m_armSubsystem = armSubsytem;
@@ -31,6 +33,8 @@ public class ManualPositionCreator extends Command {
     shoulderButtonIncrementer = new JoystickButton(m_driveController, 8);
     forearmButtonDecrementer = new JoystickButton(m_driveController, 9);
     forearmButtonIncrementer = new JoystickButton(m_driveController, 10);
+    wristBUttonIncrementer = new JoystickButton(m_driveController, 11);
+    wristButtonDecrementer = new JoystickButton(m_driveController, 12);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -61,7 +65,12 @@ public class ManualPositionCreator extends Command {
       armSetPoints[1] += 9;
       //System.out.println(shoulderIncrement);
     }
-
+    if (wristBUttonIncrementer.getAsBoolean() == true){
+      armSetPoints[2] +=9;
+    }
+    if (wristButtonDecrementer.getAsBoolean() == true){
+      armSetPoints[2] -= 9;
+    }
 
     m_armSubsystem.gotToSetPoints(armSetPoints);
   }
