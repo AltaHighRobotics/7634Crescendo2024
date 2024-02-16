@@ -12,14 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.positions.AmpPosition;
-import frc.robot.commands.positions.ManualPositionCreator;
-import frc.robot.commands.positions.RetrievalPosition;
-import frc.robot.commands.positions.SourcePosition;
-import frc.robot.commands.positions.SpeakerPosition;
-import frc.robot.commands.positions.StartingPosition;
-import frc.robot.commands.positions.TrapPosition;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.swerve.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,25 +22,23 @@ import frc.robot.swerve.*;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
-  private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
-  private final shootCommand m_shootCommand = new shootCommand(m_armSubsystem);
-  private final SpeakerPosition m_speakerPosition = new SpeakerPosition(m_armSubsystem);
-  private final StartingPosition m_startingPosition = new StartingPosition(m_armSubsystem);
-  private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
-  private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
-  private final RetrievalPosition m_retrievalPosition = new RetrievalPosition(m_armSubsystem);
+  //private final ArmSubsystem m_armSubsystem = new ArmSubsystem();
+  /* 
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
+*/private final ArmSubsytem m_armSubsystem = new ArmSubsytem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
-  //subsytems
+  private final ManualPositionCreator m_ManualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
-  private final ManualPositionCreator m_manualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
+  
+
+  //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_manualPositionCreator);
+    CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
   }
 
   /**
@@ -78,7 +69,7 @@ public class RobotContainer {
     */
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
 
-    defaultButton.onTrue(m_startingPosition);
+    //defaultButton.onTrue(m_startingPosition);
     
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
