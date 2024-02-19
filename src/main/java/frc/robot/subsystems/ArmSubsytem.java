@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -16,10 +15,11 @@ import utilities.ConfigurablePID;
 public class ArmSubsytem extends SubsystemBase {
   /** Creates a new ArmSubsytem. */
   //Motors 
+  
   private TalonFX shoulderMotor;
   private TalonFX forearmMotor;
   private TalonFX wristMotor;
-  //private TalonFX[] armMotors = {shoulderMotor, forearmMotor, wristMotor};
+  private TalonFX[] armMotors = {shoulderMotor, forearmMotor, wristMotor};
   private TalonFX primaryRollerMotor;
   private TalonFX secondaryRollerMotor;
   private ConfigurablePID armJointPID;
@@ -33,9 +33,10 @@ public class ArmSubsytem extends SubsystemBase {
     shoulderMotor.setNeutralMode(NeutralModeValue.Brake);
     forearmMotor.setNeutralMode(NeutralModeValue.Brake);
     wristMotor.setNeutralMode(NeutralModeValue.Brake);
-
+    primaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
+    secondaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
   }
-
+  
   public double[] getCurrentPositions(){
     double shoulderCurrentPosition = shoulderMotor.getPosition().refresh().getValueAsDouble();
     double forearmCurrentPosition = forearmMotor.getPosition().refresh().getValueAsDouble();
@@ -45,21 +46,35 @@ public class ArmSubsytem extends SubsystemBase {
   }
 public void gotToSetPoints(double[] setPoints) {
   double[] currentPositions = getCurrentPositions();
+  /*
   double shoulderOutput = armJointPID.runPID(setPoints[0], currentPositions[0]);
   double forearmOutput = armJointPID.runPID(setPoints[1], currentPositions[1]);
   double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
   shoulderMotor.set(shoulderOutput);
   forearmMotor.set(forearmOutput);
-  wristMotor.set(wristOutput);  //System.out.println(shoulderOutput);
+  wristMotor.set(wristOutput);  
   System.out.print("Shoulder Pos: ");
   System.out.println(currentPositions[0]);
   System.out.print("Forearm Pos: ");
   System.out.println(currentPositions[1]);
   System.out.print("Wrist Pos: ");
-  System.out.println(currentPositions[2]);
+  System.out.println(currentPositions[2]);*/
+  for (int i = 0; i < 3; i++){
+    double motorOutput = armJointPID.runPID(currentPositions[i], setPoints[i]);
+    if (i == 0){
+      System.err.print("Shoulder: "); System.out.println(currentPositions[0]);
+    }
+    if (i == 1) {
+      System.err.print("Forearm: "); System.out.println(currentPositions[1]);
+    }      
+    if (i == 2) {
+      System.err.print("Wrist: "); System.out.println(currentPositions[2]);
+    }
+    armMotors[i].set(motorOutput);
+
     }
 
-
+  }
 
   @Override
   public void periodic() {

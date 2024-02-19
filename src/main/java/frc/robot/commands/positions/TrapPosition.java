@@ -6,13 +6,15 @@ package frc.robot.commands.positions;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.commands.shootCommand;
 import frc.robot.subsystems.ArmSubsytem;
 
-public class TestPosition extends Command {
-  /** Creates a new TestPosition. */
-  ArmSubsytem m_ArmSubsytem;
-  public TestPosition(ArmSubsytem armSubsytem) {
-    m_ArmSubsytem = armSubsytem;
+public class TrapPosition extends Command {
+  /** Creates a new TrapPosition. */
+  ArmSubsytem m_armSubsytem;
+  public TrapPosition(ArmSubsytem armSubsytem){
+    m_armSubsytem = armSubsytem;
+    addRequirements(m_armSubsytem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,7 +25,8 @@ public class TestPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ArmSubsytem.gotToSetPoints(Constants.TEST_POSITION);
+    shootCommand.currentArmPosition = 3;
+    m_armSubsytem.gotToSetPoints(Constants.TRAP_POSITION);
   }
 
   // Called once the command ends or is interrupted.

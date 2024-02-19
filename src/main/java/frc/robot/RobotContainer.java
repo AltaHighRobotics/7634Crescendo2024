@@ -10,12 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.positions.TestPosition;
+import frc.robot.commands.positions.*;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.swerve.*;
 /**
@@ -35,8 +36,13 @@ public class RobotContainer {
   private final ManualPositionCreator m_ManualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
-  private final TestPosition m_TestPosition = new TestPosition(m_armSubsystem);
-  
+  // Every Button Command
+  private final DefaultPosition m_defaultPosition = new DefaultPosition(m_armSubsystem);
+  private final SpeakerPosition m_speakerPosition = new SpeakerPosition(m_armSubsystem);
+  private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
+  private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
+  private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
+  private final shootCommand m_shootCommand = new shootCommand(m_armSubsystem);
 
   //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
@@ -63,19 +69,17 @@ public class RobotContainer {
     final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
     final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
-/*
-    shootButton.onTrue(m_shootCommand);
-    ampButton.onTrue(m_ampPosition);
-    speakerButton.onTrue(m_speakerPosition);
-    sourceButton.onTrue(m_sourcePosition);
-    floorButton.whileTrue(m_retrievalPosition);
-    floorButton.onFalse(m_startingPosition);
-    trapButton.onTrue(m_trapPosition);
-    */
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
+  
+    defaultButton.onTrue(m_defaultPosition);
+    speakerButton.onTrue(m_speakerPosition);
+    ampButton.onTrue(m_ampPosition);
+    sourceButton.onTrue(m_sourcePosition);
+    trapButton.onTrue(m_trapPosition);
+    shootButton.onTrue(m_shootCommand);
 
-    defaultButton.onTrue(m_TestPosition);
-    
+
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

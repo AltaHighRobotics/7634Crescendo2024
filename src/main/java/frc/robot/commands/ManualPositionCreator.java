@@ -50,26 +50,26 @@ public class ManualPositionCreator extends Command {
 
     //System.out.println(shoulderButtonDecrementer.getAsBoolean());
     if (shoulderButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[0] -= 11;
+      armSetPoints[0] -= 1;
       //System.out.println(shoulderIncrement);
     }
     if (shoulderButtonIncrementer.getAsBoolean() == true){
-      armSetPoints[0] +=11;
+      armSetPoints[0] +=1;
       //System.out.println(shoulderIncrement);
     }
     if (forearmButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[1] -= 9;
+      armSetPoints[1] -= 1;
       //System.out.println(shoulderIncrement);
     }
     if (forearmButtonIncrementer.getAsBoolean() == true){
-      armSetPoints[1] += 9;
+      armSetPoints[1] += 1;
       //System.out.println(shoulderIncrement);
     }
     if (wristBUttonIncrementer.getAsBoolean() == true){
-      armSetPoints[2] +=9;
+      armSetPoints[2] +=1;
     }
     if (wristButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[2] -= 9;
+      armSetPoints[2] -= 1;
     }
 
     m_armSubsystem.gotToSetPoints(armSetPoints);

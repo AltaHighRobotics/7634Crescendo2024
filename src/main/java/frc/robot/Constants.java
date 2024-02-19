@@ -27,24 +27,22 @@ public final class Constants {
   public static final int DEFAULT_POSITION_BUTTON = 4;
 
   //Motors and PID constants for our Arm
-    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.01, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.1, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
     public static final int WRIST_MOTOR_ID = 7;
     public static final int FOREARM_MOTOR_ID = 8;
     public static final int SHOULDER_MOTOR_ID = 9;
     public static final int PRIMARY_ROLLER_MOTOR_ID = 0;
     public static final int SECONDARY_ROLLER_MOTOR_ID = 0;
     //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
-    public static final double[] STARTING_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SPEAKER_POSITION = {-2.003, 1.428, -10.167};
     public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
     public static final double[] DEFAULT_POSITION = {0.0, 0.0, 0.0};
     public static final double[] RETRIEVAL_POSITION = {0.0, 0.0, 0.0};
     public static final double[] TRAP_POSITION = {0.0, 0.0 ,0.0};
-    public static final double[] TEST_POSITION  ={-9.5, -6.15, -10.167};
-    //tolerance for the .brake Method on shaydns suggested changes in armSubsystem
-    public static final double JOINT_TOLERANCE = 0; //0 is default and will break robot. configure as needed
-
+  /*
+   * 
+   */
   // Driving.
     public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.5;
