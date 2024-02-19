@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel;
+//import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 
 import frc.robot.Constants;
 import utilities.MathTools;
@@ -42,9 +43,6 @@ public class SwerveModule {
     
 
 
-    // Are soul is nothing magic yet its much greater then any magic.
-    // The soul is made up of electric signals and frequencies that come together to create complex thought and feelings.
-    // Its crazy to think that small things can sum up to great things without the need of magic.
 
     // Turn motor.
     turnMotor = new CANSparkMax(config.turnMotorId, CANSparkLowLevel.MotorType.kBrushless);

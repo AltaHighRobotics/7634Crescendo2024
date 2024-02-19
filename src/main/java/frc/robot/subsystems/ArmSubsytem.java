@@ -4,15 +4,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import java.lang.Math;
-import java.util.Set;
 
 import frc.robot.Constants;
-import frc.robot.commands.shootCommand;
 import utilities.ConfigurablePID;
 
 public class ArmSubsytem extends SubsystemBase {
@@ -47,6 +44,7 @@ public class ArmSubsytem extends SubsystemBase {
     double[] positionArray = {shoulderCurrentPosition, forearmCurrentPosition, wristCurrentPosition};
     return positionArray;
   }
+
 public void gotToSetPoints(double[] setPoints) {
   double[] currentPositions = getCurrentPositions();
   /*
@@ -62,9 +60,16 @@ public void gotToSetPoints(double[] setPoints) {
   System.out.println(currentPositions[1]);
   System.out.print("Wrist Pos: ");
   System.out.println(currentPositions[2]);*/
-  
+
+  //if shoulder and forearm are within tolerance, get the shooter to desired location
   if ((Math.abs(setPoints[0] - currentPositions[0]) < Constants.POSITION_TOLERANCE) && (Math.abs(setPoints[1] - currentPositions[1]) < Constants.POSITION_TOLERANCE)){
     double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
+    wristMotor.set(wristOutput);
+  }
+  // if shoulder and forearm are out of tolerance, get the shooter to 90 degrees. 
+  //this makes it so if we are moving or get bumped, we move the shoote to a position that wont push us outside of legal zone
+  else{
+    double wristOutput = armJointPID.runPID(Constants.SHOOTER_NINETY, currentPositions[2]);
     wristMotor.set(wristOutput);
   }
 
@@ -78,6 +83,7 @@ public void gotToSetPoints(double[] setPoints) {
       System.err.print("Forearm: "); System.out.println(currentPositions[1]);
     }      
     armMotors[i].set(motorOutput);
+    System.out.print("Wrist: "); System.out.println(currentPositions[2]);
     }
 
   }

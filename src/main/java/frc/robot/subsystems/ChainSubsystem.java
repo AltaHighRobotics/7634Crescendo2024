@@ -12,9 +12,10 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 public class ChainSubsystem extends SubsystemBase {
   /** Creates a new ChainSubsystem. */
   private TalonFX chainMotor;
+  private Solenoid chainPiston;
   public ChainSubsystem() {
     chainMotor = new TalonFX(Constants.CHAIN_MOTOR_ID);
-
+    chainPiston = new Solenoid(null, 0); //Fill in this crap when we know what the heck it is
 
   }
 
