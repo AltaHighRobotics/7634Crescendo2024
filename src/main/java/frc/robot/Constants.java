@@ -19,6 +19,7 @@ public final class Constants {
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 0;
   public static final int BRAKE_SOLENOID = 0;
+  public static final int CHAIN_BUTTON = 0;
   //Constants for button id's
   // all of these should corrospond with number buttons on the controller
   public static final int TRIGGER_BUTTON = 1;

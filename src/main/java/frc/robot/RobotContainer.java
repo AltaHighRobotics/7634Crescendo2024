@@ -70,6 +70,7 @@ public class RobotContainer {
     final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
+    final JoystickButton chainButton = new JoystickButton(m_driveController, Constants.CHAIN_BUTTON); //This stuff needs to get fixed, idk what button you were trying to make here
   
     defaultButton.onTrue(m_defaultPosition);
     speakerButton.onTrue(m_speakerPosition);
