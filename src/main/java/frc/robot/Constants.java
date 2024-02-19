@@ -16,6 +16,9 @@ import utilities.PIDConfiguration;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  //Constants for our climbing mechanism
+  public static final int CHAIN_MOTOR_ID = 0;
+  public static final int BRAKE_SOLENOID = 0;
   //Constants for button id's
   // all of these should corrospond with number buttons on the controller
   public static final int TRIGGER_BUTTON = 1;
@@ -42,8 +45,6 @@ public final class Constants {
     public static final double[] TRAP_POSITION = {0.0, 0.0 ,0.0};
     public static final double SHOOTER_NINETY = 0; //Undefined
     public static final double POSITION_TOLERANCE = 0;
-  // Chain Stuff
-  public static final int CHAIN_MOTOR_ID = 0;
   // Driving.
     public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.5;

@@ -8,18 +8,27 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class ChainSubsystem extends SubsystemBase {
   /** Creates a new ChainSubsystem. */
-  private TalonFX chainMotor;
-  private Solenoid chainPiston;
+  private CANSparkMax chainMotor;
+  private Solenoid brakeSolenoid;
   public ChainSubsystem() {
-    chainMotor = new TalonFX(Constants.CHAIN_MOTOR_ID);
-    chainPiston = new Solenoid(null, 0); //Fill in this crap when we know what the heck it is
+    chainMotor = new CANSparkMax(Constants.CHAIN_MOTOR_ID, MotorType.kBrushless);
+    brakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.BRAKE_SOLENOID); //
+
+  }
+  public boolean getBrakePos(){
+    return brakeSolenoid.get();
 
   }
 
+  public void toggleBrake(){
+    brakeSolenoid.toggle();
 
+  }
   public void liftChainArm(double speed){
     chainMotor.set(speed);
   }
