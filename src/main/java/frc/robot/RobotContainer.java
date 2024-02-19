@@ -76,7 +76,7 @@ public class RobotContainer {
     ampButton.onTrue(m_ampPosition);
     sourceButton.onTrue(m_sourcePosition);
     trapButton.onTrue(m_trapPosition);
-    shootButton.onTrue(m_shootCommand);
+    shootButton.whileTrue(m_shootCommand);
 
 
 

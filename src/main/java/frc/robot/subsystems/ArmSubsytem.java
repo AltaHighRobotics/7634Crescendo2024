@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import java.lang.Math;
+import java.util.Set;
 
 import frc.robot.Constants;
+import frc.robot.commands.shootCommand;
 import utilities.ConfigurablePID;
 
 public class ArmSubsytem extends SubsystemBase {
@@ -59,7 +62,14 @@ public void gotToSetPoints(double[] setPoints) {
   System.out.println(currentPositions[1]);
   System.out.print("Wrist Pos: ");
   System.out.println(currentPositions[2]);*/
-  for (int i = 0; i < 3; i++){
+  
+  if ((Math.abs(setPoints[0] - currentPositions[0]) < Constants.POSITION_TOLERANCE) && (Math.abs(setPoints[1] - currentPositions[1]) < Constants.POSITION_TOLERANCE)){
+    double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
+    wristMotor.set(wristOutput);
+  }
+
+  for (int i = 0; i < 2; i++){
+
     double motorOutput = armJointPID.runPID(currentPositions[i], setPoints[i]);
     if (i == 0){
       System.err.print("Shoulder: "); System.out.println(currentPositions[0]);
@@ -67,11 +77,7 @@ public void gotToSetPoints(double[] setPoints) {
     if (i == 1) {
       System.err.print("Forearm: "); System.out.println(currentPositions[1]);
     }      
-    if (i == 2) {
-      System.err.print("Wrist: "); System.out.println(currentPositions[2]);
-    }
     armMotors[i].set(motorOutput);
-
     }
 
   }
