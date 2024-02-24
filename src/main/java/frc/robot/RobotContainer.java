@@ -7,10 +7,6 @@ package frc.robot;
 //import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -18,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.positions.*;
 import frc.robot.subsystems.ArmSubsytem;
+import frc.robot.subsystems.ChainSubsystem;
 import frc.robot.swerve.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,6 +29,7 @@ public class RobotContainer {
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
 */private final ArmSubsytem m_armSubsystem = new ArmSubsytem();
+private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   private final ManualPositionCreator m_ManualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
@@ -42,7 +40,8 @@ public class RobotContainer {
   private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
   private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
   private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
-  private final shootCommand m_shootCommand = new shootCommand(m_armSubsystem);
+  private final ShootCommand m_shootCommand = new ShootCommand(m_armSubsystem);
+  private final ClimbCommand m_climnCommand = new ClimbCommand(m_chainSubsystem, m_defaultPosition);
 
   //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
@@ -70,7 +69,7 @@ public class RobotContainer {
     final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
-    final JoystickButton chainButton = new JoystickButton(m_driveController, Constants.CHAIN_BUTTON); //This stuff needs to get fixed, idk what button you were trying to make here
+    final JoystickButton chainButton = new JoystickButton(m_driveController, Constants.CHAIN_BUTTON);
   
     defaultButton.onTrue(m_defaultPosition);
     speakerButton.onTrue(m_speakerPosition);

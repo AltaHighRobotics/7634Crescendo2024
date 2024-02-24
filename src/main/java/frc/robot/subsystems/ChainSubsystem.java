@@ -9,26 +9,37 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 public class ChainSubsystem extends SubsystemBase {
   /** Creates a new ChainSubsystem. */
   private CANSparkMax chainMotor;
-  private Solenoid brakeSolenoid;
+  private Solenoid brakeSolenoid;  
   public ChainSubsystem() {
     chainMotor = new CANSparkMax(Constants.CHAIN_MOTOR_ID, MotorType.kBrushless);
     brakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.BRAKE_SOLENOID); //
+    chainMotor.setIdleMode(IdleMode.kCoast);
 
   }
+  public double getEncoderPosition(){
+    return chainMotor.getEncoder().getPosition();
+  }
+  
   public boolean getBrakePos(){
     return brakeSolenoid.get();
 
   }
-
+  public void brakeOn(){
+    brakeSolenoid.set(true);
+  }
+  public void brakeOff(){
+    brakeSolenoid.set(false);
+  }
   public void toggleBrake(){
     brakeSolenoid.toggle();
 
   }
-  public void liftChainArm(double speed){
+  public void setChainArm(double speed){
     chainMotor.set(speed);
   }
   @Override

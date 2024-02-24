@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsytem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,10 +12,7 @@ public class ManualPositionCreator extends Command {
   /** Creates a new ManualPositionCreator. */
   //create controller
   private XboxController m_driveController;
-  //create SetPoints
-  private double shoulderIncrement = 0;
-  private double forearmIncrement = 0;
-  private double wristIncrement = 0;
+  //create SetPoints;
   //create jpystick buttons
   JoystickButton shoulderButtonIncrementer;
   JoystickButton shoulderButtonDecrementer;

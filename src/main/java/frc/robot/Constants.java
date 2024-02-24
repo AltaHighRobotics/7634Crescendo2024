@@ -20,6 +20,8 @@ public final class Constants {
   public static final int CHAIN_MOTOR_ID = 0;
   public static final int BRAKE_SOLENOID = 0;
   public static final int CHAIN_BUTTON = 0;
+  public static final double CLIMB_SPEED = 0.3;
+  public static final double ARM_TOLERANCE = 10;
   //Constants for button id's
   // all of these should corrospond with number buttons on the controller
   public static final int TRIGGER_BUTTON = 1;
@@ -31,7 +33,7 @@ public final class Constants {
   public static final int DEFAULT_POSITION_BUTTON = 4;
 
   //Motors and PID constants for our Arm
-    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.1, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.15, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
     public static final int WRIST_MOTOR_ID = 7;
     public static final int FOREARM_MOTOR_ID = 8;
     public static final int SHOULDER_MOTOR_ID = 9;
@@ -45,7 +47,7 @@ public final class Constants {
     public static final double[] RETRIEVAL_POSITION = {0.0, 0.0, 0.0};
     public static final double[] TRAP_POSITION = {0.0, 0.0 ,0.0};
     public static final double SHOOTER_NINETY = 0; //Undefined
-    public static final double POSITION_TOLERANCE = 0;
+    public static final double POSITION_TOLERANCE = 10; // this is encoder degrees. 10 encoder degrees of tolerance to start moving the arm in ArmSubsystem
   // Driving.
     public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.5;

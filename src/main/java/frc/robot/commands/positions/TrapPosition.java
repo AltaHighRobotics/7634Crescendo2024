@@ -6,7 +6,7 @@ package frc.robot.commands.positions;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.commands.shootCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ArmSubsytem;
 
 public class TrapPosition extends Command {
@@ -25,7 +25,7 @@ public class TrapPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootCommand.currentArmPosition = 3;
+    ShootCommand.currentArmPosition = 3;
     m_armSubsytem.gotToSetPoints(Constants.TRAP_POSITION);
   }
 

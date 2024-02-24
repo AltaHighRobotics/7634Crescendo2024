@@ -75,7 +75,7 @@ public void gotToSetPoints(double[] setPoints) {
 
   for (int i = 0; i < 2; i++){
 
-    double motorOutput = armJointPID.runPID(currentPositions[i], setPoints[i]);
+    double motorOutput = armJointPID.runPID(setPoints[i], currentPositions[i]);
     if (i == 0){
       System.err.print("Shoulder: "); System.out.println(currentPositions[0]);
     }

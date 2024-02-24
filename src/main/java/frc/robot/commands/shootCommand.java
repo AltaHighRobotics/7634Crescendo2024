@@ -6,11 +6,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmSubsytem;
 
-public class shootCommand extends Command {
+public class ShootCommand extends Command {
   ArmSubsytem m_armSubsytem;
   /** Creates a new shootCommand. */
   public static int currentArmPosition;
-  public shootCommand(ArmSubsytem armSubsytem) {
+  public ShootCommand(ArmSubsytem armSubsytem) {
     m_armSubsytem = armSubsytem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -42,7 +42,9 @@ public class shootCommand extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+  }
 
   // Returns true when the command should end.
   @Override

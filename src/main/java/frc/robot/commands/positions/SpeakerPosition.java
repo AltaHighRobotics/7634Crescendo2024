@@ -6,7 +6,7 @@ package frc.robot.commands.positions;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.commands.shootCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ArmSubsytem;
 
 public class SpeakerPosition extends Command {
@@ -25,7 +25,7 @@ public class SpeakerPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootCommand.currentArmPosition = 2;
+    ShootCommand.currentArmPosition = 2;
     m_armSubsytem.gotToSetPoints(Constants.SPEAKER_POSITION);
   }
 
