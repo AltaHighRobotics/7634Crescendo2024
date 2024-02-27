@@ -32,6 +32,7 @@ public class ClimbCommand extends Command {
   public void execute() {
     if(activated){
       m_chainSubsystem.brakeOff();
+      m_chainSubsystem.setChainArm(0);
       
       
 

@@ -25,7 +25,7 @@ public class ShootCommand extends Command {
   @Override
   public void execute() {
     switch(currentArmPosition){
-      default: //when in default position
+      default: //when in default position 0.0
         break;
       case 0: // amp position
         //insert code to shoot at amp

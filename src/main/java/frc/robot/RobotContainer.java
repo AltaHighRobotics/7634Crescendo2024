@@ -72,7 +72,7 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     final JoystickButton chainButton = new JoystickButton(m_driveController, Constants.CHAIN_BUTTON);
   
     defaultButton.onTrue(m_defaultPosition);
-    speakerButton.onTrue(m_speakerPosition);
+    speakerButton. whileTrue(m_speakerPosition);
     ampButton.onTrue(m_ampPosition);
     sourceButton.onTrue(m_sourcePosition);
     trapButton.onTrue(m_trapPosition);
