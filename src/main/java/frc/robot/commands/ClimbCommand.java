@@ -4,47 +4,55 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ChainSubsystem;
+import frc.robot.Constants;
 import frc.robot.commands.*;
 import frc.robot.commands.positions.DefaultPosition;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ClimbCommand extends Command {
   DefaultPosition m_defaultPosition;
   /** Creates a new ClimbCommand. */
+  XboxController m_xboxController;
   boolean activated;
   ChainSubsystem m_chainSubsystem;
-  public ClimbCommand(ChainSubsystem chainSubsystem, DefaultPosition defaultPosition) {
-    m_chainSubsystem = chainSubsystem;
-    m_defaultPosition = defaultPosition;
+  JoystickButton upButton;
+  JoystickButton downButton;
+  public ClimbCommand(ChainSubsystem chainSubsystem, XboxController xboxController ) {
     addRequirements(m_chainSubsystem);
-    activated = false;
-    
+    m_chainSubsystem = chainSubsystem;
+    m_xboxController = xboxController;
+    upButton = new JoystickButton(m_xboxController, Constants.CLIMB_UP);
+    downButton = new JoystickButton(m_xboxController, Constants.CLIMB_DOWN);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(activated){
+    if (upButton.getAsBoolean() == true){
       m_chainSubsystem.brakeOff();
-      m_chainSubsystem.setChainArm(0);
-      
-      
-
-      
-
-
-
-
-
+      m_chainSubsystem.setChainArm(Constants.CLIMB_SPEED);
+    }
+    else if (downButton.getAsBoolean() == true){
+      m_chainSubsystem.brakeOff();
+      m_chainSubsystem.setChainArm(-Constants.CLIMB_SPEED);
+    }
+    else{
+      m_chainSubsystem.brakeOn();
+    }
     }
 
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override

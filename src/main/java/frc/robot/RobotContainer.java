@@ -41,14 +41,18 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
   private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
   private final ShootCommand m_shootCommand = new ShootCommand(m_armSubsystem);
-  private final ClimbCommand m_climnCommand = new ClimbCommand(m_chainSubsystem, m_defaultPosition);
+  private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
 
   //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
+    CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
+    //CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
+    CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
+
+  
   }
 
   /**
@@ -66,10 +70,8 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
-    final JoystickButton floorButton = new JoystickButton(m_driveController, Constants.FLOOR_RETRIEVAL_BUTTON);
     final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
     final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
-    final JoystickButton chainButton = new JoystickButton(m_driveController, Constants.CHAIN_BUTTON);
   
     defaultButton.onTrue(m_defaultPosition);
     speakerButton. whileTrue(m_speakerPosition);

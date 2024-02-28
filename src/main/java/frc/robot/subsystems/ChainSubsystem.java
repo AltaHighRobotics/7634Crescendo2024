@@ -17,7 +17,7 @@ public class ChainSubsystem extends SubsystemBase {
   private Solenoid brakeSolenoid;  
   public ChainSubsystem() {
     chainMotor = new CANSparkMax(Constants.CHAIN_MOTOR_ID, MotorType.kBrushless);
-    brakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.BRAKE_SOLENOID); //
+    brakeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BRAKE_SOLENOID); //
     chainMotor.setIdleMode(IdleMode.kCoast);
 
   }

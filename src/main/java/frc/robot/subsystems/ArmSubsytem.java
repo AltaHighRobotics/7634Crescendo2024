@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -62,32 +63,22 @@ public void gotToSetPoints(double[] setPoints) {
   System.out.println(currentPositions[2]);*/
 
   //if shoulder and forearm are within tolerance, get the shooter to desired location
-  if ((Math.abs(setPoints[0] - currentPositions[0]) < Constants.POSITION_TOLERANCE) && (Math.abs(setPoints[1] - currentPositions[1]) < Constants.POSITION_TOLERANCE)){
-    double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
-    wristMotor.set(wristOutput);
-  }
-  // if shoulder and forearm are out of tolerance, get the shooter to 90 degrees. 
-  //this makes it so if we are moving or get bumped, we move the shoote to a position that wont push us outside of legal zone
-  else{
-    double wristOutput = armJointPID.runPID(Constants.SHOOTER_NINETY, currentPositions[2]);
-    wristMotor.set(wristOutput);
-  }
-
-  for (int i = 0; i < 2; i++){
-
+  for (int i = 0; i < 3; i++){
     double motorOutput = armJointPID.runPID(setPoints[i], currentPositions[i]);
-    if (i == 0){
-      System.err.print("Shoulder: "); System.out.println(currentPositions[0]);
-    }
-    if (i == 1) {
-      System.err.print("Forearm: "); System.out.println(currentPositions[1]);
-    }      
     armMotors[i].set(motorOutput);
-    System.out.print("Wrist: "); System.out.println(currentPositions[2]);
-    }
-
+    SmartDashboard.putNumberArray("Current Positions", currentPositions);
   }
-
+  }
+  public void setPrimaryRollers(double power){
+    primaryRollerMotor.set(power);
+  }
+  public void setSecondaryRollers(double power){
+    secondaryRollerMotor.set(power);
+  }
+  public void setRollers(double power){
+    secondaryRollerMotor.set(power);
+    primaryRollerMotor.set(power);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

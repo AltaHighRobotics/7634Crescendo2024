@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsytem;
 
 public class ShootCommand extends Command {
@@ -30,9 +31,11 @@ public class ShootCommand extends Command {
       case 0: // amp position
         //insert code to shoot at amp
       case 1: // source position
+      m_armSubsytem.setRollers(Constants.INTAKE_SPEED);
         //insert code to PICKUP at speaker
       case 2: // speaker position
         //insert code to shoot at speaker
+        m_armSubsytem.setRollers(Constants.SHOOT_SPEED);
       case 3: // trap position
         //insert code to shoot at trap
 
