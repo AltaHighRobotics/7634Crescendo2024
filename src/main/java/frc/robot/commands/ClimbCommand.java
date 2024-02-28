@@ -21,8 +21,8 @@ public class ClimbCommand extends Command {
   JoystickButton upButton;
   JoystickButton downButton;
   public ClimbCommand(ChainSubsystem chainSubsystem, XboxController xboxController ) {
-    addRequirements(m_chainSubsystem);
     m_chainSubsystem = chainSubsystem;
+    addRequirements(m_chainSubsystem);
     m_xboxController = xboxController;
     upButton = new JoystickButton(m_xboxController, Constants.CLIMB_UP);
     downButton = new JoystickButton(m_xboxController, Constants.CLIMB_DOWN);

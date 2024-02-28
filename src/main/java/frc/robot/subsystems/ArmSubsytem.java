@@ -48,7 +48,7 @@ public class ArmSubsytem extends SubsystemBase {
 
 public void gotToSetPoints(double[] setPoints) {
   double[] currentPositions = getCurrentPositions();
-  /*
+  
   double shoulderOutput = armJointPID.runPID(setPoints[0], currentPositions[0]);
   double forearmOutput = armJointPID.runPID(setPoints[1], currentPositions[1]);
   double wristOutput = armJointPID.runPID(setPoints[2], currentPositions[2]);
@@ -60,14 +60,7 @@ public void gotToSetPoints(double[] setPoints) {
   System.out.print("Forearm Pos: ");
   System.out.println(currentPositions[1]);
   System.out.print("Wrist Pos: ");
-  System.out.println(currentPositions[2]);*/
-
-  //if shoulder and forearm are within tolerance, get the shooter to desired location
-  for (int i = 0; i < 3; i++){
-    double motorOutput = armJointPID.runPID(setPoints[i], currentPositions[i]);
-    armMotors[i].set(motorOutput);
-    SmartDashboard.putNumberArray("Current Positions", currentPositions);
-  }
+  System.out.println(currentPositions[2]);
   }
   public void setPrimaryRollers(double power){
     primaryRollerMotor.set(power);

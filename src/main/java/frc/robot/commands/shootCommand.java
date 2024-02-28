@@ -13,6 +13,7 @@ public class ShootCommand extends Command {
   public static int currentArmPosition;
   public ShootCommand(ArmSubsytem armSubsytem) {
     m_armSubsytem = armSubsytem;
+    addRequirements(m_armSubsytem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
