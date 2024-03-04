@@ -34,7 +34,7 @@ public class DriveTrainSub extends SubsystemBase {
   }
 
   public double getFieldCentricYaw() {
-    return getYaw() - fieldCentricOffset-180;
+    return getYaw() - fieldCentricOffset;
   }
 
   public void zeroFieldCentric() {
@@ -84,6 +84,11 @@ public class DriveTrainSub extends SubsystemBase {
     }
 
     SmartDashboard.putNumber("Yaw", getYaw());
+  }
+  public void setToZero(){
+    for (SwerveModule module : swerveModuleSubs){
+      module.resetTurnEncoder();
+    }
   }
   
   // Usefull stuff: https://www.chiefdelphi.com/uploads/default/original/3X/e/f/ef10db45f7d65f6d4da874cd26db294c7ad469bb.pdf
@@ -137,6 +142,7 @@ public class DriveTrainSub extends SubsystemBase {
       swerveModuleSubs[i].setDesiredAngle(moduleAngles[i]);
     }
   }
+  
 
   @Override
   public void periodic() {

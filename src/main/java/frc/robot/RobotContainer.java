@@ -40,8 +40,11 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
   private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
   private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
-  private final ShootCommand m_shootCommand = new ShootCommand(m_armSubsystem);
+  private final ShootCommand m_shootCommand = new ShootCommand(m_armSubsystem, m_driveController);
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
+
+  // Auto
+  private final SillyAuto m_sillyAuto = new SillyAuto(m_driveTrainSub);
 
   //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */
@@ -50,7 +53,7 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     configureBindings();
     CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
-    CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
+   CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
 
   
   }
@@ -66,19 +69,19 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
    */
   private void configureBindings() {
   
-    final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
-    final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
+    // final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
+    // final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
-    final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
-    final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
-    final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
+    // final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
+    // final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
+    // final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
   
-    defaultButton.onTrue(m_defaultPosition);
-    speakerButton. whileTrue(m_speakerPosition);
-    ampButton.onTrue(m_ampPosition);
-    sourceButton.onTrue(m_sourcePosition);
-    trapButton.onTrue(m_trapPosition);
-    shootButton.whileTrue(m_shootCommand);
+    // defaultButton.onTrue(m_defaultPosition);
+    speakerButton. onTrue(m_speakerPosition);
+    // ampButton.onTrue(m_ampPosition);
+    // sourceButton.onTrue(m_sourcePosition);
+    // trapButton.onTrue(m_trapPosition);
+    // shootButton.whileTrue(m_shootCommand);
 
 
 
@@ -95,6 +98,6 @@ private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return m_sillyAuto;
   }
 }

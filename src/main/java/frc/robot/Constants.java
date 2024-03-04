@@ -19,30 +19,30 @@ public final class Constants {
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 10;
   public static final int BRAKE_SOLENOID = 0;
-  public static final double CLIMB_SPEED = 0.3;
+  public static final double CLIMB_SPEED = 0.5;
   public static final double ARM_TOLERANCE = 10;
   //Constants for button id's
   // all of these should corrospond with number buttons on the controller
   public static final int TRIGGER_BUTTON = 1;
   public static final int SOURCE_POSITION_BUTTON = 10;
   public static final int AMP_POSITION_BUTTON = 7;
-  public static final int SPEAKER_POSITION_BUTTON = 8;
+  public static final int SPEAKER_POSITION_BUTTON = 3;
   public static final int TRAP_POSITION_BUTTON = 9;
   public static final int DEFAULT_POSITION_BUTTON = 2;
   public static final int CLIMB_UP = 11;
   public static final int CLIMB_DOWN = 12;
 
   //Motors and PID constants for our Arms
-  public static final double SHOOT_SPEED = 1;
-  public static final double INTAKE_SPEED = -0.2;
-    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.15, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.5);
+  public static final double SHOOT_SPEED = -0.8;
+  public static final double INTAKE_SPEED = 0.2;
+    public static final PIDConfiguration ARM_JOINT_CONTROLLER = new PIDConfiguration(0.05, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, -0.9, 0.9);
     public static final int WRIST_MOTOR_ID = 7;
     public static final int FOREARM_MOTOR_ID = 8;
     public static final int SHOULDER_MOTOR_ID = 9;
     public static final int PRIMARY_ROLLER_MOTOR_ID = 11;
     public static final int SECONDARY_ROLLER_MOTOR_ID = 12;
     //Position Constants for our arm, structured as ShoulderSetPoint, ForearmSetPoint, wristSetPoint
-    public static final double[] SPEAKER_POSITION = {-2.003, 1.428, -10.167};
+    public static final double[] SPEAKER_POSITION = {7, 1.6,1.3};
     public static final double[] AMP_POSITION = {0.0, 0.0, 0.0};
     public static final double[] SOURCE_POSITION = {0.0, 0.0, 0.0};
     public static final double[] DEFAULT_POSITION = {0.0, 0.0, 0.0};
@@ -51,10 +51,10 @@ public final class Constants {
     public static final double POSITION_TOLERANCE = 10; // this is encoder degrees. 10 encoder degrees of tolerance to start moving the arm in ArmSubsystem
   // Driving.
     public static final int DRIVE_CONTROLLER = 0;
-    public static final double DRIVE_SPEED = 0.5;
-    public static final double DRIVE_TURN_SPEED = 0.5;
+    public static final double DRIVE_SPEED = 0.9;
+    public static final double DRIVE_TURN_SPEED = 0.9;
   // Controller.
-    public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.3;
+    public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.05;
 
     public static final int RIGHT_STICK_Y = 5;
     public static final int RIGHT_STICK_X = 4;
@@ -82,7 +82,7 @@ public final class Constants {
 
     //public static final double SWERVE_MODULE_WHEEL_CURRENT_LIMIT = 50.0;
 
-    public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.01, 0.00, 0.0
+    public static final PIDConfiguration SWERVE_MODULE_TURN_PID = new PIDConfiguration(0.005, 0.00, 0.0
     , 0.0, 0, 0, 0, 0, 0, 0, 0, -0.8, 0.8);
 
     public static final int FRONT_RIGHT_MODULE = 0;
@@ -92,9 +92,9 @@ public final class Constants {
     public static final int SWERVE_MODULE_COUNT = 4;
 
     public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
-      new SwerveModuleConfig(4, 40, false, false), // Front right
+      new SwerveModuleConfig(4, 40, true, false), // Front right
       new SwerveModuleConfig(6, 60, false, false), // Front left
-      new SwerveModuleConfig(5, 50, false, false), // Back right
+      new SwerveModuleConfig(5, 50, true, false), // Back right
       new SwerveModuleConfig(3, 30, false, false) // Back left
     };
     

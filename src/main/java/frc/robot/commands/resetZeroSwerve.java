@@ -2,19 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.positions;
-
+package frc.robot.commands;
+import frc.robot.swerve.DriveTrainSub;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
-import frc.robot.commands.ShootCommand;
-import frc.robot.subsystems.ArmSubsytem;
 
-public class DefaultPosition extends Command {
-  /** Creates a new DefaultPosition. */
-  ArmSubsytem m_armSubsytem;
-  public DefaultPosition(ArmSubsytem armSubsytem) {
-    m_armSubsytem = armSubsytem;
-    addRequirements(m_armSubsytem);
+public class resetZeroSwerve extends Command {
+  /** Creates a new resetZeroSwerve. */
+  DriveTrainSub m_driveTrainSub;
+  public resetZeroSwerve(DriveTrainSub driveTrainSub) {
+    m_driveTrainSub = driveTrainSub;
+    addRequirements(m_driveTrainSub);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -25,8 +22,7 @@ public class DefaultPosition extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ShootCommand.currentArmPosition = 99; //set to an arbitrary number so that the switch case statement in shoot command is matched to "default". it does nothing
-    m_armSubsytem.gotToSetPoints(Constants.DEFAULT_POSITION);
+    m_driveTrainSub.setToZero();
   }
 
   // Called once the command ends or is interrupted.

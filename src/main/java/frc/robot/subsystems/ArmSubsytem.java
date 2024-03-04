@@ -20,7 +20,6 @@ public class ArmSubsytem extends SubsystemBase {
   private TalonFX shoulderMotor;
   private TalonFX forearmMotor;
   private TalonFX wristMotor;
-  private TalonFX[] armMotors = {shoulderMotor, forearmMotor, wristMotor};
   private TalonFX primaryRollerMotor;
   private TalonFX secondaryRollerMotor;
   private ConfigurablePID armJointPID;
@@ -34,8 +33,8 @@ public class ArmSubsytem extends SubsystemBase {
     shoulderMotor.setNeutralMode(NeutralModeValue.Brake);
     forearmMotor.setNeutralMode(NeutralModeValue.Brake);
     wristMotor.setNeutralMode(NeutralModeValue.Brake);
-    primaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
-    secondaryRollerMotor.setNeutralMode(NeutralModeValue.Brake);
+    primaryRollerMotor.setNeutralMode(NeutralModeValue.Coast);
+    secondaryRollerMotor.setNeutralMode(NeutralModeValue.Coast);
   }
   
   public double[] getCurrentPositions(){

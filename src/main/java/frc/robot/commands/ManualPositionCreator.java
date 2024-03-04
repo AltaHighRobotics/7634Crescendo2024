@@ -20,6 +20,7 @@ public class ManualPositionCreator extends Command {
   JoystickButton forearmButtonIncrementer;
   JoystickButton wristBUttonIncrementer;
   JoystickButton wristButtonDecrementer;
+  double[] armSetPoints = {0,0,0};
   ArmSubsytem m_armSubsystem;
   public ManualPositionCreator(ArmSubsytem armSubsytem, XboxController driveController) {
     m_armSubsystem = armSubsytem;
@@ -37,35 +38,36 @@ public class ManualPositionCreator extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double[] armSetPoints = m_armSubsystem.getCurrentPositions();
 
     //System.out.println(shoulderButtonDecrementer.getAsBoolean());
     if (shoulderButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[0] -= 1;
+      armSetPoints[0] -= .2;
       //System.out.println(shoulderIncrement);
     }
     if (shoulderButtonIncrementer.getAsBoolean() == true){
-      armSetPoints[0] +=1;
+      armSetPoints[0] +=.2;
       //System.out.println(shoulderIncrement);
     }
     if (forearmButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[1] -= 1;
+      armSetPoints[1] -= .2;
       //System.out.println(shoulderIncrement);
     }
     if (forearmButtonIncrementer.getAsBoolean() == true){
-      armSetPoints[1] += 1;
+      armSetPoints[1] += .2;
       //System.out.println(shoulderIncrement);
     }
     if (wristBUttonIncrementer.getAsBoolean() == true){
-      armSetPoints[2] +=1;
+      armSetPoints[2] +=.2;
     }
     if (wristButtonDecrementer.getAsBoolean() == true){
-      armSetPoints[2] -= 1;
+      armSetPoints[2] -= .2;
     }
 
     m_armSubsystem.gotToSetPoints(armSetPoints);

@@ -48,8 +48,10 @@ public class ClimbCommand extends Command {
       m_chainSubsystem.setChainArm(-Constants.CLIMB_SPEED);
     }
     else{
+      m_chainSubsystem.setChainArm(0);
       m_chainSubsystem.brakeOn();
     }
+
     }
 
   
@@ -57,7 +59,6 @@ public class ClimbCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_defaultPosition.schedule();
   }
 
   // Returns true when the command should end.

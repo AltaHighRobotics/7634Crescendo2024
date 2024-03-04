@@ -40,10 +40,6 @@ public class SwerveModule {
     wheelMotor.setInverted(config.invertWheelMotor);
     wheelMotor.setNeutralMode(NeutralMode.Coast);
 
-    
-
-
-
     // Turn motor.
     turnMotor = new CANSparkMax(config.turnMotorId, CANSparkLowLevel.MotorType.kBrushless);
     turnMotor.setIdleMode(IdleMode.kCoast);
@@ -104,21 +100,21 @@ public class SwerveModule {
   public void setDesiredAngle(double desiredAngle) {
     //this.desiredAngle = desiredAngle;
     
-    this.desiredAngle = MathTools.getAngleSetPoint(desiredAngle, getTurnEncoderPosition());
+    //this.desiredAngle = MathTools.getAngleSetPoint(desiredAngle, getTurnEncoderPosition());
 
-    // double turnDis = MathTools.angleDis(MathTools.wrapAngle(desiredAngle), getAngle());
+     double turnDis = MathTools.angleDis(MathTools.wrapAngle(desiredAngle), getAngle());
 
-    // if (Math.abs(turnDis) > 90.0) {
-    //   this.desiredAngle = MathTools.getAngleSetPoint(
-    //     MathTools.wrapAngle(desiredAngle - turnDis), 
-    //     getTurnEncoderPosition()
-    //   );
+    if (Math.abs(turnDis) > 90.0) {
+      this.desiredAngle = MathTools.getAngleSetPoint(
+        MathTools.wrapAngle(desiredAngle - turnDis), 
+        getTurnEncoderPosition()
+      );
 
-    //   wheelDirection = BACKWARD;
-    // } else {
-    //   this.desiredAngle = MathTools.getAngleSetPoint(desiredAngle, getTurnEncoderPosition());
-    //   wheelDirection = FORWARD;
-    // }
+      wheelDirection = BACKWARD;
+    } else {
+      this.desiredAngle = MathTools.getAngleSetPoint(desiredAngle, getTurnEncoderPosition());
+      wheelDirection = FORWARD;
+    }
   }
 
   public double getDesiredAngle() {

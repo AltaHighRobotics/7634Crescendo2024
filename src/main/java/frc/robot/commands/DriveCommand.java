@@ -67,10 +67,9 @@ public class DriveCommand extends Command {
     // Apply dead zones to controller.
     if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
       flightStickX = 0.0;
-
     } if (Math.abs(flightStickY) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
       flightStickY = 0.0;
-    } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE*10) {
       flightStickZ = 0.0;
     }
 
@@ -84,11 +83,16 @@ public class DriveCommand extends Command {
     double speed = flightStickY;
     double rotation = flightStickZ;
 
+    // Dont use this lol.
+    // if (strafe < 0 && speed < 0 && rotation < 0){
+    //   m_driveTrainSub.setToZero();
+    // }
+
     m_driveTrainSub.drive(
       Math.pow(strafe, 2.0) * Math.signum(strafe), //signum returns -1 if neg, 0 if 0, 1 if pos.
       -Math.pow(speed, 2.0) * Math.signum(speed), // basically, he smooths out speed, gtes the direction (signum)
       Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
-      false,
+      true,
       Constants.DRIVE_SPEED
     );
     

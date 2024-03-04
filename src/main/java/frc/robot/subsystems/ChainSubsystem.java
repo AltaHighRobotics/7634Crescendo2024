@@ -17,7 +17,7 @@ public class ChainSubsystem extends SubsystemBase {
   private Solenoid brakeSolenoid;  
   public ChainSubsystem() {
     chainMotor = new CANSparkMax(Constants.CHAIN_MOTOR_ID, MotorType.kBrushless);
-    brakeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BRAKE_SOLENOID); //
+    brakeSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BRAKE_SOLENOID);
     chainMotor.setIdleMode(IdleMode.kCoast);
 
   }
@@ -30,10 +30,10 @@ public class ChainSubsystem extends SubsystemBase {
 
   }
   public void brakeOn(){
-    brakeSolenoid.set(true);
+    brakeSolenoid.set(false);
   }
   public void brakeOff(){
-    brakeSolenoid.set(false);
+    brakeSolenoid.set(true);
   }
   public void toggleBrake(){
     brakeSolenoid.toggle();
