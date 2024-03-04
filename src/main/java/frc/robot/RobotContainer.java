@@ -28,19 +28,11 @@ public class RobotContainer {
   /* 
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
-*/private final ArmSubsytem m_armSubsystem = new ArmSubsytem();
-private ChainSubsystem m_chainSubsystem = new ChainSubsystem();
+*/
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
-  private final ManualPositionCreator m_ManualPositionCreator = new ManualPositionCreator(m_armSubsystem, m_driveController);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
   // Every Button Command
-  private final DefaultPosition m_defaultPosition = new DefaultPosition(m_armSubsystem);
-  private final SpeakerPosition m_speakerPosition = new SpeakerPosition(m_armSubsystem);
-  private final AmpPosition m_ampPosition = new AmpPosition(m_armSubsystem);
-  private final SourcePosition m_sourcePosition = new SourcePosition(m_armSubsystem);
-  private final TrapPosition m_trapPosition = new TrapPosition(m_armSubsystem);
-  private final ShootCommand m_shootCommand = new ShootCommand(m_armSubsystem, m_driveController);
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
 
   // Auto
