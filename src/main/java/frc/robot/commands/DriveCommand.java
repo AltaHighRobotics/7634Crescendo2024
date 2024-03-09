@@ -48,7 +48,7 @@ public class DriveCommand extends Command {
   @Override
   public void execute() {
     //test();
-    
+
    // The gyro wants to be reset during runtime but I only want to do it once.
     if (doInitGyro) {
       doInitGyro = false;
@@ -63,13 +63,14 @@ public class DriveCommand extends Command {
     double flightStickX = m_driveController.getRawAxis(Constants.FLIGHT_STICK_X);
     double flightStickY = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Y);
     double flightStickZ = m_driveController.getRawAxis(Constants.FLIGHT_STICK_Z);
+    //m_driveTrainSub.test(flightStickX);
 
     // Apply dead zones to controller.
     if (Math.abs(flightStickX) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
       flightStickX = 0.0;
     } if (Math.abs(flightStickY) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
       flightStickY = 0.0;
-    } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE*10) {
+    } if (Math.abs(flightStickZ) < Constants.DRIVE_CONTROLLER_DEAD_ZONE*5) {
       flightStickZ = 0.0;
     }
 

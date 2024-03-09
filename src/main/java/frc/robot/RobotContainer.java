@@ -7,13 +7,13 @@ package frc.robot;
 //import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.positions.*;
-import frc.robot.subsystems.ArmSubsytem;
+import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.ChainSubsystem;
 import frc.robot.swerve.*;
 /**
@@ -29,6 +29,9 @@ public class RobotContainer {
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
 */
+private final AprilTagSubsystem m_AprilTagSubsystem = new AprilTagSubsystem();
+private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem);
+private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
@@ -43,9 +46,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
+    //CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
-   CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
+   //CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
+   CommandScheduler.getInstance().setDefaultCommand(m_AprilTagSubsystem, m_AprilTagTest);
 
   
   }
@@ -69,7 +73,6 @@ public class RobotContainer {
     // final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);
   
     // defaultButton.onTrue(m_defaultPosition);
-    speakerButton. onTrue(m_speakerPosition);
     // ampButton.onTrue(m_ampPosition);
     // sourceButton.onTrue(m_sourcePosition);
     // trapButton.onTrue(m_trapPosition);

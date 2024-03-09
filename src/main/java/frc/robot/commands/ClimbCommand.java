@@ -8,12 +8,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ChainSubsystem;
 import frc.robot.Constants;
-import frc.robot.commands.*;
-import frc.robot.commands.positions.DefaultPosition;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ClimbCommand extends Command {
-  DefaultPosition m_defaultPosition;
   /** Creates a new ClimbCommand. */
   XboxController m_xboxController;
   boolean activated;
