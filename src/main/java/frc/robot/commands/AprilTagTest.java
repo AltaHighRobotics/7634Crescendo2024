@@ -6,13 +6,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AprilTagSubsystem;
+import frc.robot.swerve.DriveTrainSub;
 
 public class AprilTagTest extends Command {
   /** Creates a new AprilTagTest. */
+  int allianceColor;
   AprilTagSubsystem m_aprilTagSubsystem;
-  public AprilTagTest(AprilTagSubsystem aprilTagSubsystem) {
+  DriveTrainSub m_driveTrainSub;
+  public AprilTagTest(AprilTagSubsystem aprilTagSubsystem, DriveTrainSub driveTrainSub) {
     m_aprilTagSubsystem = aprilTagSubsystem;
+    m_driveTrainSub = driveTrainSub;
+    addRequirements(m_driveTrainSub);
     addRequirements(m_aprilTagSubsystem);
+    allianceColor = 0;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,11 +29,8 @@ public class AprilTagTest extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_aprilTagSubsystem.getTargetID() == 4){
-      System.out.println("april tag 4");
-    }
-    else{
-      System.err.println(m_aprilTagSubsystem.getMovement());
+    if(allianceColor == 0){
+
     }
     
   }

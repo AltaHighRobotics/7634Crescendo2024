@@ -17,6 +17,7 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //constants for apriltag
+  public static final double CENTER_LINE = 326; //326 inches from 0,0 is the center line
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 10;
   public static final int BRAKE_SOLENOID = 0;

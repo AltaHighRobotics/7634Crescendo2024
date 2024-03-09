@@ -30,11 +30,12 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
 */
 private final AprilTagSubsystem m_AprilTagSubsystem = new AprilTagSubsystem();
-private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem);
+
 private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
+  private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem,m_driveTrainSub);
   // Every Button Command
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
 

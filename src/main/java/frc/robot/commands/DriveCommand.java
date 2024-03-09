@@ -84,10 +84,7 @@ public class DriveCommand extends Command {
     double speed = flightStickY;
     double rotation = flightStickZ;
 
-    // Dont use this lol.
-    // if (strafe < 0 && speed < 0 && rotation < 0){
-    //   m_driveTrainSub.setToZero();
-    // }
+
 
     m_driveTrainSub.drive(
       Math.pow(strafe, 2.0) * Math.signum(strafe), //signum returns -1 if neg, 0 if 0, 1 if pos.
