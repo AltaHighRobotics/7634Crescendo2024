@@ -9,4 +9,7 @@ public class MeasurementConverters {
     public static double MeterstoInches(double meters){
         return(meters * 39.37);
     }
+    public static double InchestoMeters(double inches){
+        return(inches/39.97);
+    }
 }

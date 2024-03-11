@@ -18,21 +18,21 @@ import utilities.PIDConfiguration;
 public final class Constants {
   //constants for apriltag
   public static final double CENTER_LINE = 326; //326 inches from 0,0 is the center line
+  public static final double DIVISOR_AMOUNT = 3.5; //divide radius by 5 if the angle is too high
+  public static final double FARTHEST_MAX = 66;
+  // shooter constants
+  public static final int INTAKE_MOTOR_ID = 0;
+  public static final int LEFT_FLYWHEEL_ID = 0;
+  public static final int RIGHT_FLYWHEEL_ID = 0;
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 10;
   public static final int BRAKE_SOLENOID = 0;
   public static final double CLIMB_SPEED = 0.5;
   public static final double ARM_TOLERANCE = 10;
-  //Constants for button id's
-  // all of these should corrospond with number buttons on the controller
-  public static final int TRIGGER_BUTTON = 1;
-  public static final int SOURCE_POSITION_BUTTON = 10;
-  public static final int AMP_POSITION_BUTTON = 7;
-  public static final int SPEAKER_POSITION_BUTTON = 3;
-  public static final int TRAP_POSITION_BUTTON = 9;
-  public static final int DEFAULT_POSITION_BUTTON = 2;
   public static final int CLIMB_UP = 11;
   public static final int CLIMB_DOWN = 12;
+  //
+
 
     public static final int DRIVE_CONTROLLER = 0;
     public static final double DRIVE_SPEED = 0.9;

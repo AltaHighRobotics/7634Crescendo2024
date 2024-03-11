@@ -35,8 +35,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
-  private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem,m_driveTrainSub);
-  // Every Button Command
+  private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem);
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
 
   // Auto
@@ -68,7 +67,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   
     // final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
     // final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
-    final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
+    //final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     // final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
     // final JoystickButton trapButton = new JoystickButton(m_driveController, Constants.TRAP_POSITION_BUTTON);
     // final JoystickButton defaultButton = new JoystickButton(m_driveController, Constants.DEFAULT_POSITION_BUTTON);

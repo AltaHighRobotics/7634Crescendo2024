@@ -4,6 +4,11 @@
 
 package frc.robot.commands;
 
+import org.photonvision.targeting.PhotonTrackedTarget;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
+import edu.wpi.first.units.Measure;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.swerve.DriveTrainSub;
@@ -12,13 +17,9 @@ public class AprilTagTest extends Command {
   /** Creates a new AprilTagTest. */
   int allianceColor;
   AprilTagSubsystem m_aprilTagSubsystem;
-  DriveTrainSub m_driveTrainSub;
-  public AprilTagTest(AprilTagSubsystem aprilTagSubsystem, DriveTrainSub driveTrainSub) {
+  public AprilTagTest(AprilTagSubsystem aprilTagSubsystem) {
     m_aprilTagSubsystem = aprilTagSubsystem;
-    m_driveTrainSub = driveTrainSub;
-    addRequirements(m_driveTrainSub);
     addRequirements(m_aprilTagSubsystem);
-    allianceColor = 0;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,9 +30,33 @@ public class AprilTagTest extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(allianceColor == 0){
+    PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
+    if(currentTarget == null){
+      return;
+    }
+    System.out.println(m_aprilTagSubsystem.testDistance(currentTarget));
+    int targetId = currentTarget.getFiducialId();
+    switch(targetId){
+      default:
+        break;
+      case 7:
+        //insert code to shoto at speaker
+        break;
+      case 4:
+        //insert code to shoot at speaker
+        break;
+      case 6:
+        //insert code to shoot at amp
+        break;
+      case 5:
+        //insert code to shoot at amp
+        break;
+      
+
 
     }
+    // System.out.println(m_aprilTagSubsystem.xDistance(currentTarget));
+    // System.out.println(m_aprilTagSubsystem.yDistance(currentTarget)); 
     
   }
 

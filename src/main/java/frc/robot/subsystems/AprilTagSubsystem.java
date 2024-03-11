@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.apriltags.Position;
 import utilities.MeasurementConverters;
 import edu.wpi.first.math.geometry.*;
+import java.lang.Math.*;
+import frc.robot.Constants;
 
 
 public class AprilTagSubsystem extends SubsystemBase {
@@ -58,8 +60,47 @@ public class AprilTagSubsystem extends SubsystemBase {
 
   //public Trasform3d getRobotPosition(PhotonTrackedTarget currentTarget){
 
-  
-  //}
+  public double xDistance(PhotonTrackedTarget currentTarget){
+      Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
+      double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
+      return((x));
+  }
+  public double yDistance(PhotonTrackedTarget currentTarget){
+    Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
+      double y = MeasurementConverters.MeterstoInches(aprilTagDistances.getY());
+      return(y);
+  }
+
+  public double zDistance(PhotonTrackedTarget currentTarget){
+    Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
+      double z = MeasurementConverters.MeterstoInches(aprilTagDistances.getZ());
+      return(z);
+  }
+  public boolean testDistance(PhotonTrackedTarget currentTarget){
+    Transform3d currentPositions = getAprilTagDistance(currentTarget);
+    double x = Math.pow(currentPositions.getX(),2);
+    double y = Math.pow(currentPositions.getY(),2);
+    double totalDistance = Math.sqrt(x+y);
+    Rotation3d rotation = currentPositions.getRotation();
+    double aprilAngleDifference = 180- rotation.getAngle()*57.2958;
+    double acceptableRadius = totalDistance/(aprilAngleDifference/Constants.DIVISOR_AMOUNT)+38;
+    if (acceptableRadius > 66){
+      acceptableRadius = 66;
+    }
+    if (totalDistance <= acceptableRadius && aprilAngleDifference < 70){
+      return true;
+    }
+
+    return false;
+
+  //   if (dis < Constants.SPEAKER_TOLERANCE){
+  //     System.out.println(dis);
+  //     return true;    }
+  //   else{
+  //     return false;
+  //   }
+  // }
+  }
 
 
     
