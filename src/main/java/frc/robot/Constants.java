@@ -18,12 +18,16 @@ import utilities.PIDConfiguration;
 public final class Constants {
   //constants for apriltag
   public static final double CENTER_LINE = 326; //326 inches from 0,0 is the center line
-  public static final double DIVISOR_AMOUNT = 3.5; //divide radius by 5 if the angle is too high
-  public static final double FARTHEST_MAX = 66;
+  public static final double SPEAKER_DIVISOR = 3.5; //divide radius by 5 if the angle is too high
+  public static final double AMP_DIVISOR = 1;
+  public static final double FARTHEST_MAX = 66; //graham says 20 inches, so 20inches +36 1/8inch
   // shooter constants
+ // public static final double SHOOTER_ANGLE = 53;
   public static final int INTAKE_MOTOR_ID = 0;
   public static final int LEFT_FLYWHEEL_ID = 0;
   public static final int RIGHT_FLYWHEEL_ID = 0;
+  public static final double SPEAKER_SPEED = 0.9;
+  public static final double AMP_SPEED = 0;
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 10;
   public static final int BRAKE_SOLENOID = 0;

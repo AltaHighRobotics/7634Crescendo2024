@@ -19,7 +19,32 @@ public class ShootSubsystem extends SubsystemBase {
     rightFlywheel = new TalonFX(Constants.RIGHT_FLYWHEEL_ID);
     intakeMotor = new TalonFX(Constants.INTAKE_MOTOR_ID);
   }
+public void shootSpeaker(){
+  leftFlywheel.set(Constants.SPEAKER_SPEED);
+  rightFlywheel.set(Constants.SPEAKER_SPEED);
+}
+public void shootAmp(){
+  rightFlywheel.set(Constants.AMP_SPEED);
+  leftFlywheel.set(Constants.AMP_SPEED);
+}
+public void setFlywheel(double power){
+  rightFlywheel.set(power);
+  leftFlywheel.set(power);
+}
+public double FlyWheelEncoder(){
+  return leftFlywheel.getPosition().getValueAsDouble();
   
+}
+public void spinIntakeMotor(double power){
+  intakeMotor.set(power);
+}
+
+
+
+
+
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
