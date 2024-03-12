@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import org.photonvision.targeting.PhotonTrackedTarget;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
@@ -44,8 +45,11 @@ public class ShootCommand extends Command {
     if(currentTarget == null){
       targetId = -1;
     }
-    targetId =currentTarget.getFiducialId();
-    if (m_aprilTagSubsystem.testDistance(currentTarget)){
+    else{
+      targetId =currentTarget.getFiducialId();
+    }
+    if (m_aprilTagSubsystem.testDistance(currentTarget) && targetId >-1){
+    SmartDashboard.putBoolean("Can Shoot", (m_aprilTagSubsystem.testDistance(currentTarget)));
     switch(targetId){
       default:
       m_shootSubsystem.shootSpeaker();
@@ -57,6 +61,9 @@ public class ShootCommand extends Command {
         m_shootSubsystem.shootAmp();
         break;      
       }
+    }
+    else{
+      m_shootSubsystem.shootSpeaker();
     }
   }
 
