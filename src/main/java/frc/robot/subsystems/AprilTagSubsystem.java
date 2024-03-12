@@ -14,9 +14,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.apriltags.Position;
 import utilities.MeasurementConverters;
 import edu.wpi.first.math.geometry.*;
+
+import java.io.ObjectInputStream.GetField;
 import java.lang.Math.*;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import java.util.List;
 
 
 public class AprilTagSubsystem extends SubsystemBase {
@@ -44,13 +47,26 @@ public class AprilTagSubsystem extends SubsystemBase {
     // tagPositions.put(16, new Position(182.73, 146.19, 52.00, 240));
   }
   public PhotonTrackedTarget getBestTarget(){
-    //returns null if no tag is deteced
-    if (camera.getLatestResult().getBestTarget().getFiducialId() == 3 || camera.getLatestResult().getBestTarget().getFiducialId() == 8)
-    {
+    List<PhotonTrackedTarget> targets = camera.getLatestResult().getTargets();
+    int listLength = targets.size();
+    if (listLength == 0){
       return null;
     }
-    return camera.getLatestResult().getBestTarget();
+    for(int i = 0; i < listLength; i++){  
+    PhotonTrackedTarget bestTarget = targets.get(i);
+    if (bestTarget.getFiducialId() == 3 || bestTarget.getFiducialId() == 8){
+      if(listLength > i){ //fuck you kam if its fucked
+        if (targets.get(i+1).getFiducialId() == 4 || targets.get(i+1).getFiducialId() == 7){
+          return targets.get(i+1);
+        }
+      }
+    }
+    return targets.get(i);
+    }
+    return null;
   }
+    
+  
 
 
   

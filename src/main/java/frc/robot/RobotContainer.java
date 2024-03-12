@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.ChainSubsystem;
+import frc.robot.subsystems.ShootSubsystem;
 import frc.robot.swerve.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,13 +31,14 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
 */
 private final AprilTagSubsystem m_AprilTagSubsystem = new AprilTagSubsystem();
-
+private final ShootSubsystem m_ShootSubsystem = new ShootSubsystem();
 private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController);
-  private final AprilTagTest m_AprilTagTest = new AprilTagTest(m_AprilTagSubsystem);
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
+  private final ShootCommand m_shootCommand = new ShootCommand(m_ShootSubsystem, m_AprilTagSubsystem);
+  private final IntakeCommand m_IntakeCommand = new IntakeCommand(m_ShootSubsystem);
 
   // Auto
   private final SillyAuto m_sillyAuto = new SillyAuto(m_driveTrainSub);
@@ -49,13 +51,11 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     //CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
    //CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
-   CommandScheduler.getInstance().setDefaultCommand(m_AprilTagSubsystem, m_AprilTagTest);
-
   
   }
 
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * Use this method to define your trigger->command mappings. Trigdgers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
    * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
@@ -65,7 +65,8 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
    */
   private void configureBindings() {
   
-    // final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
+    final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
+    final JoystickButton intakeButton = new JoystickButton(m_driveController, Constants.INTAKE_BUTTON);
     // final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     //final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     // final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
@@ -76,7 +77,8 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     // ampButton.onTrue(m_ampPosition);
     // sourceButton.onTrue(m_sourcePosition);
     // trapButton.onTrue(m_trapPosition);
-    // shootButton.whileTrue(m_shootCommand);
+    shootButton.whileTrue(m_shootCommand);
+    intakeButton.whileTrue(m_IntakeCommand);
 
 
 

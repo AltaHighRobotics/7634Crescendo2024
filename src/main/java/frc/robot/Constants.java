@@ -21,6 +21,7 @@ public final class Constants {
   public static final double SPEAKER_DIVISOR = 3.5; //divide radius by 5 if the angle is too high
   public static final double AMP_DIVISOR = 1;
   public static final double FARTHEST_MAX = 66; //graham says 20 inches, so 20inches +36 1/8inch
+  public static final double ENCODER_TOLERANCE =1;
   // shooter constants
  // public static final double SHOOTER_ANGLE = 53;
   public static final int INTAKE_MOTOR_ID = 0;
@@ -28,11 +29,13 @@ public final class Constants {
   public static final int RIGHT_FLYWHEEL_ID = 0;
   public static final double SPEAKER_SPEED = 0.9;
   public static final double AMP_SPEED = 0;
+  public static final double SPIN_TIME = 1.5;
+  public static final double INTAKE_SPEED = 0.5;
+  public static final int MAX_BACK_ROTATIONS = 20;
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 10;
   public static final int BRAKE_SOLENOID = 0;
   public static final double CLIMB_SPEED = 0.5;
-  public static final double ARM_TOLERANCE = 10;
   public static final int CLIMB_UP = 11;
   public static final int CLIMB_DOWN = 12;
   //
@@ -43,6 +46,8 @@ public final class Constants {
     public static final double DRIVE_TURN_SPEED = 0.9;
   // Controller.
     public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.05;
+    public static final int TRIGGER_BUTTON = 1;
+    public static final int INTAKE_BUTTON = 2;
 
     public static final int RIGHT_STICK_Y = 5;
     public static final int RIGHT_STICK_X = 4;

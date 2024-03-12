@@ -4,8 +4,10 @@
 
 package frc.robot.commands;
 
-import org.photonvision.targeting.PhotonTrackedTarget;
+import java.lang.annotation.Target;
 
+import org.photonvision.targeting.PhotonTrackedTarget;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
@@ -15,6 +17,7 @@ public class ShootCommand extends Command {
   /** Creates a new ShootCommand. */
   ShootSubsystem m_shootSubsystem;
   AprilTagSubsystem m_aprilTagSubsystem;
+  double startTime;
   public ShootCommand(ShootSubsystem shootSubsystem, AprilTagSubsystem aprilTagSubsystem) {
     m_aprilTagSubsystem = aprilTagSubsystem;
     m_shootSubsystem = shootSubsystem;
@@ -25,31 +28,35 @@ public class ShootCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    startTime = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double endTime = System.currentTimeMillis();
+    int targetId;
+    if(endTime-startTime > Constants.SPIN_TIME)
+    {
+      m_shootSubsystem.spinIntakeMotor(Constants.SPEAKER_SPEED);
+    }
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
-    int targetId =currentTarget.getFiducialId();
+    if(currentTarget == null){
+      targetId = -1;
+    }
+    targetId =currentTarget.getFiducialId();
     if (m_aprilTagSubsystem.testDistance(currentTarget)){
     switch(targetId){
       default:
-        break;
-      case 4:
-        m_shootSubsystem.shootSpeaker();
+      m_shootSubsystem.shootSpeaker();
         break;
       case 5:
         m_shootSubsystem.shootAmp();
         break;
       case 6:
         m_shootSubsystem.shootAmp();
-        break;
-      case 7:
-        m_shootSubsystem.shootSpeaker();
-        break;        
+        break;      
       }
-    
     }
   }
 
