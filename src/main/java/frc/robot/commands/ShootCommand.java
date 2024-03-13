@@ -48,7 +48,7 @@ public class ShootCommand extends Command {
     else{
       targetId =currentTarget.getFiducialId();
     }
-    if (m_aprilTagSubsystem.testDistance(currentTarget) && targetId >-1){
+    if (targetId >-1 && m_aprilTagSubsystem.testDistance(currentTarget)){
     SmartDashboard.putBoolean("Can Shoot", (m_aprilTagSubsystem.testDistance(currentTarget)));
     switch(targetId){
       default:

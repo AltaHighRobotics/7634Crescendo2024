@@ -45,6 +45,7 @@ public final class Constants {
     public static final double DRIVE_SPEED = 0.9;
     public static final double DRIVE_TURN_SPEED = 0.9;
   // Controller.
+    public static final int ZERO_FIELD = 8;
     public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.05;
     public static final int TRIGGER_BUTTON = 1;
     public static final int INTAKE_BUTTON = 2;

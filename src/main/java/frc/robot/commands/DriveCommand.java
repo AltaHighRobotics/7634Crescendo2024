@@ -8,16 +8,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.swerve.DriveTrainSub;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class DriveCommand extends Command {
   private DriveTrainSub m_driveTrainSub;
   private XboxController m_driveController;
-
+  private JoystickButton zeroField;
   private boolean doInitGyro = true;
 
   public DriveCommand(DriveTrainSub driveTrainSub, XboxController driveController) {
     m_driveTrainSub = driveTrainSub;
     m_driveController = driveController;
+    zeroField = new JoystickButton(m_driveController, Constants.ZERO_FIELD);
+
 
     addRequirements(m_driveTrainSub);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -47,6 +49,9 @@ public class DriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (zeroField.getAsBoolean() == true){
+      m_driveTrainSub.zeroFieldCentric();
+    }
     //test();
 
    // The gyro wants to be reset during runtime but I only want to do it once.
