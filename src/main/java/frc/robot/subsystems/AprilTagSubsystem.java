@@ -12,6 +12,7 @@ import javax.lang.model.util.ElementScanner14;
 import java.util.HashMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.apriltags.Position;
+import utilities.ConfigurablePID;
 import utilities.MeasurementConverters;
 import edu.wpi.first.math.geometry.*;
 
@@ -21,12 +22,13 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
 
-
+import frc.robot.Constants;
 public class AprilTagSubsystem extends SubsystemBase {
   /** Creates a new AprilTagSubsystem. */
   PhotonCamera camera;
   //final Map<Integer, Position> tagPositions = new HashMap<>();
     //makes a dictonary of all april tag ID's and Positions on the field
+  ConfigurablePID autoPID;
   public AprilTagSubsystem() {
     camera = new PhotonCamera("test");
     // tagPositions.put(1, new Position(593.68, 9.68, 53.38, 120));
@@ -44,6 +46,7 @@ public class AprilTagSubsystem extends SubsystemBase {
     // tagPositions.put(13, new Position(441.74, 161.62, 52.00, 180));
     // tagPositions.put(14, new Position(209.48, 161.62, 52.00, 0));
     // tagPositions.put(15, new Position(182.73, 177.10, 52.00, 120));
+    autoPID = new ConfigurablePID(Constants.AUTO_PID);
     // tagPositions.put(16, new Position(182.73, 146.19, 52.00, 240));
   }
   public PhotonTrackedTarget getBestTarget(){
@@ -70,7 +73,10 @@ public class AprilTagSubsystem extends SubsystemBase {
 
 
   
+  public double rotationPID(double yaw){
+    return(autoPID.runPID(yaw, 0));
 
+  }
 
   public Transform3d getAprilTagDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
@@ -83,7 +89,13 @@ public class AprilTagSubsystem extends SubsystemBase {
   }
 
   //public Trasform3d getRobotPosition(PhotonTrackedTarget currentTarget){
+public double relativeYaw(PhotonTrackedTarget currentTarget){
+  return currentTarget.getYaw();
 
+}
+public boolean hasTargets(){
+  return camera.getLatestResult().hasTargets();
+}
   public double xDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
       double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());

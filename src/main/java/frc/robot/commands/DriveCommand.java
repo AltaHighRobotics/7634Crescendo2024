@@ -6,7 +6,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.swerve.DriveTrainSub;
+
+import org.photonvision.targeting.PhotonTrackedTarget;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class DriveCommand extends Command {
@@ -14,14 +18,21 @@ public class DriveCommand extends Command {
   private XboxController m_driveController;
   private JoystickButton zeroField;
   private boolean doInitGyro = true;
+  private AprilTagSubsystem m_aprilTagSubsystem;
+  private double strafe;
+  private double rotation;
+  private double speed;
+  private JoystickButton autoRotate;
 
-  public DriveCommand(DriveTrainSub driveTrainSub, XboxController driveController) {
+  public DriveCommand(DriveTrainSub driveTrainSub, XboxController driveController, AprilTagSubsystem aprilTagSubsystem)  {
     m_driveTrainSub = driveTrainSub;
     m_driveController = driveController;
+    m_aprilTagSubsystem =aprilTagSubsystem;
     zeroField = new JoystickButton(m_driveController, Constants.ZERO_FIELD);
+    autoRotate = new JoystickButton(m_driveController, 9);
 
 
-    addRequirements(m_driveTrainSub);
+    addRequirements(m_driveTrainSub,m_aprilTagSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
   // Called when the command is initially scheduled.
@@ -84,10 +95,17 @@ public class DriveCommand extends Command {
     // System.out.println(flightStickX);
     // System.out.println(flightStickY);
     // System.out.println(flightStickZ);
+    
 
-    double strafe = flightStickX;
-    double speed = flightStickY;
-    double rotation = flightStickZ;
+     strafe = flightStickX;
+     speed = flightStickY;
+     rotation = flightStickZ;
+    if(m_aprilTagSubsystem.hasTargets() && autoRotate.getAsBoolean() == true){
+      PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
+      double yaw = m_aprilTagSubsystem.relativeYaw(currentTarget);
+      rotation = m_aprilTagSubsystem.rotationPID(yaw);
+      System.out.println(rotation);
+    }
 
 
 
