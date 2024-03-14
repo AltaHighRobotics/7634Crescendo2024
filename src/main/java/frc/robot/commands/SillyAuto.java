@@ -17,7 +17,6 @@ public class SillyAuto extends Command {
   private DriveTrainSub m_driveTrainSub;
   private boolean done;
   private boolean shot;
-  private boolean outOfZone;
   private boolean grabbedNote;
   private long startTime;
   private AprilTagSubsystem m_aprilTagSubsystem;
@@ -42,7 +41,6 @@ public class SillyAuto extends Command {
     rotationPID = 0;
     xPID = 0;
     yPID = 0;
-    outOfZone = false;
     done = false;
     firstShot = false;
     secondShot = false;
@@ -58,7 +56,7 @@ public class SillyAuto extends Command {
   public void execute() {
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
     //if you dont see a tag and are running out of a time, just move foward. You should get out of the zone.
-    if(currentTarget == null && System.currentTimeMillis() - startTime >=10 && !outOfZone){
+    if(currentTarget == null && System.currentTimeMillis() - startTime >=10){
       yPID = 0.5;
     }
     if(!firstShot){
