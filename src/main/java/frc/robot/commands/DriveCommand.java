@@ -66,11 +66,12 @@ public class DriveCommand extends Command {
     //test();
 
    // The gyro wants to be reset during runtime but I only want to do it once.
-    if (doInitGyro) {
-      doInitGyro = false;
-      m_driveTrainSub.resetGyro();
-      m_driveTrainSub.zeroFieldCentric();
-    }
+    //gyro determines field centric during auto, should transfer to teleop
+    // if (doInitGyro) {
+    //   doInitGyro = false;
+    //   m_driveTrainSub.resetGyro();
+    //   m_driveTrainSub.zeroFieldCentric();
+    // }
 
     // Get joystick values.
     // double flightStickX = m_driveController.getRawAxis(Constants.LEFT_STICK_X);
