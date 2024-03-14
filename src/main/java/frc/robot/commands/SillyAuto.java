@@ -59,26 +59,27 @@ public class SillyAuto extends Command {
     if(currentTarget == null && System.currentTimeMillis() - startTime >=10){
       yPID = 0.5;
     }
+    
+    //zero your field centric for driving based on april tag
+
+    if(currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4){
     if(!firstShot){
       m_shootSubsystem.shootSpeaker();
       if(System.currentTimeMillis() - startTime >=2){
         m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
       }
       if(System.currentTimeMillis() - startTime >= 3){
-        
         firstShot = true;
         startingYdistance = m_aprilTagSubsystem.yDistance(currentTarget);
       }
     }
-    //zero your field centric for driving based on april tag
-
-    else if(currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4){
     speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
     double startingAngle = m_aprilTagSubsystem.getAngleDifference(currentTarget);
       double relativeYaw = currentTarget.getYaw();
     m_driveTrainSub.fieldCentricOffset = 180 - (startingAngle * speakerPosition);
     double yDistance = m_aprilTagSubsystem.yDistance(currentTarget);
     double xDistance = m_aprilTagSubsystem.xDistance(currentTarget);
+    if (firstShot){
     switch(speakerPosition){
       case 1:
         //insert code if youre nearest to the "bad" april tag
@@ -106,6 +107,7 @@ public class SillyAuto extends Command {
       case -1:
         //inset code if youre closest to amp
         break;
+    }
     }  
     }
     m_driveTrainSub.drive(xPID,yPID,rotationPID,false,1);
