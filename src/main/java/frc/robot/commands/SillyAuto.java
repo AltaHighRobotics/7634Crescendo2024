@@ -47,7 +47,6 @@ public class SillyAuto extends Command {
     if(currentTarget == null && System.currentTimeMillis() - startTime >=10){
       m_driveTrainSub.drive(0,0.5,0,false,1);
     }
-    //zero your gyroscope for driving based on april tag
     if(!shot){
       m_shootSubsystem.shootSpeaker();
       if(System.currentTimeMillis() - startTime >=2){
@@ -57,14 +56,23 @@ public class SillyAuto extends Command {
         shot = true;
       }
     }
+          //zero your gyroscope for driving based on april tag
+
     else if(currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4){
     speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
     double startingAngle = m_aprilTagSubsystem.getAngleDifference(currentTarget);
     m_driveTrainSub.fieldCentricOffset = 180 - (startingAngle * speakerPosition);
     switch(speakerPosition){
       case 1:
-        //insert code if youre nearest to the "bad" april tag"
-    }
+        //insert code if youre nearest to the "bad" april tag
+        break;
+      case 0:
+        //insert code if youre head on with speaker
+        break;
+      case -1:
+        //inset code if youre closest to amp
+        break;
+    }  
     }
     
 
