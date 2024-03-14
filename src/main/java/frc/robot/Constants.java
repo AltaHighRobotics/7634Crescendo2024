@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.swerve.SwerveModuleConfig;
+import utilities.MeasurementConverters;
 import utilities.PIDConfiguration;
 
 /**
@@ -23,6 +24,8 @@ public final class Constants {
   public static final double FARTHEST_MAX = 66; //graham says 20 inches, so 20inches +36 1/8inch
   public static final double ENCODER_TOLERANCE =1;
   public static final int AUTO_TURN = 9;
+  public static final double X_DIS_SPEAKER = 0;
+  public static final double Y_DIS_SPEAKER = 36;
   public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.01,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
  // public static final double SHOOTER_ANGLE = 53;
   public static final int INTAKE_MOTOR_ID = 0;

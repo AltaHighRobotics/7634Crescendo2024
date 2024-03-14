@@ -58,7 +58,7 @@ public class AprilTagSubsystem extends SubsystemBase {
     for(int i = 0; i < listLength; i++){  
     PhotonTrackedTarget bestTarget = targets.get(i);
     if (bestTarget.getFiducialId() == 3 || bestTarget.getFiducialId() == 8){
-      if(listLength-1> i){ //fuck you kam if its fucked
+      if(listLength-1> i){
         if (targets.get(i+1).getFiducialId() == 4 || targets.get(i+1).getFiducialId() == 7){
           return targets.get(i+1);
         }
@@ -70,11 +70,45 @@ public class AprilTagSubsystem extends SubsystemBase {
     return null;
     //return camera.getLatestResult().getBestTarget();
   }
+  public double[] getPresetPosition(PhotonTrackedTarget currentTarget){
+    double xDistanceFromTarget = xDistance(currentTarget);
+    double yDistanceFromTarget = yDistance(currentTarget);
+    double zAngleFromTarget = currentTarget.getYaw();
+    double xPIDOutput;
+    double yPIDOutput;
+    double zPIDOutput;
+    int targetID = currentTarget.getFiducialId();
+    switch(targetID){
+      case 7:
+        //speaker stuff
+        xPIDOutput = xPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
+        yPIDOutput = yPID(yDistanceFromTarget, Constants.Y_DIS_SPEAKER);
+        zPIDOutput = rotationPID(zAngleFromTarget);
+        break;
+      case 14:
+        //speaker stuff
+        xPIDOutput = xPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
+        yPIDOutput = yPID(yDistanceFromTarget, Constants.Y_DIS_SPEAKER);
+        zPIDOutput = rotationPID(zAngleFromTarget);
+        break;
+      case 4:
+        //ampstuff
+        break;
+
+
+    }
     
-  
 
 
+  }
   
+  public double yPID(double yPos, double ySetPoint){
+    return (autoPID.runPID(yPos, ySetPoint));
+  }
+
+  public double xPID(double xPos, double xSetPoint){
+    return(autoPID.runPID(xPos, xSetPoint));
+  }
   public double rotationPID(double yaw){
     
     return(autoPID.runPID(yaw, 0));
