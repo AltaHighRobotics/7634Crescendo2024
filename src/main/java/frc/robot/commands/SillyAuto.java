@@ -72,7 +72,7 @@ public class SillyAuto extends Command {
         firstShot = true;
         startingYdistance = m_aprilTagSubsystem.yDistance(currentTarget);
       }
-    }
+    
     speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
     double startingAngle = m_aprilTagSubsystem.getAngleDifference(currentTarget);
       double relativeYaw = currentTarget.getYaw();
