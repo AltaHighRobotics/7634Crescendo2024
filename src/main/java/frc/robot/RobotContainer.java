@@ -48,7 +48,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    //CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
+    CommandScheduler.getInstance().setDefaultCommand(m_driveTrainSub, m_driveCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_armSubsystem, m_ManualPositionCreator);
    //CommandScheduler.getInstance().setDefaultCommand(m_chainSubsystem, m_climbCommand);
   

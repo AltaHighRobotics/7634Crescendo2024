@@ -58,15 +58,17 @@ public class AprilTagSubsystem extends SubsystemBase {
     for(int i = 0; i < listLength; i++){  
     PhotonTrackedTarget bestTarget = targets.get(i);
     if (bestTarget.getFiducialId() == 3 || bestTarget.getFiducialId() == 8){
-      if(listLength > i){ //fuck you kam if its fucked
+      if(listLength-1> i){ //fuck you kam if its fucked
         if (targets.get(i+1).getFiducialId() == 4 || targets.get(i+1).getFiducialId() == 7){
           return targets.get(i+1);
         }
       }
+      return null;
     }
     return targets.get(i);
     }
     return null;
+    //return camera.getLatestResult().getBestTarget();
   }
     
   
@@ -74,6 +76,7 @@ public class AprilTagSubsystem extends SubsystemBase {
 
   
   public double rotationPID(double yaw){
+    
     return(autoPID.runPID(yaw, 0));
 
   }
@@ -94,7 +97,11 @@ public double relativeYaw(PhotonTrackedTarget currentTarget){
 
 }
 public boolean hasTargets(){
-  return camera.getLatestResult().hasTargets();
+  PhotonTrackedTarget bestTarget = getBestTarget();
+  if (bestTarget == null){
+    return false;
+  }
+  return true;
 }
   public double xDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
