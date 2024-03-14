@@ -76,6 +76,7 @@ public class SillyAuto extends Command {
         break;
     }  
     }
+    m_driveTrainSub.run();
     
 
     
