@@ -5,24 +5,13 @@
 package frc.robot.subsystems;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
-import java.util.Map;
-
-import javax.lang.model.util.ElementScanner14;
-
-import java.util.HashMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.apriltags.Position;
 import utilities.ConfigurablePID;
 import utilities.MeasurementConverters;
 import edu.wpi.first.math.geometry.*;
 
-import java.io.ObjectInputStream.GetField;
-import java.lang.Math.*;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
-
-import frc.robot.Constants;
 public class AprilTagSubsystem extends SubsystemBase {
   /** Creates a new AprilTagSubsystem. */
   PhotonCamera camera;
@@ -74,9 +63,9 @@ public class AprilTagSubsystem extends SubsystemBase {
     double xDistanceFromTarget = xDistance(currentTarget);
     double yDistanceFromTarget = yDistance(currentTarget);
     double zAngleFromTarget = currentTarget.getYaw();
-    double xPIDOutput;
-    double yPIDOutput;
-    double zPIDOutput;
+    double xPIDOutput = 0;
+    double yPIDOutput = 0;
+    double zPIDOutput = 0;
     int targetID = currentTarget.getFiducialId();
     switch(targetID){
       case 7:
@@ -94,9 +83,10 @@ public class AprilTagSubsystem extends SubsystemBase {
       case 4:
         //ampstuff
         break;
-
-
     }
+      double[] PIDPowers = {xPIDOutput, yPIDOutput, zPIDOutput};
+      return(PIDPowers);
+    
     
 
 
@@ -125,10 +115,32 @@ public class AprilTagSubsystem extends SubsystemBase {
       return(DistanceInInches);
   }
 
-  //public Trasform3d getRobotPosition(PhotonTrackedTarget currentTarget){
+  public boolean withinRotationTolerance(PhotonTrackedTarget currentTarget){
+    if(currentTarget.getYaw() <= Constants.ROTATION_TOLERANCE){
+      return true;
+    }
+    return false;
+  }
+
 public double relativeYaw(PhotonTrackedTarget currentTarget){
   return currentTarget.getYaw();
 
+}
+public int getSpeakerPosition(PhotonTrackedTarget currentTarget){
+  PhotonTrackedTarget inclusiveBestTarget = camera.getLatestResult().getBestTarget();
+  int targetID = 0;
+  if(inclusiveBestTarget != null){
+    targetID = inclusiveBestTarget.getFiducialId();
+    if (targetID == 8 || targetID == 3){
+      return 1; //right side, closer to offset april tag
+    }
+    double angleDifference = getAngleDifference(currentTarget);
+    if(angleDifference < 160){
+      return -1;
+    }
+    
+  }
+  return 0;
 }
 public boolean hasTargets(){
   PhotonTrackedTarget bestTarget = getBestTarget();
@@ -153,6 +165,12 @@ public boolean hasTargets(){
       double z = MeasurementConverters.MeterstoInches(aprilTagDistances.getZ());
       return(z);
   }
+  public double getAngleDifference(PhotonTrackedTarget currentTarget){
+    Transform3d bestToCamera = currentTarget.getBestCameraToTarget();
+    double rotation = bestToCamera.getRotation().getAngle()*57.2958;
+    double aprilAngleDifference = 180 - rotation;
+    return aprilAngleDifference;
+  }
   public boolean testDistance(PhotonTrackedTarget currentTarget){
     double divisorAmount;
     int targetID = currentTarget.getFiducialId();
@@ -169,8 +187,7 @@ public boolean hasTargets(){
     double x = Math.pow(currentPositions.getX(),2);
     double y = Math.pow(currentPositions.getY(),2);
     double totalDistance = Math.sqrt(x+y);
-    Rotation3d rotation = currentPositions.getRotation();
-    double aprilAngleDifference = 180- rotation.getAngle()*57.2958;
+    double aprilAngleDifference = getAngleDifference(currentTarget);
     double acceptableRadius = totalDistance/(aprilAngleDifference/divisorAmount)+38;
     if (acceptableRadius > 66){
       acceptableRadius = 66;

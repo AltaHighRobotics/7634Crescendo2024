@@ -104,7 +104,7 @@ public class DriveCommand extends Command {
       PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
       double yaw = m_aprilTagSubsystem.relativeYaw(currentTarget);
       rotation = m_aprilTagSubsystem.rotationPID(yaw);
-      System.out.println(rotation);
+      //System.out.println(rotation);
     }
 
 

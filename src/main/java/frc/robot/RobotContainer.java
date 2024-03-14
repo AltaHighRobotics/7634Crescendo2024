@@ -7,7 +7,6 @@ package frc.robot;
 //import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -41,7 +40,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final IntakeCommand m_IntakeCommand = new IntakeCommand(m_ShootSubsystem);
 
   // Auto
-  private final SillyAuto m_sillyAuto = new SillyAuto(m_driveTrainSub);
+  private final SillyAuto m_sillyAuto = new SillyAuto(m_driveTrainSub,m_AprilTagSubsystem,m_ShootSubsystem);
 
   //subsytems
   /** The container for the rot. Contains subsystems, OI devices, and commands. */

@@ -5,7 +5,6 @@
 package frc.robot;
 
 import frc.robot.swerve.SwerveModuleConfig;
-import utilities.MeasurementConverters;
 import utilities.PIDConfiguration;
 
 /**
@@ -18,6 +17,7 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //constants for apriltag
+  public  static final double ROTATION_TOLERANCE = 0.5;
   public static final double CENTER_LINE = 326; //326 inches from 0,0 is the center line
   public static final double SPEAKER_DIVISOR = 3.5; //divide radius by 5 if the angle is too high
   public static final double AMP_DIVISOR = 1;

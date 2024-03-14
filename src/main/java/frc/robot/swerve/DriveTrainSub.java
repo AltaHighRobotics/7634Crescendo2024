@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C.Port;
 import java.lang.Math;
@@ -15,16 +13,11 @@ public class DriveTrainSub extends SubsystemBase {
   /** Creates a new DriveTrainSub. */
   private SwerveModule[] swerveModuleSubs = new SwerveModule[Constants.SWERVE_MODULE_COUNT];
   private AHRS navx;
-  private TalonFX testMotor1;
-  private TalonFX testMotor2;
-  private double fieldCentricOffset = 0.0;
+
+  public double fieldCentricOffset = 0.0;
 
   public DriveTrainSub() {
     // Config swerve modules,
-    testMotor1 = new TalonFX(7);
-    testMotor2 = new TalonFX(8);
-    testMotor1.setNeutralMode(NeutralModeValue.Coast);
-    testMotor2.setNeutralMode(NeutralModeValue.Coast);
     for (int i = 0; i < Constants.SWERVE_MODULE_COUNT; ++i) {
       swerveModuleSubs[i] = new SwerveModule(Constants.SWERVE_MODULE_CONFIGS[i]);
     }
@@ -34,10 +27,7 @@ public class DriveTrainSub extends SubsystemBase {
     resetGyro();
 
     zeroFieldCentric();
-  }
-  public void test(double power){
-    testMotor1.set(-power);
-    testMotor2.set(power);
+
   }
   public void resetGyro() {
     navx.reset();
