@@ -17,6 +17,7 @@ public class SillyAuto extends Command {
   private DriveTrainSub m_driveTrainSub;
   private boolean done;
   private boolean shot;
+  private boolean outOfZone;
   private long startTime;
   private AprilTagSubsystem m_aprilTagSubsystem;
   private ShootSubsystem m_shootSubsystem;
@@ -32,6 +33,7 @@ public class SillyAuto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    outOfZone = false;
     done = false;
     shot = false;
     speakerPosition = 10;
@@ -44,7 +46,7 @@ public class SillyAuto extends Command {
   public void execute() {
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
     //if you dont see a tag and are running out of a time, just move foward. You should get out of the zone.
-    if(currentTarget == null && System.currentTimeMillis() - startTime >=10){
+    if(currentTarget == null && System.currentTimeMillis() - startTime >=10 && !outOfZone){
       m_driveTrainSub.drive(0,0.5,0,false,1);
     }
     if(!shot){
@@ -56,7 +58,7 @@ public class SillyAuto extends Command {
         shot = true;
       }
     }
-          //zero your gyroscope for driving based on april tag
+    //zero your field centric for driving based on april tag
 
     else if(currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4){
     speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
