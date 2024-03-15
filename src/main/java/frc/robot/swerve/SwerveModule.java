@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkLowLevel;
 
 import frc.robot.Constants;
 import utilities.MathTools;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
@@ -21,7 +21,7 @@ public class SwerveModule {
   
   // Wheel.
   private double wheelDirection = FORWARD;
-  private WPI_VictorSPX wheelMotor;
+  private WPI_TalonSRX wheelMotor;
 
 
   // Turn.
@@ -35,7 +35,7 @@ public class SwerveModule {
 
   public SwerveModule(SwerveModuleConfig config) {
     // Wheel motor.
-    wheelMotor = new WPI_VictorSPX(config.wheelMotorId);
+    wheelMotor = new WPI_TalonSRX(config.wheelMotorId);
     // Config wheel motor.
     wheelMotor.setInverted(config.invertWheelMotor);
     wheelMotor.setNeutralMode(NeutralMode.Coast);

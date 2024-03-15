@@ -61,7 +61,7 @@ public class DriveCommand extends Command {
   @Override
   public void execute() {
     if (zeroField.getAsBoolean() == true){
-      m_driveTrainSub.zeroFieldCentric();
+      m_driveTrainSub.zeroFieldCentric(true);
     }
     //test();
 

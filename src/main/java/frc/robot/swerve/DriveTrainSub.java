@@ -26,7 +26,7 @@ public class DriveTrainSub extends SubsystemBase {
     navx = new AHRS(Port.kMXP);
     resetGyro();
 
-    zeroFieldCentric();
+    zeroFieldCentric(true);
 
   }
   public void resetGyro() {
@@ -38,8 +38,9 @@ public class DriveTrainSub extends SubsystemBase {
     return getYaw() - fieldCentricOffset;
   }
 
-  public void zeroFieldCentric() {
-    fieldCentricOffset = getYaw();
+  public void zeroFieldCentric(boolean resetField) {
+    if (fieldCentricOffset == 0 || resetField){
+    fieldCentricOffset = getYaw();}
   }
 
   public double getYaw() {

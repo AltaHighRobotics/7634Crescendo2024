@@ -197,14 +197,6 @@ public boolean hasTargets(){
     }
 
     return false;
-
-  //   if (dis < Constants.SPEAKER_TOLERANCE){
-  //     System.out.println(dis);
-  //     return true;    }
-  //   else{
-  //     return false;
-  //   }
-  // }
   }
 
 
