@@ -21,15 +21,15 @@ public class ShootSubsystem extends SubsystemBase {
   }
 public void shootSpeaker(){
   leftFlywheel.set(Constants.SPEAKER_SPEED);
-  rightFlywheel.set(Constants.SPEAKER_SPEED);
+  rightFlywheel.set(-Constants.SPEAKER_SPEED);
 }
 public void shootAmp(){
   rightFlywheel.set(Constants.AMP_SPEED);
-  leftFlywheel.set(Constants.AMP_SPEED);
+  leftFlywheel.set(-Constants.AMP_SPEED);
 }
 public void setFlywheel(double power){
   rightFlywheel.set(power);
-  leftFlywheel.set(power);
+  leftFlywheel.set(-power);
 }
 public double FlyWheelEncoder(){
   return leftFlywheel.getPosition().getValueAsDouble();

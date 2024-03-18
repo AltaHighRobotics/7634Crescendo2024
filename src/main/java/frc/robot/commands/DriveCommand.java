@@ -23,13 +23,16 @@ public class DriveCommand extends Command {
   private double rotation;
   private double speed;
   private JoystickButton autoRotate;
+  private JoystickButton resetGyro;
 
   public DriveCommand(DriveTrainSub driveTrainSub, XboxController driveController, AprilTagSubsystem aprilTagSubsystem)  {
     m_driveTrainSub = driveTrainSub;
     m_driveController = driveController;
     m_aprilTagSubsystem =aprilTagSubsystem;
     zeroField = new JoystickButton(m_driveController, Constants.ZERO_FIELD);
-    autoRotate = new JoystickButton(m_driveController, 9);
+    autoRotate = new JoystickButton(m_driveController, 4);
+
+    // uwu
 
 
     addRequirements(m_driveTrainSub,m_aprilTagSubsystem);
@@ -60,18 +63,17 @@ public class DriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (zeroField.getAsBoolean() == true){
-      m_driveTrainSub.zeroFieldCentric(true);
-    }
+    
+    m_driveTrainSub.zeroFieldCentric(zeroField.getAsBoolean());
     //test();
 
    // The gyro wants to be reset during runtime but I only want to do it once.
-    //gyro determines field centric during auto, should transfer to teleop
-    // if (doInitGyro) {
-    //   doInitGyro = false;
-    //   m_driveTrainSub.resetGyro();
-    //   m_driveTrainSub.zeroFieldCentric();
-    // }
+    // gyro determines field centric during auto, should transfer to teleop
+    if (doInitGyro) {
+      doInitGyro = false;
+      m_driveTrainSub.resetGyro();
+      m_driveTrainSub.zeroFieldCentric(true);
+    }
 
     // Get joystick values.
     // double flightStickX = m_driveController.getRawAxis(Constants.LEFT_STICK_X);
@@ -103,9 +105,13 @@ public class DriveCommand extends Command {
      rotation = flightStickZ;
     if(m_aprilTagSubsystem.hasTargets() && autoRotate.getAsBoolean() == true){
       PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
+      if(currentTarget == null){
+        rotation = flightStickZ;
+      }
+      else{
       double yaw = m_aprilTagSubsystem.relativeYaw(currentTarget);
       rotation = m_aprilTagSubsystem.rotationPID(yaw);
-      //System.out.println(rotation);
+      System.out.println(rotation);}
     }
 
 
@@ -114,7 +120,7 @@ public class DriveCommand extends Command {
       Math.pow(strafe, 2.0) * Math.signum(strafe), //signum returns -1 if neg, 0 if 0, 1 if pos.
       -Math.pow(speed, 2.0) * Math.signum(speed), // basically, he smooths out speed, gtes the direction (signum)
       Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
-      true,
+      false,
       Constants.DRIVE_SPEED
     );
     

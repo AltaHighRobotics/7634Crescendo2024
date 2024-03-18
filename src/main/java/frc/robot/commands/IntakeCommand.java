@@ -11,8 +11,7 @@ import java.lang.Math;
 public class IntakeCommand extends Command {
   /** Creates a new IntakeCommand. */
   ShootSubsystem m_shootSubsystem;
-  double startingPosition;
-  int backRotations;
+  boolean done = false;
   public IntakeCommand(ShootSubsystem shootSubsystem) {
     m_shootSubsystem = shootSubsystem;
     addRequirements(m_shootSubsystem);
@@ -21,35 +20,27 @@ public class IntakeCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    startingPosition = m_shootSubsystem.FlyWheelEncoder();
-    backRotations = 0;
+  public void initialize() { 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double endPosition = m_shootSubsystem.FlyWheelEncoder();
-    if (Math.abs(endPosition-startingPosition) > Constants.ENCODER_TOLERANCE){
-      if (backRotations < Constants.MAX_BACK_ROTATIONS){
-        m_shootSubsystem.spinIntakeMotor(-Constants.INTAKE_SPEED);
-        backRotations++;
-      }
-      else{
-        m_shootSubsystem.spinIntakeMotor(0);
-      }
-    }
-    else
-    {
-      m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-    }
-
+    m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+    double startTime = System.currentTimeMillis();
+    while(System.currentTimeMillis() - startTime <= 50){
+      m_shootSubsystem.spinIntakeMotor(-Constants.INTAKE_SPEED);
+    }
+    m_shootSubsystem.spinIntakeMotor(0);
+
+  }
 
   // Returns true when the command should end.
   @Override

@@ -126,6 +126,12 @@ public double relativeYaw(PhotonTrackedTarget currentTarget){
   return currentTarget.getYaw();
 
 }
+public boolean closeEnoughtoShoot(double startingX, double startingY, double currentX, double currentY){
+  if (Math.abs(currentY) - Constants.REZERO_TOLERANCE <= Math.abs(startingY) && Math.abs(currentY)- Constants.REZERO_TOLERANCE <= Math.abs(startingY)){
+    return true;
+  }
+  return false;
+}
 public int getSpeakerPosition(PhotonTrackedTarget currentTarget){
   PhotonTrackedTarget inclusiveBestTarget = camera.getLatestResult().getBestTarget();
   int targetID = 0;

@@ -17,6 +17,7 @@ import utilities.PIDConfiguration;
  */
 public final class Constants {
   //constants for apriltag
+  public static final double REZERO_TOLERANCE = 3;
   public  static final double ROTATION_TOLERANCE = 0.5;
   public static final double CENTER_LINE = 326; //326 inches from 0,0 is the center line
   public static final double SPEAKER_DIVISOR = 3.5; //divide radius by 5 if the angle is too high
@@ -26,18 +27,18 @@ public final class Constants {
   public static final int AUTO_TURN = 9;
   public static final double X_DIS_SPEAKER = 0;
   public static final double Y_DIS_SPEAKER = 36;
-  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.01,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
+  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.09,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
  // public static final double SHOOTER_ANGLE = 53;
-  public static final int INTAKE_MOTOR_ID = 0;
-  public static final int LEFT_FLYWHEEL_ID = 0;
-  public static final int RIGHT_FLYWHEEL_ID = 0;
+  public static final int INTAKE_MOTOR_ID =11;
+  public static final int LEFT_FLYWHEEL_ID = 10;
+  public static final int RIGHT_FLYWHEEL_ID = 2;
   public static final double SPEAKER_SPEED = 0.9;
   public static final double AMP_SPEED = 0;
   public static final double SPIN_TIME = 1.5;
-  public static final double INTAKE_SPEED = 0.5;
+  public static final double INTAKE_SPEED = -0.9;
   public static final int MAX_BACK_ROTATIONS = 20;
   //Constants for our climbing mechanism
-  public static final int CHAIN_MOTOR_ID = 10;
+  public static final int CHAIN_MOTOR_ID = 12;
   public static final int BRAKE_SOLENOID = 0;
   public static final double CLIMB_SPEED = 0.5;
   public static final int CLIMB_UP = 11;
@@ -88,6 +89,8 @@ public final class Constants {
     public static final int BACK_RIGHT_MODULE = 2;
     public static final int BACK_LEFT_MODULE = 3;
     public static final int SWERVE_MODULE_COUNT = 4;
+
+    // Booty cheese
 
     public static final SwerveModuleConfig []SWERVE_MODULE_CONFIGS = {
       new SwerveModuleConfig(4, 40, true, false), // Front right

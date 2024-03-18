@@ -37,17 +37,14 @@ public class ClimbCommand extends Command {
   @Override
   public void execute() {
     if (upButton.getAsBoolean() == true){
-      m_chainSubsystem.brakeOff();
       m_chainSubsystem.setChainArm(Constants.CLIMB_SPEED);
     }
     else if (downButton.getAsBoolean() == true){
-      m_chainSubsystem.brakeOff();
       m_chainSubsystem.setChainArm(-Constants.CLIMB_SPEED);
     }
     else{
       m_chainSubsystem.setChainArm(0);
-      m_chainSubsystem.brakeOn();
-    }
+   }
 
     }
 
