@@ -36,6 +36,10 @@ public class ClimbCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (m_chainSubsystem.getLimitSwitch()){
+      m_chainSubsystem.setChainArm(0);
+      return;
+    }
     if (upButton.getAsBoolean() == true){
       m_chainSubsystem.setChainArm(Constants.CLIMB_SPEED);
     }

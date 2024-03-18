@@ -70,7 +70,6 @@ public class SillyAuto extends Command {
   public void execute() {
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
     //if you dont see a tag and are running out of a time, just move foward. You should get out of the zone.
-    System.out.println(System.currentTimeMillis()-startTime);
 
     if(currentTarget == null){
       if (System.currentTimeMillis()-shootTimeout >= 14000){
