@@ -68,9 +68,6 @@ public class SillyAuto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    yPID = 0;
-    xPID = 0;
-    rotationPID = 0;
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
     //if you dont see a tag and are running out of a time, just move foward. You should get out of the zone.
 
