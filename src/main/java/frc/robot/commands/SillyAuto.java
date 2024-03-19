@@ -77,7 +77,10 @@ public class SillyAuto extends Command {
       shootTimeout = System.currentTimeMillis();
       startTimer = false;
       }
-      System.out.println(System.currentTimeMillis() - shootTimeout);
+      // suck the note back a little before you shoot
+      if (System.currentTimeMillis() - shootTimeout <= 100){
+        m_shootSubsystem.spinIntakeMotor(-Constants.INTAKE_SPEED);
+      }
       if(System.currentTimeMillis() - shootTimeout <= 1000){
       m_shootSubsystem.shootSpeaker();}
       if (System.currentTimeMillis() - shootTimeout >= 1000){
