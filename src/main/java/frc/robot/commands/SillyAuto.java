@@ -102,7 +102,7 @@ public class SillyAuto extends Command {
 
 
 
-  if(currentTarget != null && (currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4)){
+  if(currentTarget != null 1&& (currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4)){
     //if youre just starting, get all the starting info
     if(!gotSpeakerPosition){
       speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
@@ -158,41 +158,14 @@ public class SillyAuto extends Command {
                     break;
                   case 2:
                     // go the the back left note
-                    xPID = m_aprilTagSubsystem.xPID(currentX, -57);
-                    yPID = m_aprilTagSubsystem.yPID(currentY, 130);
+                    xPID = m_aprilTagSubsystem.xPID(currentX, 0);
+                    yPID = m_aprilTagSubsystem.yPID(currentY, 0);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    // if youre roughly there, assume you got it
-                    if (currentY >= 125 && xPID <= -55){
-                      loadedNote = true;
-                    // if youve got it, go back to the start
-                    }
-                    if(loadedNote){
-                      xPID = m_aprilTagSubsystem.xPID(currentX, startingXdistance);
-                      yPID = m_aprilTagSubsystem.yPID(currentY, startingYdistance);
-                      rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    }
-                    // if youre close enough to shoot, shoot.
-                    if(currentY <= 40 && Math.abs(currentX) - Constants.REZERO_TOLERANCE <= 4){
-                      readyToShoot = true;
-                      startTimer = true;
-                    }
+        
                     break;
                   case 3:
-                    xPID = m_aprilTagSubsystem.xPID(currentX, 57);
-                    yPID = m_aprilTagSubsystem.yPID(currentY, 130);
-                    rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    if (currentY >= 125 && xPID >= 55){
-                      loadedNote = true;
-                    }
-                    if(loadedNote){
-                      xPID = m_aprilTagSubsystem.xPID(currentX, startingXdistance);
-                      yPID = m_aprilTagSubsystem.yPID(currentY, startingYdistance);
-                      rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    }
-                    if (currentY <= 40 && Math.abs(currentX)- Constants.REZERO_TOLERANCE <= 4){
-                      readyToShoot = true;
-                      startTimer = true;
-                    }
+                    break;
+                  
                   
 
 
