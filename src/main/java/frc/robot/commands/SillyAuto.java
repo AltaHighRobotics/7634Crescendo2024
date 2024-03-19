@@ -144,7 +144,7 @@ public class SillyAuto extends Command {
               switch(shotNumber){
                   case 1:
                     xPID = m_aprilTagSubsystem.xPID(currentX, 56);
-                    yPID = m_aprilTagSubsystem.yPID(currentY, 0);
+                    //yPID = m_aprilTagSubsystem.yPID(currentY, 0);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
                     // m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
                     // if (currentY >= 125){
@@ -228,7 +228,7 @@ public class SillyAuto extends Command {
 
     }
   }
-  m_driveTrainSub.drive(xPID, yPID, rotationPID, true,1);
+  m_driveTrainSub.drive(yPID, xPID, rotationPID, true,1);
   m_driveTrainSub.run();
 
 

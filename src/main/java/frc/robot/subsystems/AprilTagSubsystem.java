@@ -155,16 +155,16 @@ public boolean hasTargets(){
     return false;
   }
   return true;
-}
+}//in photonvision, X is how far away you are head on, y is is lateral movement... I switched that
   public double xDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
-      double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
-      return((x+Constants.CAMERA_OFFSET));
+      double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getY());
+      return((x));
   }
   public double yDistance(PhotonTrackedTarget currentTarget){
     Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
-      double y = MeasurementConverters.MeterstoInches(aprilTagDistances.getY());
-      return(y);
+      double y = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
+      return(y+Constants.CAMERA_OFFSET);
   }
 
   public double zDistance(PhotonTrackedTarget currentTarget){
