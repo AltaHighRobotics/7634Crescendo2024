@@ -68,41 +68,45 @@ public class SillyAuto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    yPID = 0;
+    xPID = 0;
+    rotationPID = 0;
     PhotonTrackedTarget currentTarget = m_aprilTagSubsystem.getBestTarget();
     //if you dont see a tag and are running out of a time, just move foward. You should get out of the zone.
 
-    if(currentTarget == null){
-      if (System.currentTimeMillis()-shootTimeout >= 14000){
-        yPID =0.9;
 
-    }
     if(loadedNote && readyToShoot) {
       if (startTimer){
       shootTimeout = System.currentTimeMillis();
       startTimer = false;
       }
+      System.out.println(System.currentTimeMillis() - shootTimeout);
       if(System.currentTimeMillis() - shootTimeout <= 1000){
       m_shootSubsystem.shootSpeaker();}
       if (System.currentTimeMillis() - shootTimeout >= 1000){
         m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-        loadedNote = false;
-        readyToShoot = false;
-        startTimer = false;
-        shotNumber++;
-        shootTimeout = 0;
-        m_shootSubsystem.setFlywheel(0);
-        m_shootSubsystem.spinIntakeMotor(0);
+        if(System.currentTimeMillis() - shootTimeout >= 1100){
+          loadedNote = false;
+          readyToShoot = false;
+          startTimer = false;
+          shotNumber++;
+          shootTimeout = 0;
+         m_shootSubsystem.setFlywheel(0);
+         m_shootSubsystem.spinIntakeMotor(0);
+        }
+       m_shootSubsystem.setFlywheel(0);
+         m_shootSubsystem.spinIntakeMotor(0);
       }
     }
 
-    }
+
+    
 
 
 
 
   if(currentTarget != null && (currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4)){
     //if youre just starting, get all the starting info
-    System.out.println("Auto!");
     if(!gotSpeakerPosition){
       speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
       startingAngle = m_aprilTagSubsystem.getAngleDifference(currentTarget);
@@ -110,7 +114,7 @@ public class SillyAuto extends Command {
       startingYdistance = m_aprilTagSubsystem.yDistance(currentTarget);
       m_driveTrainSub.fieldCentricOffset = 180 - (startingAngle * speakerPosition); // set field oriented offset to 180 - where we are.
       gotSpeakerPosition = true;
-    }
+        }
     currentX = m_aprilTagSubsystem.xDistance(currentTarget);
     currentY = m_aprilTagSubsystem.yDistance(currentTarget);
     currentRotation = currentTarget.getYaw();
@@ -122,7 +126,7 @@ public class SillyAuto extends Command {
         if (startTime - System.currentTimeMillis() >= 10){ // wait 10 seconds  to go to make sure that we dont hit any other auto bots getting notes
         xPID = m_aprilTagSubsystem.xPID(currentX, -40); // go to roughly the amp
         yPID = m_aprilTagSubsystem.yPID(currentY, 120); // go slightly above the auto
-        rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);// always face apriltag
+        //rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);// always face apriltag
        break;
         }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,24 +137,27 @@ public class SillyAuto extends Command {
         rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
 ////////////////////////////////////////////////////////////////////////////////////////////
       case 0:
-              //4 note auto code. get ready for a ride.
+              //4 note auto code. get ready for a ride
+              System.out.println("I am Head On!");
+              System.out.println("ShotNumber: "+shotNumber);
+              
               switch(shotNumber){
                   case 1:
-                    xPID = m_aprilTagSubsystem.xPID(currentX, 0);
-                    yPID = m_aprilTagSubsystem.yPID(currentY, 130);
+                    xPID = m_aprilTagSubsystem.xPID(currentX, 56);
+                    yPID = m_aprilTagSubsystem.yPID(currentY, 0);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-                    if (currentY >= 125){
-                      loadedNote = true;
-                    }
-                    if (loadedNote){ //if we got the note, then go back and shoot.
-                      xPID = m_aprilTagSubsystem.xPID(currentX, startingXdistance);
-                      yPID = m_aprilTagSubsystem.yPID(currentY, startingYdistance);
-                      if (currentY < 40){ //if were close enough to shoot, shoot
-                        readyToShoot = true;
-                        startTimer = true;
-                      }
-                    }
+                    // m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
+                    // if (currentY >= 125){
+                    //   loadedNote = true;
+                    // }
+                    // if (loadedNote){ //if we got the note, then go back and shoot.
+                    //   xPID = m_aprilTagSubsystem.xPID(currentX, startingXdistance);
+                    //   yPID = m_aprilTagSubsystem.yPID(currentY, startingYdistance);
+                    //   if (currentY < 40){ //if were close enough to shoot, shoot
+                    //     readyToShoot = true;
+                    //     startTimer = true;
+                    //   }
+                    // }
                     break;
                   case 2:
                     // go the the back left note

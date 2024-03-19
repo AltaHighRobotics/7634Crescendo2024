@@ -20,8 +20,8 @@ public class ShootSubsystem extends SubsystemBase {
     intakeMotor = new TalonFX(Constants.INTAKE_MOTOR_ID);
   }
 public void shootSpeaker(){
-  leftFlywheel.set(Constants.SPEAKER_SPEED);
-  rightFlywheel.set(-Constants.SPEAKER_SPEED);
+  leftFlywheel.set(-Constants.SPEAKER_SPEED);
+  rightFlywheel.set(Constants.SPEAKER_SPEED);
 }
 public void shootAmp(){
   rightFlywheel.set(Constants.AMP_SPEED);

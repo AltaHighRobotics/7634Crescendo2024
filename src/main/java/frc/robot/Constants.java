@@ -27,7 +27,8 @@ public final class Constants {
   public static final int AUTO_TURN = 9;
   public static final double X_DIS_SPEAKER = 0;
   public static final double Y_DIS_SPEAKER = 36;
-  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.09,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
+  public static final double CAMERA_OFFSET = 11.5;
+  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.05,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
  // public static final double SHOOTER_ANGLE = 53;
   public static final int INTAKE_MOTOR_ID =11;
   public static final int LEFT_FLYWHEEL_ID = 10;
@@ -40,10 +41,12 @@ public final class Constants {
   //Constants for our climbing mechanism
   public static final int CHAIN_MOTOR_ID = 12;
   public static final int BRAKE_SOLENOID = 0;
-  public static final double CLIMB_SPEED = 0.5;
+  public static final double CLIMB_SPEED = 0.9;
   public static final int CLIMB_UP = 11;
   public static final int CLIMB_DOWN = 12;
   //
+
+  // I did a poopy
 
 
     public static final int DRIVE_CONTROLLER = 0;

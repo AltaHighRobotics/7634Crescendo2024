@@ -140,8 +140,9 @@ public int getSpeakerPosition(PhotonTrackedTarget currentTarget){
     if (targetID == 8 || targetID == 3){
       return 1; //right side, closer to offset april tag
     }
-    double angleDifference = getAngleDifference(currentTarget);
-    if(angleDifference < 160){
+    double currentAngle = currentTarget.getYaw();
+    if(Math.abs(currentAngle) >15){
+      System.out.println(currentAngle);
       return -1;
     }
     
@@ -158,7 +159,7 @@ public boolean hasTargets(){
   public double xDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
       double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
-      return((x));
+      return((x+Constants.CAMERA_OFFSET));
   }
   public double yDistance(PhotonTrackedTarget currentTarget){
     Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
@@ -177,6 +178,7 @@ public boolean hasTargets(){
     double aprilAngleDifference = 180 - rotation;
     return aprilAngleDifference;
   }
+  // You smell like peee
   public boolean testDistance(PhotonTrackedTarget currentTarget){
     double divisorAmount;
     int targetID = currentTarget.getFiducialId();

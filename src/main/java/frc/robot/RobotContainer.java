@@ -38,6 +38,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
   private final shootCommand m_shootCommand = new shootCommand(m_ShootSubsystem);
   private final IntakeCommand m_IntakeCommand = new IntakeCommand(m_ShootSubsystem);
+  private final OuttakeCommand m_OuttakeCommand = new OuttakeCommand(m_ShootSubsystem);
 
   // Auto
   private final SillyAuto m_sillyAuto = new SillyAuto(m_driveTrainSub,m_AprilTagSubsystem,m_ShootSubsystem);
@@ -64,6 +65,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   
     final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
     final JoystickButton intakeButton = new JoystickButton(m_driveController, Constants.INTAKE_BUTTON);
+    final JoystickButton outtakeButton = new JoystickButton(m_driveController, 6);
     // final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     //final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     // final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);
@@ -76,6 +78,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
     // trapButton.onTrue(m_trapPosition);
     intakeButton.whileTrue(m_IntakeCommand);
     shootButton.whileTrue(m_shootCommand);
+    outtakeButton.whileTrue(m_OuttakeCommand);
 
 
 
