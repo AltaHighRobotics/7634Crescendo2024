@@ -105,7 +105,7 @@ public class SillyAuto extends Command {
 
 
 
-  if(currentTarget != null 1&& (currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4)){
+  if(currentTarget != null && (currentTarget.getFiducialId() == 7 || currentTarget.getFiducialId() == 4)){
     //if youre just starting, get all the starting info
     if(!gotSpeakerPosition){
       speakerPosition = m_aprilTagSubsystem.getSpeakerPosition(currentTarget);
