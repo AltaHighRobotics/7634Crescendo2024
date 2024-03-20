@@ -78,15 +78,11 @@ public class SillyAuto extends Command {
       shootTimeout = System.currentTimeMillis();
       startTimer = false;
       }
-      // suck the note back a little before you shoot
-      if (System.currentTimeMillis() - shootTimeout <= 500){
-        m_shootSubsystem.spinIntakeMotor(-0.9);
-      }
       if(System.currentTimeMillis() - shootTimeout <= 1000){
       m_shootSubsystem.shootSpeaker();}
-      if (System.currentTimeMillis() - shootTimeout >= 1000){
+      if (System.currentTimeMillis() - shootTimeout >= 800){
         m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-        if(System.currentTimeMillis() - shootTimeout >= 1100){
+        if(System.currentTimeMillis() - shootTimeout >= 1000){
           loadedNote = false;
           readyToShoot = false;
           startTimer = false;
@@ -95,8 +91,6 @@ public class SillyAuto extends Command {
          m_shootSubsystem.setFlywheel(0);
          m_shootSubsystem.spinIntakeMotor(0);
         }
-       m_shootSubsystem.setFlywheel(0);
-         m_shootSubsystem.spinIntakeMotor(0);
       }
     }
 
@@ -137,26 +131,26 @@ public class SillyAuto extends Command {
 ////////////////////////////////////////////////////////////////////////////////////////////
       case 0:
               //4 note auto code. get ready for a ride
-              System.out.println("ShotNumber: "+shotNumber);
+             // System.out.println("ShotNumber: "+shotNumber);
               
               switch(shotNumber){
                   case 1:
-                    forwardPID = m_aprilTagSubsystem.forwardPID(currentX, 120);
+                    forwardPID = m_aprilTagSubsystem.forwardPID(currentX,120);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
                     m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-                    if (currentX >= 110){
+                    if (currentX >= 115){
                       loadedNote = true;
                     }
                     if (loadedNote){ //if we got the note, then go back and shoot.
-                      forwardPID = m_aprilTagSubsystem.forwardPID(currentX, startingXdistance);
+                      forwardPID = m_aprilTagSubsystem.forwardPID(currentX, startingXdistance+3);
                       System.out.println(currentX);
                       if (currentX < 60){ //if were close enough to shoot, shoot
                         readyToShoot = true;
                         startTimer = true;
                         m_shootSubsystem.spinIntakeMotor(0);
-                        m_shootSubsystem.setFlywheel(0.5);
-                      }
-                    }
+                        m_shootSubsystem.setFlywheel(-0.5);}}
+                      
+                    
                     break;
                   case 2:
                     // go the the back left note
@@ -206,6 +200,7 @@ public class SillyAuto extends Command {
   } if (Math.abs(rotationPID) < Constants.DRIVE_CONTROLLER_DEAD_ZONE*5) {
     rotationPID = 0.0;
   }
+  System.out.println("Current X: "+currentX);
   m_driveTrainSub.drive(yPID, forwardPID, rotationPID, false, Constants.DRIVE_SPEED);
   // m_driveTrainSub.drive(
   //   Math.pow(yPID, 2.0) * Math.signum(yPID), //signum returns -1 if neg, 0 if 0, 1 if pos.

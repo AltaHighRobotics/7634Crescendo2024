@@ -17,14 +17,12 @@ public class DriveCommand extends Command {
   private DriveTrainSub m_driveTrainSub;
   private XboxController m_driveController;
   private JoystickButton zeroField;
-  private boolean doInitGyro = true;
+  private boolean doInitGyro = false;
   private AprilTagSubsystem m_aprilTagSubsystem;
   private double strafe;
   private double rotation;
   private double speed;
   private JoystickButton autoRotate;
-  private JoystickButton resetGyro;
-
   public DriveCommand(DriveTrainSub driveTrainSub, XboxController driveController, AprilTagSubsystem aprilTagSubsystem)  {
     m_driveTrainSub = driveTrainSub;
     m_driveController = driveController;
@@ -120,7 +118,7 @@ public class DriveCommand extends Command {
       Math.pow(strafe, 2.0) * Math.signum(strafe), //signum returns -1 if neg, 0 if 0, 1 if pos.
       -Math.pow(speed, 2.0) * Math.signum(speed), // basically, he smooths out speed, gtes the direction (signum)
       Math.pow(rotation, 2.0) * Math.signum(rotation) * Constants.DRIVE_TURN_SPEED,
-      false,
+      true,
       Constants.DRIVE_SPEED
     );
     

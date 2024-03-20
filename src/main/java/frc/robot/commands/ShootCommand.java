@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShootSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-public class shootCommand extends Command {
+public class ShootCommand extends Command {
   /** Creates a new shootCommand. */
   ShootSubsystem m_shootSubsystem;
   JoystickButton shoot;
   long start;
 
-  public shootCommand(ShootSubsystem shootSubsystem) {
+  public ShootCommand(ShootSubsystem shootSubsystem) {
     m_shootSubsystem = shootSubsystem;
     addRequirements(m_shootSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.

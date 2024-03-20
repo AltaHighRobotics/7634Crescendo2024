@@ -18,6 +18,7 @@ public class AprilTagSubsystem extends SubsystemBase {
   //final Map<Integer, Position> tagPositions = new HashMap<>();
     //makes a dictonary of all april tag ID's and Positions on the field
   ConfigurablePID autoPID;
+  ConfigurablePID movementPID;
   public AprilTagSubsystem() {
     camera = new PhotonCamera("test");
     // tagPositions.put(1, new Position(593.68, 9.68, 53.38, 120));
@@ -35,7 +36,8 @@ public class AprilTagSubsystem extends SubsystemBase {
     // tagPositions.put(13, new Position(441.74, 161.62, 52.00, 180));
     // tagPositions.put(14, new Position(209.48, 161.62, 52.00, 0));
     // tagPositions.put(15, new Position(182.73, 177.10, 52.00, 120));
-    autoPID = new ConfigurablePID(Constants.AUTO_PID);
+    autoPID = new ConfigurablePID(Constants.AUTO_ROTATION_PID);
+    movementPID = new ConfigurablePID(Constants.AUTO_MOVEMENT_PID);
     // tagPositions.put(16, new Position(182.73, 146.19, 52.00, 240));
   }
   public PhotonTrackedTarget getBestTarget(){
@@ -93,11 +95,11 @@ public class AprilTagSubsystem extends SubsystemBase {
   }
   
   public double yPID(double yPos, double ySetPoint){
-    return (autoPID.runPID(yPos, ySetPoint));
+    return (movementPID.runPID(yPos, ySetPoint));
   }
 
   public double forwardPID(double xPos, double xSetPoint){
-    return(autoPID.runPID(xPos, xSetPoint));
+    return(movementPID.runPID(xPos, xSetPoint));
   }
   public double rotationPID(double yaw){
     

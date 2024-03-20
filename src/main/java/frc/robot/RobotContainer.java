@@ -36,7 +36,7 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController, m_AprilTagSubsystem);
   private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
-  private final shootCommand m_shootCommand = new shootCommand(m_ShootSubsystem);
+  private final ShootCommand m_shootCommand = new ShootCommand(m_ShootSubsystem);
   private final IntakeCommand m_IntakeCommand = new IntakeCommand(m_ShootSubsystem);
   private final OuttakeCommand m_OuttakeCommand = new OuttakeCommand(m_ShootSubsystem);
 
