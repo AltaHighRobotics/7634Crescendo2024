@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import org.ejml.equation.IntegerSequence.For;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,6 +12,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.AprilTagSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 import frc.robot.swerve.DriveTrainSub;
+import utilities.MeasurementConverters;
 
 public class SillyAuto extends Command {
   /** Creates a new AutoCommand. */
@@ -25,7 +27,7 @@ public class SillyAuto extends Command {
   private ShootSubsystem m_shootSubsystem;
   private int speakerPosition;
   private double rotationPID;
-  private double xPID;
+  private double forwardPID;
   private double yPID;
   private double startingYdistance;
   private double startingXdistance;
@@ -49,9 +51,8 @@ public class SillyAuto extends Command {
   public void initialize() {
     startingYdistance = Constants.Y_DIS_SPEAKER;
     rotationPID = 0;
-    xPID = 0;
+    forwardPID = 0;
     yPID = 0;
-    System.out.println(yPID);
     done = false;
     shotNumber = 0;  
     gotSpeakerPosition = false;
@@ -78,8 +79,8 @@ public class SillyAuto extends Command {
       startTimer = false;
       }
       // suck the note back a little before you shoot
-      if (System.currentTimeMillis() - shootTimeout <= 100){
-        m_shootSubsystem.spinIntakeMotor(-Constants.INTAKE_SPEED);
+      if (System.currentTimeMillis() - shootTimeout <= 500){
+        m_shootSubsystem.spinIntakeMotor(-0.9);
       }
       if(System.currentTimeMillis() - shootTimeout <= 1000){
       m_shootSubsystem.shootSpeaker();}
@@ -118,13 +119,12 @@ public class SillyAuto extends Command {
     currentX = m_aprilTagSubsystem.xDistance(currentTarget);
     currentY = m_aprilTagSubsystem.yDistance(currentTarget);
     currentRotation = currentTarget.getYaw();
-
     //switch statement for which side of the speaker your on. think of it as choosing the autonomous by itself
     switch(speakerPosition){
       case -1:
         //insert code for auto nearest to the amp
         if (startTime - System.currentTimeMillis() >= 10){ // wait 10 seconds  to go to make sure that we dont hit any other auto bots getting notes
-        xPID = m_aprilTagSubsystem.xPID(currentX, -40); // go to roughly the amp
+        forwardPID = m_aprilTagSubsystem.forwardPID(currentX, -40); // go to roughly the amp
         yPID = m_aprilTagSubsystem.yPID(currentY, 120); // go slightly above the auto
         //rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);// always face apriltag
        break;
@@ -132,37 +132,35 @@ public class SillyAuto extends Command {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       case 1:
         //code for auto farthest from amp
-        xPID = m_aprilTagSubsystem.xPID(currentX, 120);
-        yPID = m_aprilTagSubsystem.yPID(currentY, 75);
+        forwardPID = m_aprilTagSubsystem.forwardPID(currentX, 120);
         rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
 ////////////////////////////////////////////////////////////////////////////////////////////
       case 0:
               //4 note auto code. get ready for a ride
-              System.out.println("I am Head On!");
               System.out.println("ShotNumber: "+shotNumber);
               
               switch(shotNumber){
                   case 1:
-                    xPID = m_aprilTagSubsystem.xPID(currentX, 56);
-                    //yPID = m_aprilTagSubsystem.yPID(currentY, 0);
+                    forwardPID = m_aprilTagSubsystem.forwardPID(currentX, 120);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
-                    // m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
-                    // if (currentY >= 125){
-                    //   loadedNote = true;
-                    // }
-                    // if (loadedNote){ //if we got the note, then go back and shoot.
-                    //   xPID = m_aprilTagSubsystem.xPID(currentX, startingXdistance);
-                    //   yPID = m_aprilTagSubsystem.yPID(currentY, startingYdistance);
-                    //   if (currentY < 40){ //if were close enough to shoot, shoot
-                    //     readyToShoot = true;
-                    //     startTimer = true;
-                    //   }
-                    // }
+                    m_shootSubsystem.spinIntakeMotor(Constants.INTAKE_SPEED);
+                    if (currentX >= 110){
+                      loadedNote = true;
+                    }
+                    if (loadedNote){ //if we got the note, then go back and shoot.
+                      forwardPID = m_aprilTagSubsystem.forwardPID(currentX, startingXdistance);
+                      System.out.println(currentX);
+                      if (currentX < 60){ //if were close enough to shoot, shoot
+                        readyToShoot = true;
+                        startTimer = true;
+                        m_shootSubsystem.spinIntakeMotor(0);
+                        m_shootSubsystem.setFlywheel(0.5);
+                      }
+                    }
                     break;
                   case 2:
                     // go the the back left note
-                    xPID = m_aprilTagSubsystem.xPID(currentX, 0);
-                    yPID = m_aprilTagSubsystem.yPID(currentY, 0);
+                    forwardPID = m_aprilTagSubsystem.forwardPID(currentX, 0);
                     rotationPID = m_aprilTagSubsystem.rotationPID(currentRotation);
         
                     break;
@@ -201,8 +199,22 @@ public class SillyAuto extends Command {
 
     }
   }
-  m_driveTrainSub.drive(yPID, xPID, rotationPID, true,1);
-  m_driveTrainSub.run();
+  if (Math.abs(yPID) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    yPID = 0.0;
+  } if (Math.abs(forwardPID) < Constants.DRIVE_CONTROLLER_DEAD_ZONE) {
+    forwardPID = 0.0;
+  } if (Math.abs(rotationPID) < Constants.DRIVE_CONTROLLER_DEAD_ZONE*5) {
+    rotationPID = 0.0;
+  }
+  m_driveTrainSub.drive(yPID, forwardPID, rotationPID, false, Constants.DRIVE_SPEED);
+  // m_driveTrainSub.drive(
+  //   Math.pow(yPID, 2.0) * Math.signum(yPID), //signum returns -1 if neg, 0 if 0, 1 if pos.
+  //   -Math.pow(forwardPID, 2.0) * Math.signum(forwardPID), // basically, he smooths out speed, gtes the direction (signum)
+  //   Math.pow(rotationPID, 2.0) * Math.signum(rotationPID) * Constants.DRIVE_TURN_SPEED,
+  //   false,
+  //   Constants.DRIVE_SPEED
+  // );
+ m_driveTrainSub.run();
 
 
 

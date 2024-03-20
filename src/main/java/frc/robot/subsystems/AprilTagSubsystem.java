@@ -70,13 +70,13 @@ public class AprilTagSubsystem extends SubsystemBase {
     switch(targetID){
       case 7:
         //speaker stuff
-        xPIDOutput = xPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
+        xPIDOutput = forwardPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
         yPIDOutput = yPID(yDistanceFromTarget, Constants.Y_DIS_SPEAKER);
         zPIDOutput = rotationPID(zAngleFromTarget);
         break;
       case 14:
         //speaker stuff
-        xPIDOutput = xPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
+        xPIDOutput = forwardPID(xDistanceFromTarget, Constants.X_DIS_SPEAKER);
         yPIDOutput = yPID(yDistanceFromTarget, Constants.Y_DIS_SPEAKER);
         zPIDOutput = rotationPID(zAngleFromTarget);
         break;
@@ -96,7 +96,7 @@ public class AprilTagSubsystem extends SubsystemBase {
     return (autoPID.runPID(yPos, ySetPoint));
   }
 
-  public double xPID(double xPos, double xSetPoint){
+  public double forwardPID(double xPos, double xSetPoint){
     return(autoPID.runPID(xPos, xSetPoint));
   }
   public double rotationPID(double yaw){
@@ -155,15 +155,15 @@ public boolean hasTargets(){
     return false;
   }
   return true;
-}//in photonvision, X is how far away you are head on, y is is lateral movement... I switched that
+}
   public double xDistance(PhotonTrackedTarget currentTarget){
       Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
-      double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getY());
+      double x = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
       return((x));
   }
   public double yDistance(PhotonTrackedTarget currentTarget){
     Transform3d aprilTagDistances = currentTarget.getBestCameraToTarget();
-      double y = MeasurementConverters.MeterstoInches(aprilTagDistances.getX());
+      double y = MeasurementConverters.MeterstoInches(aprilTagDistances.getY());
       return(y+Constants.CAMERA_OFFSET);
   }
 

@@ -28,7 +28,7 @@ public final class Constants {
   public static final double X_DIS_SPEAKER = 0;
   public static final double Y_DIS_SPEAKER = 36;
   public static final double CAMERA_OFFSET = 11.5;
-  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.05,0,0,0,0,0,0,0,0,0,0,-0.8,0.8);
+  public static final PIDConfiguration AUTO_PID = new PIDConfiguration(0.04,0,0.0001,0,0,0,0,0,0,0,0,-0.8,0.8);
  // public static final double SHOOTER_ANGLE = 53;
   public static final int INTAKE_MOTOR_ID =11;
   public static final int LEFT_FLYWHEEL_ID = 10;
