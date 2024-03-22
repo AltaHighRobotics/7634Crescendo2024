@@ -128,12 +128,8 @@ public double relativeYaw(PhotonTrackedTarget currentTarget){
   return currentTarget.getYaw();
 
 }
-public boolean closeEnoughtoShoot(double startingX, double startingY, double currentX, double currentY){
-  if (Math.abs(currentY) - Constants.REZERO_TOLERANCE <= Math.abs(startingY) && Math.abs(currentY)- Constants.REZERO_TOLERANCE <= Math.abs(startingY)){
-    return true;
-  }
-  return false;
-}
+
+
 public int getSpeakerPosition(PhotonTrackedTarget currentTarget){
   PhotonTrackedTarget inclusiveBestTarget = camera.getLatestResult().getBestTarget();
   int targetID = 0;
@@ -143,8 +139,7 @@ public int getSpeakerPosition(PhotonTrackedTarget currentTarget){
       return 1; //right side, closer to offset april tag
     }
     double currentAngle = currentTarget.getYaw();
-    if(Math.abs(currentAngle) >15){
-      System.out.println(currentAngle);
+    if(Math.abs(currentAngle) > 15){
       return -1;
     }
     

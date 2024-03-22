@@ -24,7 +24,7 @@ public class OuttakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ShootSubsystem.setFlywheel(-Constants.AMP_SPEED);
+    m_ShootSubsystem.setFlywheel(-0.9);
     m_ShootSubsystem.spinIntakeMotor(-Constants.INTAKE_SPEED);
   }
 

@@ -15,14 +15,13 @@ public class ClimbCommand extends Command {
   XboxController m_xboxController;
   boolean activated;
   ChainSubsystem m_chainSubsystem;
-  JoystickButton upButton;
-  JoystickButton downButton;
-  public ClimbCommand(ChainSubsystem chainSubsystem, XboxController xboxController ) {
+double chainDown;
+double chainUp;
+    public ClimbCommand(ChainSubsystem chainSubsystem, XboxController xboxController ) {
     m_chainSubsystem = chainSubsystem;
     addRequirements(m_chainSubsystem);
     m_xboxController = xboxController;
-    upButton = new JoystickButton(m_xboxController, Constants.CLIMB_UP);
-    downButton = new JoystickButton(m_xboxController, Constants.CLIMB_DOWN);
+
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -30,27 +29,27 @@ public class ClimbCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_chainSubsystem.getLimitSwitch() && upButton.getAsBoolean()==true){
+    chainDown = -m_xboxController.getRawAxis(Constants.LEFT_TRIGGER);
+    chainUp = -m_xboxController.getRawAxis(Constants.RIGHT_TRIGGER);
+    if (m_chainSubsystem.getLimitSwitch() && chainDown < 0){
       m_chainSubsystem.setChainArm(0);
       return;
     }
-    if (upButton.getAsBoolean() == true){
-      m_chainSubsystem.setChainArm(Constants.CLIMB_SPEED);
-    }
-    else if (downButton.getAsBoolean() == true){
-      m_chainSubsystem.setChainArm(-Constants.CLIMB_SPEED);
-    }
-    else{
-      m_chainSubsystem.setChainArm(0);
-   }
+    m_chainSubsystem.setChainArm(chainUp-chainDown);
 
-    }
+
+    }  
+    
+
+   
+
+    
 
   
 

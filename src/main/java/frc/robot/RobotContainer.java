@@ -33,9 +33,10 @@ private final AprilTagSubsystem m_AprilTagSubsystem = new AprilTagSubsystem();
 private final ShootSubsystem m_ShootSubsystem = new ShootSubsystem();
 private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
   private final XboxController m_driveController = new XboxController(Constants.DRIVE_CONTROLLER);
+  private final XboxController m_shootController = new XboxController(Constants.SHOOT_CONTROLLER);
   private final DriveTrainSub m_driveTrainSub = new DriveTrainSub();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrainSub, m_driveController, m_AprilTagSubsystem);
-  private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_driveController);
+  private final ClimbCommand m_climbCommand = new ClimbCommand(m_chainSubsystem, m_shootController);
   private final ShootCommand m_shootCommand = new ShootCommand(m_ShootSubsystem);
   private final IntakeCommand m_IntakeCommand = new IntakeCommand(m_ShootSubsystem);
   private final OuttakeCommand m_OuttakeCommand = new OuttakeCommand(m_ShootSubsystem);
@@ -63,9 +64,9 @@ private final ChainSubsystem m_chainSubsystem = new ChainSubsystem();
    */
   private void configureBindings() {
   
-    final JoystickButton shootButton = new JoystickButton(m_driveController, Constants.TRIGGER_BUTTON);
+    final JoystickButton shootButton = new JoystickButton(m_shootController, Constants.SHOOT_BUTTON);
     final JoystickButton intakeButton = new JoystickButton(m_driveController, Constants.INTAKE_BUTTON);
-    final JoystickButton outtakeButton = new JoystickButton(m_driveController, 6);
+    final JoystickButton outtakeButton = new JoystickButton(m_shootController, Constants.OUTTAKE_BUTTON);
     // final JoystickButton ampButton = new JoystickButton(m_driveController, Constants.AMP_POSITION_BUTTON);
     //final JoystickButton speakerButton = new JoystickButton(m_driveController, Constants.SPEAKER_POSITION_BUTTON);
     // final JoystickButton sourceButton = new JoystickButton(m_driveController, Constants.SOURCE_POSITION_BUTTON);

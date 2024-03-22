@@ -51,18 +51,22 @@ public final class Constants {
 
 
     public static final int DRIVE_CONTROLLER = 1;
+    public static final int SHOOT_CONTROLLER = 2;
     public static final double DRIVE_SPEED = 0.9;
     public static final double DRIVE_TURN_SPEED = 0.9;
   // Controller.
     public static final int ZERO_FIELD = 8;
     public static final double DRIVE_CONTROLLER_DEAD_ZONE = 0.05;
-    public static final int TRIGGER_BUTTON = 1;
+    public static final int SHOOT_BUTTON = 1;
     public static final int INTAKE_BUTTON = 2;
+    public static final int OUTTAKE_BUTTON = 2;
 
     public static final int RIGHT_STICK_Y = 5;
     public static final int RIGHT_STICK_X = 4;
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
+    public static final int LEFT_TRIGGER = 2;
+    public static final int RIGHT_TRIGGER = 3;
 
     public static final int FLIGHT_STICK_X = 0;
     public static final int FLIGHT_STICK_Y = 1;
